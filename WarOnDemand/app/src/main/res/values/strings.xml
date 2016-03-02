@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">WarOnDemand</string>
     <string name="title_activity_searching">SearchingActivity</string>
+    <string name="title_activity_user_controller">UserController</string>
 </resources>
