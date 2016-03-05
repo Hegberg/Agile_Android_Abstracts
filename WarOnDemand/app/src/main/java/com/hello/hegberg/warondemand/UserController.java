@@ -18,22 +18,29 @@ public class UserController extends AppCompatActivity {
         setContentView(R.layout.activity_user_controller);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //initalizing all buttons
-        Button addAccount = (Button) findViewById(R.id.addAccount);
-        Button editAccount = (Button) findViewById(R.id.editAccount);
-        addAccount.setOnClickListener(new View.OnClickListener() {
+        Button createAccount = (Button) findViewById(R.id.addEditAccount);
+        Button signInAccount = (Button) findViewById(R.id.signInAccount);
+        createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AccountController.class));
+                MainActivity.profileOption = 2; // initializes createAccount interface in AddEditAccount.
+                startActivity(new Intent(UserController.this, AddEditAccount.class));
+            }
+        });
+        signInAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserController.this, AccountController.class));
 
             }
         });
-        editAccount.setOnClickListener(new View.OnClickListener() {
+        /*editAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AccountController.class));
+                startActivity(new Intent(UserController.this, Borrowed.class));
 
             }
-        });
+        });*/
     }
 
 }

@@ -2,4 +2,7 @@
     <string name="app_name">WarOnDemand</string>
     <string name="title_activity_searching">SearchingActivity</string>
     <string name="title_activity_user_controller">UserController</string>
+    <string name="title_activity_account_editor">AccountEditor</string>
+    <string name="title_activity_account_controller">AccountController</string>
+    <string name="title_activity_add_edit_account">AddEditAccount</string>
 </resources>
