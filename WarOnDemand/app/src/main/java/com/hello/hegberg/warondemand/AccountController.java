@@ -24,6 +24,7 @@ public class AccountController extends AppCompatActivity {
         myProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.profileOption = 1;
                 startActivity(new Intent(AccountController.this, AddEditAccount.class));
 
             }
