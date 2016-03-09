@@ -8,6 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 public class ViewAddEditDeleteProduct extends AppCompatActivity {
+    /* Depending on which button is clicked to get here the view will be different.
+     if it came from view, edit, delete, then when you click on a product is will either
+     view, edit, or delete the product.
+     If add had been clicked, then it will go to a view to insert a product. */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
