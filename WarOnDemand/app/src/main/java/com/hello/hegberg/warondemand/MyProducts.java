@@ -33,7 +33,7 @@ public class MyProducts extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //TODO: insert class to go to when 'view' is clicked.
-            startActivity(new Intent(MainActivity.this, <InsertClass>.class));
+            startActivity(new Intent(MyProducts.this, <InsertClass>.class));
         }
     };
 
@@ -42,7 +42,7 @@ public class MyProducts extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //TODO: insert class to go to when 'add' is clicked.
-            startActivity(new Intent(MainActivity.this, <InsertClass>.class));
+            startActivity(new Intent(MyProducts.this, <InsertClass>.class));
         }
     };
     // when edit is clicked, go to a list of your products, where you can edit a specific product
@@ -50,7 +50,7 @@ public class MyProducts extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //TODO: insert class to go to when 'edit' is clicked.
-            startActivity(new Intent(MainActivity.this, <InsertClass>.class));
+            startActivity(new Intent(MyProducts.this, <InsertClass>.class));
         }
     };
 
@@ -59,7 +59,7 @@ public class MyProducts extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //TODO: insert class to go to when 'delete' is clicked.
-            startActivity(new Intent(MainActivity.this, <InsertClass>.class));
+            startActivity(new Intent(MyProducts.this, <InsertClass>.class));
         }
     };
     //when pendingBids is clicked, go to list of pending bids.
@@ -67,7 +67,7 @@ public class MyProducts extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //TODO: insert class to go to when 'pending bids' is clicked.
-            startActivity(new Intent(MainActivity.this, <InsertClass>.class));
+            startActivity(new Intent(MyProducts.this, <InsertClass>.class));
         }
     };
 
@@ -76,7 +76,7 @@ public class MyProducts extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //TODO: insert class to go to when 'loaned products' is clicked.
-            startActivity(new Intent(MainActivity.this, <InsertClass>.class));
+            startActivity(new Intent(MyProducts.this, <InsertClass>.class));
         }
     };
     //when recentReturns is clicked go to list of recent returns.
@@ -84,7 +84,7 @@ public class MyProducts extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //TODO: insert class to go to when 'recent returns' is clicked.
-            startActivity(new Intent(MainActivity.this, <InsertClass>.class));
+            startActivity(new Intent(MyProducts.this, <InsertClass>.class));
         }
     };
 
@@ -92,7 +92,7 @@ public class MyProducts extends AppCompatActivity {
     back.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(MainActivity.this, AccountController.class));
+            startActivity(new Intent(MyProducts.this, AccountController.class));
         }
     };
 }
