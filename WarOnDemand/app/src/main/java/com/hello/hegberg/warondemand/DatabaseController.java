@@ -15,6 +15,7 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
+
 /**
  * Created by esports on 2/16/16.
  */
@@ -24,31 +25,73 @@ public class DatabaseController {
     //private static HttpClient http;
 
 
-    /*TODO: A function that gets info
-    public static class getInfo {
-        // TODO: Get tweets
-
-        }
-
-
-    }
-    */
-
-
-
-
-    /* public static class addInfo{
-        //@Override
-        protected Void doInBackground() {
-            verifyClient();
-
-            // TODO:Add stuff in here to add data
-            return null;
-        }
-    }
-    */
-
-
+//    //TODO: A function that gets tweets
+//    public static class GetInfo extends AsyncTask<String, Void, ArrayList<>> {
+//        // TODO: Get tweets
+//        @Override
+//        protected ArrayList<> doInBackground(String... search_strings) {
+//            verifyClient();
+//
+//            // Base arraylist to hold tweets
+//            //ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+//
+//            String query = "{\n" +
+//                    "\"query\": {\n" +
+//                    "\"term\": { \"tweet\" : \"sad\" }\n" +
+//                    "}\n" +
+//                    "}\n";
+//            String search_string = "";
+//
+//            Search search = new Search.Builder(search_string)
+//                    .addIndex("testing")
+//                    .addType("tweet")
+//                    .build();
+//
+//            try {
+//                SearchResult result = client.execute(search);
+//                if(result.isSucceeded()) {
+//                    //List<NormalTweet> fun = result.getSourceAsObjectList(NormalTweet.class);
+//                    //tweets.addAll(fun);
+//                }
+//            } catch (IOException e) {
+//                // TODO: Something more useful
+//                throw new RuntimeException();
+//            }
+//
+//            return
+//        }
+//
+//
+//    }
+//
+//
+//    public static class AddInfo extends AsyncTask<NormalTweet,Void,Void>{
+//        @Override
+//        protected Void doInBackground(NormalTweet... tweets) {
+//            verifyClient();
+//
+//            // Since AsyncTasks work on arrays, we need to work with arrays as well (>= 1 tweet)
+//            for(int i = 0; i < .length; i++) {
+//                NormalTweet tweet = tweets[i];
+//
+//                Index index = new Index.Builder(tweet).index("testing").type("tweet").build();
+//                try {
+//                    DocumentResult result = client.execute(index);
+//                    if(result.isSucceeded()) {
+//                        // Set the ID to tweet that elasticsearch told me it was
+//                        tweet.setId(result.getId());
+//                    } else {
+//                        // TODO: Add an error message, because this was puzzling.
+//                        // TODO: Right here it will trigger if the insert fails
+//                        Log.i("TODO", "We actually failed here, adding a tweet");
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            return null;
+//        }
+//    }
 
 
     public static void verifyClient() {
