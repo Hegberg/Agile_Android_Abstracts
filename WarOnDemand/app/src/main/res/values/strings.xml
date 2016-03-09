@@ -5,4 +5,5 @@
     <string name="title_activity_account_editor">AccountEditor</string>
     <string name="title_activity_account_controller">AccountController</string>
     <string name="title_activity_add_edit_account">AddEditAccount</string>
+    <string name="title_activity_my_products">MyProducts</string>
 </resources>

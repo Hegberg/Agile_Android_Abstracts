@@ -32,6 +32,10 @@
         <activity
             android:name=".AddEditAccount"
             android:label="@string/title_activity_add_edit_account"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyProducts"
+            android:label="@string/title_activity_my_products"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

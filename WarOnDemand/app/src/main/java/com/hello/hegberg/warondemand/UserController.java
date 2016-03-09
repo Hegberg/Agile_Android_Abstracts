@@ -17,9 +17,11 @@ public class UserController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_controller);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         //initalizing all buttons
         Button createAccount = (Button) findViewById(R.id.addEditAccount);
         Button signInAccount = (Button) findViewById(R.id.signInAccount);
+        Button back = (Button) findViewById(R.id.back);
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,6 +33,13 @@ public class UserController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserController.this, AccountController.class));
+
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserController.this, Main.class));
 
             }
         });
