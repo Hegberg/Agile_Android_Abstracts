@@ -18,9 +18,15 @@ public class AccountController extends AppCompatActivity {
 
         //TODO: Prompt signing
         //TODO: Pulls profile
-        //TODO:
+
+        // Initialize Buttons
         Button myProfile = (Button) findViewById(R.id.myProfile);
-        Button myProduct = (Button) findViewById(R.id.myProduct);
+        Button myProducts = (Button) findViewById(R.id.myProducts);
+        Button myBids = (Button) findViewById(R.id.myBids);
+        Button borrowedProducts = (Button) findViewById(R.id.borrowedProducts);
+
+        //TODO: Create classes to go to with products, bids, borrowed.
+        // Create Buttons
         myProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,6 +35,26 @@ public class AccountController extends AppCompatActivity {
 
             }
         });
-    }
+        myProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AccountController.this, <Insert Class>.class));
 
+            }
+        });
+        myBids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AccountController.this, <Insert Class>.class));
+
+            }
+        });
+        borrowedProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AccountController.this, <Insert Class>. class));
+
+            }
+        });
+    }
 }
