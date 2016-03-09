@@ -8,6 +8,11 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    //initialize variables
+    //profileOption variable is for selecting the correct interface in AddEditAccount
+    //profileOption 1 = ViewAccount, 2 = CreateAccount, 3 = EditAccount
+    public static int profileOption;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Button account = (Button) findViewById(R.id.Account);
     Button products = (Button) findViewById(R.id.Products);
     Button help = (Button) findViewById(R.id.Help);
+
 
     //when account clicked go to UserController
     account.setOnClickListener(new View.OnClickListener() {

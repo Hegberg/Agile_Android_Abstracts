@@ -19,7 +19,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchingActivity"></activity>
+        <activity android:name=".SearchingActivity" />
+        <activity
+            android:name=".UserController"
+            android:label="@string/title_activity_user_controller"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AccountController"
+            android:label="@string/title_activity_account_controller"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.hello.hegberg.warondemand.MainActivity" />
+        </activity>
+        <activity
+            android:name=".AddEditAccount"
+            android:label="@string/title_activity_add_edit_account"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyProducts"
+            android:label="@string/title_activity_my_products"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewAddEditDeleteProduct"
+            android:label="@string/title_activity_view_add_edit_delete_product"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -7,37 +7,40 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hello.hegberg.warondemand.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="War On Demand"
-        android:id="@+id/textView" />
+    tools:context="com.hello.hegberg.warondemand.AccountControllerActivity">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Account"
-        android:id="@+id/account"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="73dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Products"
-        android:id="@+id/products"
-        android:layout_centerVertical="true"
+        android:text="My Profile"
+        android:id="@+id/myProfile"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Help"
-        android:id="@+id/help"
-        android:layout_below="@+id/products"
+        android:text="My Products"
+        android:id="@+id/myProducts"
+        android:layout_below="@+id/myProfile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="68dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Bids"
+        android:id="@+id/myBids"
+        android:layout_below="@+id/myProducts"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Borrowed Products"
+        android:id="@+id/borrowedProducts"
+        android:layout_below="@+id/myBids"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="71dp" />
 </RelativeLayout>
