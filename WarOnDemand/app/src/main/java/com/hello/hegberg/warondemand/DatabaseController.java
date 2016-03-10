@@ -65,33 +65,46 @@ public class DatabaseController {
 //    }
 //
 //
-//    public static class AddInfo extends AsyncTask<NormalTweet,Void,Void>{
-//        @Override
-//        protected Void doInBackground(NormalTweet... tweets) {
-//            verifyClient();
-//
-//            // Since AsyncTasks work on arrays, we need to work with arrays as well (>= 1 tweet)
-//            for(int i = 0; i < .length; i++) {
-//                NormalTweet tweet = tweets[i];
-//
-//                Index index = new Index.Builder(tweet).index("testing").type("tweet").build();
-//                try {
-//                    DocumentResult result = client.execute(index);
-//                    if(result.isSucceeded()) {
-//                        // Set the ID to tweet that elasticsearch told me it was
-//                        tweet.setId(result.getId());
-//                    } else {
-//                        // TODO: Add an error message, because this was puzzling.
-//                        // TODO: Right here it will trigger if the insert fails
-//                        Log.i("TODO", "We actually failed here, adding a tweet");
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            return null;
-//        }
-//    }
+    public static void addUser(String username){
+
+        verifyClient();
+
+        Index index = new Index.Builder(username).index("Agile_Android_Abstracts").type("users").build();
+        try {
+            DocumentResult result = client.execute(index);
+            if(result.isSucceeded()) {
+                // Set the ID to tweet that elasticsearch told me it was
+                //username.setId(result.getId());
+            } else {
+                // TODO: Add an error message, because this was puzzling.
+                // TODO: Right here it will trigger if the insert fails
+                Log.i("TODO", "We actually failed here, adding a tweet");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addItem(String name){
+
+        verifyClient();
+
+        Index index = new Index.Builder(name).index("Agile_Android_Abstracts").type("items").build();
+        try {
+            DocumentResult result = client.execute(index);
+            if(result.isSucceeded()) {
+                // Set the ID to tweet that elasticsearch told me it was
+                //username.setId(result.getId());
+            } else {
+                // TODO: Add an error message, because this was puzzling.
+                // TODO: Right here it will trigger if the insert fails
+                Log.i("TODO", "We actually failed here, adding a tweet");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     public static void verifyClient() {
