@@ -7,19 +7,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hello.hegberg.warondemand.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="War On Demand"
-        android:id="@+id/textView" />
+    tools:context="com.hello.hegberg.warondemand.UserControllerActivity">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Account"
-        android:id="@+id/account"
+        android:text="Create Profile"
+        android:id="@+id/createProfile"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="73dp" />
@@ -27,17 +21,17 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Products"
-        android:id="@+id/products"
+        android:text="Sign In"
+        android:id="@+id/signIn"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Help"
-        android:id="@+id/help"
-        android:layout_below="@+id/products"
+        android:text="Back"
+        android:id="@+id/back"
+        android:layout_below="@+id/signIn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="71dp" />
 </RelativeLayout>
