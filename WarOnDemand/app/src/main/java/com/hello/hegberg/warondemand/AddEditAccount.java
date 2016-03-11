@@ -21,31 +21,34 @@ public class AddEditAccount extends AppCompatActivity {
         }
         if(MainActivity.profileOption == 2) {
             setContentView(R.layout.activity_add_account);
-            //AddAccount();
-            //uncomment above line when function fixed
+            Button createAccount = (Button) findViewById(R.id.createAccount);
+            createAccount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //AddAccount();
+                    //uncomment above line when function fixed
+                    //TODO: Prompt user to input variables and save then in Json
+
+                }
+            });
+
         }
         if(MainActivity.profileOption == 3) {
             setContentView(R.layout.activity_edit_account);
-            //EditAccount();
-            //uncomment above line when function fixed
+            Button editAccount = (Button) findViewById(R.id.editAccount);
+            editAccount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //EditAccount();
+                    //uncomment above line when function fixed
+                    //TODO: Pull up old record and prompt user to change them
+
+
+                }
+            });
+            
         }
-        Button createAccount = (Button) findViewById(R.id.createAccount);
-        Button editAccount = (Button) findViewById(R.id.editAccount);
-        createAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: Prompt user to input variables and save then in Json
 
-            }
-        });
-        editAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: Pull up old record and prompt user to change them
-
-
-            }
-        });
     }
 
 
