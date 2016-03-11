@@ -67,8 +67,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Items"
-        android:id="@+id/items"
+        android:text="Recent Returns"
+        android:id="@+id/recentReturns"
         android:layout_below="@+id/loanedProducts"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:text="Back"
         android:id="@+id/back"
-        android:layout_below="@+id/items"
+        android:layout_below="@+id/recentReturns"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 </RelativeLayout>
