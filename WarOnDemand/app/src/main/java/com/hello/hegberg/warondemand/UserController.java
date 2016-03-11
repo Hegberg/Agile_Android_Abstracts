@@ -16,33 +16,38 @@ public class UserController extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_controller);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //What is this toolbar for?
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //initalizing all buttons
-        Button createAccount = (Button) findViewById(R.id.addEditAccount);
-        Button signInAccount = (Button) findViewById(R.id.signInAccount);
+        Button createUser = (Button) findViewById(R.id.createProfile);
+        Button signIn = (Button) findViewById(R.id.signIn);
         Button back = (Button) findViewById(R.id.back);
-        createAccount.setOnClickListener(new View.OnClickListener() {
+
+        createUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity.profileOption = 2; // initializes createAccount interface in AddEditAccount.
                 startActivity(new Intent(UserController.this, AddEditAccount.class));
             }
         });
-        signInAccount.setOnClickListener(new View.OnClickListener() {
+
+        signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserController.this, AccountController.class));
 
             }
         });
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserController.this, Main.class));
+                startActivity(new Intent(UserController.this, MainActivity.class));
 
             }
         });
+
         /*editAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
