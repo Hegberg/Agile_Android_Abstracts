@@ -17,9 +17,7 @@ public class ViewAddEditDeleteProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_add_edit_delete_product);
-        //What is this toolbar for?
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+
     }
 
 }
