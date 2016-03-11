@@ -13,8 +13,9 @@ public class AccountController extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_controller);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //What is this toolbar for?
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         //TODO: Prompt signing
         //TODO: Pulls profile
@@ -35,6 +36,10 @@ public class AccountController extends AppCompatActivity {
 
             }
         });
+
+
+        /*
+        //commented out since breaks app currently
         myProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,5 +61,6 @@ public class AccountController extends AppCompatActivity {
 
             }
         });
+        */
     }
 }

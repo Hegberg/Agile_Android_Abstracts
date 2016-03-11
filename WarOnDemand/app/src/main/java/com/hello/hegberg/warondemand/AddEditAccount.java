@@ -16,15 +16,18 @@ public class AddEditAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if(MainActivity.profileOption == 1) {
             setContentView(R.layout.activity_view_account);
-            ViewAccount();
+            //ViewAccount();
+            //uncomment above line when function fixed
         }
         if(MainActivity.profileOption == 2) {
             setContentView(R.layout.activity_add_account);
-            AddAccount();
+            //AddAccount();
+            //uncomment above line when function fixed
         }
         if(MainActivity.profileOption == 3) {
             setContentView(R.layout.activity_edit_account);
-            EditAccount();
+            //EditAccount();
+            //uncomment above line when function fixed
         }
         Button createAccount = (Button) findViewById(R.id.createAccount);
         Button editAccount = (Button) findViewById(R.id.editAccount);
@@ -46,7 +49,8 @@ public class AddEditAccount extends AppCompatActivity {
     }
 
 
-
+    /*
+    //commented out since bad code
     public void EditAccount() {
         //TODO: Upload from Json, display text in edit text format, prompt user to change text.
 
@@ -110,5 +114,5 @@ public class AddEditAccount extends AppCompatActivity {
             }
         });
     }
+    */
 }
-

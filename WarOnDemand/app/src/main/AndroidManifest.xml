@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hello.hegberg.warondemand">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -34,17 +35,14 @@
                 android:value="com.hello.hegberg.warondemand.MainActivity" />
         </activity>
         <activity
-            android:name=".AddEditAccount"
-            android:label="@string/title_activity_add_edit_account"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".MyProducts"
             android:label="@string/title_activity_my_products"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ViewAddEditDeleteProduct"
             android:label="@string/title_activity_view_add_edit_delete_product"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AddEditAccount"></activity>
     </application>
 
 </manifest>
