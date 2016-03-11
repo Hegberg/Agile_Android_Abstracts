@@ -23,7 +23,7 @@ public class MyProducts extends AppCompatActivity {
         Button delete = (Button) findViewById(R.id.Delete);
         Button pendingBids = (Button) findViewById(R.id.pendingBids);
         Button loanedProducts = (Button) findViewById(R.id.loanedProducts);
-        Button items = (Button) findViewById(R.id.items);
+        Button recentReturns = (Button) findViewById(R.id.recentReturns);
         Button back = (Button) findViewById(R.id.back);
 
         //when back is clicked go back to account controller
