@@ -3,7 +3,7 @@ package com.hello.hegberg.warondemand;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+
 
 public class ViewChangeProduct extends AppCompatActivity {
     /* Depending on which button is clicked to get here the view will be different.
@@ -38,8 +38,7 @@ public class ViewChangeProduct extends AppCompatActivity {
 
     }
 
-    /*
-    //commented out since bad code
+/*
     public void ViewProducts() {
         setContentView(R.layout.activity_view_products);
 
@@ -48,20 +47,23 @@ public class ViewChangeProduct extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddEditAccount.this, MyProduct.class));
+                MainActivity.productOption = 0;
+                startActivity(new Intent(ViewChangeProduct.this, MyProduct.class));
 
 
             }
+
         });
 
     }
     public void AddProducts() {
 
-        Button edit = (Button) findViewById(R.id.add);
+        Button edit = (Button) findViewById(R.id.edit);
         Button back = (Button) findViewById(R.id.back);//instead of a back button
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.productOption = 0;
                 //json change
 
             }
@@ -69,7 +71,7 @@ public class ViewChangeProduct extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddEditAccount.this, MyProduct.class));
+                startActivity(new Intent(ViewChangeProduct.this, MyProduct.class));
 
             }
         });
@@ -89,7 +91,7 @@ public class ViewChangeProduct extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddEditAccount.this, MyProduct.class));
+                startActivity(new Intent(ViewChangeProduct.this, MyProduct.class));
 
             }
         });
@@ -113,8 +115,8 @@ public class ViewChangeProduct extends AppCompatActivity {
             }
         });
     }
-    */
 
+*/
 
 
 
