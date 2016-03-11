@@ -13,9 +13,6 @@ public class AccountController extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_controller);
-        //What is this toolbar for?
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
         //TODO: Prompt signing
         //TODO: Pulls profile

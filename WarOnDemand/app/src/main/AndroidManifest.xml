@@ -39,7 +39,7 @@
             android:label="@string/title_activity_my_products"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ViewAddEditDeleteProduct"
+            android:name=".ViewChangeProduct"
             android:label="@string/title_activity_view_add_edit_delete_product"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AddEditAccount"></activity>
