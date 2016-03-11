@@ -2,6 +2,8 @@ package com.hello.hegberg.warondemand;
 
 import java.util.ArrayList;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by Chris on 2/26/2016.
  */
@@ -12,11 +14,21 @@ public class User {
     private ArrayList<WarItem> inventory = new ArrayList<>();
     private ArrayList<WarItem> itemsBidOn = new ArrayList<>();
     private ArrayList<WarItem> itemsBorrowed = new ArrayList<>();
+    @JestId
+    protected String id;
 
     public void createUser(String name, String email, String phoneNumber) {
         username = name;
         contactInfo.add(0, email);
         contactInfo.add(1, phoneNumber);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void editUser(String name, String email, String phoneNumber) {

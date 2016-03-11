@@ -2,6 +2,8 @@ package com.hello.hegberg.warondemand;
 
 import java.util.ArrayList;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by unkno on 2016-02-11.
  */
@@ -22,6 +24,8 @@ public class WarItem {
     private ArrayList<User> listOfBidders;
     private User owner;
     private User borrower;
+    @JestId
+    protected String id;
 
     public WarItem(String name, String desc, Double cost, User owner ) {
         this.name = name;
@@ -43,6 +47,14 @@ public class WarItem {
         this.autoSetAvailable = false;
         this.owner = owner;
         //this.returning = Boolean.FALSE;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
