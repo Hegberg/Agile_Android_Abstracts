@@ -16,8 +16,6 @@ public class UserController extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_controller);
-        //What is this toolbar for?
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //initalizing all buttons
         Button createUser = (Button) findViewById(R.id.createProfile);
