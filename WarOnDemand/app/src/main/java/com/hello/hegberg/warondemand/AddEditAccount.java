@@ -21,8 +21,8 @@ public class AddEditAccount extends AppCompatActivity {
         }
         if(MainActivity.profileOption == 2) {
             setContentView(R.layout.activity_add_account);
-            Button createAccount = (Button) findViewById(R.id.createAccount);
-            createAccount.setOnClickListener(new View.OnClickListener() {
+            Button done = (Button) findViewById(R.id.done);
+            done.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //AddAccount();
@@ -35,8 +35,8 @@ public class AddEditAccount extends AppCompatActivity {
         }
         if(MainActivity.profileOption == 3) {
             setContentView(R.layout.activity_edit_account);
-            Button editAccount = (Button) findViewById(R.id.editAccount);
-            editAccount.setOnClickListener(new View.OnClickListener() {
+            Button back = (Button) findViewById(R.id.back);
+            back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //EditAccount();

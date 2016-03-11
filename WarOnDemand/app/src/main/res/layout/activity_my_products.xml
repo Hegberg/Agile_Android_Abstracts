@@ -8,6 +8,7 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:fitsSystemWindows="true"
+    android:background="#000000"
     tools:context="com.hello.hegberg.warondemand.MyProducts">
 
 

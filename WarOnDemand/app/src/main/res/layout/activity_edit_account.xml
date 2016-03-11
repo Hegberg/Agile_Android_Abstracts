@@ -7,7 +7,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hello.hegberg.warondemand.addActivity">>
+    android:background="#000000"
+    tools:context="com.hello.hegberg.warondemand.addActivity">
+
+
 
     <Button
         android:layout_width="wrap_content"
@@ -35,6 +38,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Name: "
         android:id="@+id/name"
+        android:textColor="#ffffff"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -46,6 +50,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Description: "
         android:id="@+id/description"
+        android:textColor="#ffffff"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/name"
         android:layout_alignLeft="@+id/name"
@@ -57,6 +62,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Contact Info "
         android:id="@+id/contactInfo"
+        android:textColor="#ffffff"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/description"
         android:layout_alignLeft="@+id/description"
@@ -67,6 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/add_name"
+        android:textColor="#ffffff"
         android:layout_above="@+id/contactInfo"
         android:layout_toRightOf="@+id/description"
         android:layout_alignRight="@+id/add_odometer"
@@ -78,6 +85,7 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/add_odometer"
+        android:textColor="#ffffff"
         android:layout_above="@+id/description"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -88,6 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText"
+        android:textColor="#ffffff"
         android:layout_alignBottom="@+id/contactInfo"
         android:layout_toRightOf="@+id/contactInfo"
         android:layout_alignRight="@+id/add_name"
