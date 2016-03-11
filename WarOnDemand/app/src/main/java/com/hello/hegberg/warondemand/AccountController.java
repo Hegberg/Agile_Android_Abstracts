@@ -33,17 +33,18 @@ public class AccountController extends AppCompatActivity {
 
             }
         });
+        myProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AccountController.this, MyProducts.class));
+
+            }
+        });
 
 
         /*
         //commented out since breaks app currently
-        myProducts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AccountController.this, <Insert Class>.class));
 
-            }
-        });
         myBids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
