@@ -26,6 +26,14 @@ public class MyProducts extends AppCompatActivity {
         Button items = (Button) findViewById(R.id.items);
         Button back = (Button) findViewById(R.id.back);
 
+        //when back is clicked go back to account controller
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MyProducts.this, AccountController.class));
+            }
+        });
+
         //when view is clicked go to list of your products, where you can click a specific product
         /*
         //commented out bad code again, and moved into onCreate method
@@ -88,13 +96,6 @@ public class MyProducts extends AppCompatActivity {
             }
         });
 
-        //when back is clicked go back to account controller
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MyProducts.this, AccountController.class));
-            }
-        });
         */
     }
 

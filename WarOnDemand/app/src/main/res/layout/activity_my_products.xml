@@ -26,7 +26,7 @@
         android:id="@+id/Add"
         android:layout_below="@+id/View"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="20dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
         android:id="@+id/Edit"
         android:layout_below="@+id/Add"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
         android:id="@+id/Delete"
         android:layout_below="@+id/Edit"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
         android:id="@+id/pendingBids"
         android:layout_below="@+id/Delete"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
         android:id="@+id/loanedProducts"
         android:layout_below="@+id/pendingBids"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -71,5 +71,15 @@
         android:id="@+id/items"
         android:layout_below="@+id/loanedProducts"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/back"
+        android:layout_below="@+id/items"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 </RelativeLayout>
+
