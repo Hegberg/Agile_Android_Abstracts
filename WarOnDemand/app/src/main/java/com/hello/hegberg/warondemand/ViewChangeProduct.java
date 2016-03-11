@@ -3,7 +3,7 @@ package com.hello.hegberg.warondemand;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+
 
 public class ViewChangeProduct extends AppCompatActivity {
     /* Depending on which button is clicked to get here the view will be different.
@@ -38,52 +38,46 @@ public class ViewChangeProduct extends AppCompatActivity {
 
     }
 
-    /*
-    //commented out since bad code
+/*
     public void ViewProducts() {
-        //TODO:
+        setContentView(R.layout.activity_view_products);
 
 
-        Button confirm = (Button) findViewById(R.id.confirm);
-        Button cancel = (Button) findViewById(R.id.cancel);//instead of a back button
-        confirm.setOnClickListener(new View.OnClickListener() {
+        Button back = (Button) findViewById(R.id.back);//instead of a back button
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Save to Json
+                MainActivity.productOption = 0;
+                startActivity(new Intent(ViewChangeProduct.this, MyProduct.class));
+
 
             }
-        });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: Return to Main account menu: AccountController.
 
-            }
         });
+
     }
-    public void ViewProducts() {
-        //TODO: Upload from Json, display text, add button for option to edit.
+    public void AddProducts() {
+
         Button edit = (Button) findViewById(R.id.edit);
         Button back = (Button) findViewById(R.id.back);//instead of a back button
-        edit.setOnClickListener(new View.OnClickListener() {
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //changed static profileOption to 2: editAccount.
-                MainActivity.profileOption = 2;
-                startActivity(new Intent(AddEditAccount.this, AddEditAccount.class));
+                MainActivity.productOption = 0;
+                //json change
 
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Return to Main account menu: AccountController.
+                startActivity(new Intent(ViewChangeProduct.this, MyProduct.class));
 
             }
         });
 
     }
-    public void AddAccount() {
+    public void EditProducts() {
         //TODO: Prompt user to input info, check user input for unique username info,
         // and add button to commit it to Json.
         Button confirm = (Button) findViewById(R.id.confirm);
@@ -91,20 +85,19 @@ public class ViewChangeProduct extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: when you confirm, commit everything to Json, and pull up the account
-                // to the main account menu: UserController.
+                //connect to json and delete product from record
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Return to Main account menu: AccountController.
+                startActivity(new Intent(ViewChangeProduct.this, MyProduct.class));
 
             }
         });
 
     }
-    public void AddAccount() {
+    public void DeleteProducts() {
         //TODO: Prompt user to input info, check user input for unique username info,
         // and add button to commit it to Json.
         Button confirm = (Button) findViewById(R.id.confirm);
@@ -112,20 +105,18 @@ public class ViewChangeProduct extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: when you confirm, commit everything to Json, and pull up the account
-                // to the main account menu: UserController.
+               // connect to Json and delete product from record
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Return to Main account menu: AccountController.
-
+                //TODO: return to my product
             }
         });
     }
-    */
 
+*/
 
 
 
