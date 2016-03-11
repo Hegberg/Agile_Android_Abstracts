@@ -12,6 +12,9 @@ public class MainActivity extends AppCompatActivity {
     //profileOption variable is for selecting the correct interface in AddEditAccount
     //profileOption 1 = ViewAccount, 2 = CreateAccount, 3 = EditAccount
     public static int profileOption;
+    //productOption variable is for selecting the correct interface in ViewChangeProduct
+    //productOption 1 = ViewProduct, 2 = AddProduct, 3 = EditProduct, 4 = DeleteProduct,
+    public static int productOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
