@@ -17,13 +17,20 @@ import io.searchbox.core.SearchResult;
 
 
 /**
- * Created by esports on 2/16/16.
+ * The database controller for controlling accesses to the database server
+ * Using jest
  */
+
 public class DatabaseController {
     private static JestDroidClient client;
     private static Gson gson;
 
 
+/**
+ * Some info and examples to the other developers on how to use the
+ * methods in the database class.
+ *
+  */
 /* how to use GetUsers/ GetItems:
 ------------------------------------
 ElasticsearchTweetController.GetTweetsTask getTweetsTask = new ElasticsearchTweetController.GetTweetsTask();
@@ -67,9 +74,12 @@ NormalTweet latestTweet = new NormalTweet(text);
  */
 
 
-
-
-
+    /**
+     * Verifying the database client
+     * We verify the client before reading the values in the database and writing to the database
+     *
+     * Returns nothing and accepts nothing
+     */
     public static void verifyClient() {
         if(client == null) {
             // 2. If it doesn't, make it.
@@ -84,8 +94,10 @@ NormalTweet latestTweet = new NormalTweet(text);
     }
 
 
-
-
+    /**
+     * Adding users to the database.
+     * Separating the users list and items list
+     */
     public static class AddUsers extends AsyncTask<User,Void,Void>{
         @Override
         protected Void doInBackground(User... users) {
@@ -114,6 +126,11 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 
+    /**
+     * Adding items to the database
+     * We have owner usernames in the database so the user
+     * connected to the item can be connected
+     */
     public static class AddItems extends AsyncTask<WarItem,Void,Void>{
         @Override
         protected Void doInBackground(WarItem... items) {
@@ -142,6 +159,11 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 
+    /**
+     * Getting users from the database
+     * Returns all a list of users unless a username is a parameter
+     *
+     */
     public static class GetUsers extends AsyncTask<String, Void, ArrayList<User>> {
         // TODO: Get users
         @Override
@@ -185,7 +207,11 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 
-
+    /**
+     * class for returning items in the database
+     * Returns a list of items. Unless search value is a parameter
+     *
+     */
     public static class GetItems extends AsyncTask<String, Void, ArrayList<WarItem>> {
         // TODO: Get items
         @Override
@@ -229,86 +255,3 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 }
-
-
-
-
-//    //TODO: A function that gets tweets
-//    public static class GetInfo extends AsyncTask<String, Void, ArrayList<>> {
-//        // TODO: Get tweets
-//        @Override
-//        protected ArrayList<> doInBackground(String... search_strings) {
-//            verifyClient();
-//
-//            // Base arraylist to hold tweets
-//            //ArrayList<Tweet> tweets = new ArrayList<Tweet>();
-//
-//            String query = "{\n" +
-//                    "\"query\": {\n" +
-//                    "\"term\": { \"tweet\" : \"sad\" }\n" +
-//                    "}\n" +
-//                    "}\n";
-//            String search_string = "";
-//
-//            Search search = new Search.Builder(search_string)
-//                    .addIndex("testing")
-//                    .addType("tweet")
-//                    .build();
-//
-//            try {
-//                SearchResult result = client.execute(search);
-//                if(result.isSucceeded()) {
-//                    //List<NormalTweet> fun = result.getSourceAsObjectList(NormalTweet.class);
-//                    //tweets.addAll(fun);
-//                }
-//            } catch (IOException e) {
-//                // TODO: Something more useful
-//                throw new RuntimeException();
-//            }
-//
-//            return
-//        }
-//
-//
-//    }
-//
-//
-//    public static void addUser(String username){
-//
-//        verifyClient();
-//
-//        Index index = new Index.Builder(username).index("Agile_Android_Abstracts").type("users").build();
-//        try {
-//            DocumentResult result = client.execute(index);
-//            if(result.isSucceeded()) {
-//                // Set the ID to tweet that elasticsearch told me it was
-//                //username.setId(result.getId());
-//            } else {
-//                // TODO: Add an error message, because this was puzzling.
-//                // TODO: Right here it will trigger if the insert fails
-//                Log.i("TODO", "We actually failed here, adding a tweet");
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public static void addItem(String name){
-//
-//        verifyClient();
-//
-//        Index index = new Index.Builder(name).index("Agile_Android_Abstracts").type("items").build();
-//        try {
-//            DocumentResult result = client.execute(index);
-//            if(result.isSucceeded()) {
-//                // Set the ID to tweet that elasticsearch told me it was
-//                //username.setId(result.getId());
-//            } else {
-//                // TODO: Add an error message, because this was puzzling.
-//                // TODO: Right here it will trigger if the insert fails
-//                Log.i("TODO", "We actually failed here, adding a tweet");
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
