@@ -21,6 +21,8 @@ import io.searchbox.core.SearchResult;
  * Using jest
  */
 
+
+
 public class DatabaseController {
     private static JestDroidClient client;
     private static Gson gson;
