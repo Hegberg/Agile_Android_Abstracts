@@ -104,7 +104,6 @@ public class AccountController extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: insert class to go to when 'products' is clicked.
                 startActivity(new Intent(AccountController.this, SearchingActivity.class));
             }
         });

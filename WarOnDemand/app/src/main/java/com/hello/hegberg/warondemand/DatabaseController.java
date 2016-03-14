@@ -342,6 +342,11 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 
+    public static void deleteItem(WarItem oldItem) {
+        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
+        Delete.execute(oldItem.getName());
+    }
+
 
 
 
