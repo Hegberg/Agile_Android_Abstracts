@@ -279,7 +279,7 @@ NormalTweet latestTweet = new NormalTweet(text);
 
     public static void updateItem(WarItem oldItem, WarItem newItem) {
 
-        DatabaseController.DeleteUsers Delete = new DatabaseController.DeleteUsers();
+        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
         Delete.execute(oldItem.getName());
 
         AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
