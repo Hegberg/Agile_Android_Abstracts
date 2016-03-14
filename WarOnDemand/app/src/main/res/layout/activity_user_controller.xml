@@ -15,17 +15,19 @@
         android:layout_height="wrap_content"
         android:text="Create Profile"
         android:id="@+id/createProfile"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp" />
+        android:layout_marginTop="77dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign In"
         android:id="@+id/signIn"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/createProfile"
+        android:layout_alignLeft="@+id/back"
+        android:layout_alignStart="@+id/back"
+        android:layout_marginTop="47dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -34,5 +36,6 @@
         android:id="@+id/back"
         android:layout_below="@+id/signIn"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp" />
+        android:layout_marginTop="57dp" />
+
 </RelativeLayout>

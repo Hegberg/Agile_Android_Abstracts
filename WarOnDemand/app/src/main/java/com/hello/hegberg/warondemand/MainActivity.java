@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     //productOption variable is for selecting the correct interface in ViewChangeProduct
     //productOption 1 = ViewProduct, 2 = AddProduct, 3 = EditProduct, 4 = DeleteProduct,
     public static int productOption;
+    public static User chosenUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

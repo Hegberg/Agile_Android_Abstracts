@@ -8,9 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 
 public class UserController extends AppCompatActivity {
+    private ArrayList<User> checkAgainst = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,47 @@ public class UserController extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserController.this, AccountController.class));
+                setContentView(R.layout.sing_in_info);
+                Button signInAgain = (Button) findViewById(R.id.signInWithInfo);
+                Button backAgain = (Button) findViewById(R.id.backSignInWithInfo);
+
+                final EditText username = (EditText) findViewById(R.id.usernameSignIn);
+
+                signInAgain.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                        /*
+                        for (int i=itemsPostFilter.size() - 1; i>=0; i--) {
+                            itemsPostFilter.remove(i);
+                        }
+                        */
+                            DatabaseController.GetUsers getUsersTask = new DatabaseController.GetUsers();
+                            getUsersTask.execute("");
+                            checkAgainst = getUsersTask.get();
+                            for (int i = 0; i < checkAgainst.size(); i++) {
+                                if (checkAgainst.get(i).getUsername() == username.getText().toString()) {
+                                    MainActivity.chosenUser = checkAgainst.get(i);
+                                    startActivity(new Intent(UserController.this, AccountController.class));
+                                } else {
+                                    Toast.makeText(UserController.this, "You need to enter a correct username", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                backAgain.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        finish();
+                        startActivity(new Intent(UserController.this, UserController.class));
+                    }
+                });
 
             }
         });
@@ -41,7 +87,7 @@ public class UserController extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserController.this, MainActivity.class));
+                finish();
 
             }
         });

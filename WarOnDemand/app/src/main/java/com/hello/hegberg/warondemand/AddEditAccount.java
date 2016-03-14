@@ -37,7 +37,7 @@ public class AddEditAccount extends AppCompatActivity {
                     AddAccount();
                     //uncomment above line when function fixed
                     //TODO: Prompt user to input variables and save then in Json
-
+                    finish();
                 }
             });
 
@@ -124,8 +124,6 @@ public class AddEditAccount extends AppCompatActivity {
         String description = descriptionInfo.getText().toString();
         String contact = contactInfo.getText().toString();
 
-        //ArrayList<User> users = new ArrayList<User>();
-
         if (name.equals("")){
             Toast.makeText(AddEditAccount.this, "You need to enter a name", Toast.LENGTH_SHORT).show();
         } else if (description.equals("")) {
@@ -133,20 +131,8 @@ public class AddEditAccount extends AppCompatActivity {
         } else if (contact.equals("")) {
             Toast.makeText(AddEditAccount.this, "You need to enter your contact information", Toast.LENGTH_SHORT).show();
         } else {
-            User user = new User(name, description, contact);
-            //DatabaseController.GetUsers getUsersTask = new DatabaseController.GetUsers();
-            /*
-            try {
-                getUsersTask.execute("");
-                users = getUsersTask.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-            */
 
-            //users.add(user);
+            User user = new User(name, description, contact);
 
             AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
             execute.execute(user);
