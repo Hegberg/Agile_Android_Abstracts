@@ -1,3 +1,6 @@
+//Class not used anymore
+
+
 package com.hello.hegberg.warondemand;
 
 import android.content.Intent;

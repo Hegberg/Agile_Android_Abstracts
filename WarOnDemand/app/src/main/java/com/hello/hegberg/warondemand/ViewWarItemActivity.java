@@ -92,7 +92,7 @@ public class ViewWarItemActivity extends AppCompatActivity {
 
                         //delays return so server has time to update
                         Handler myHandler = new Handler();
-                        myHandler.postDelayed(mMyRunnable, 500);
+                        myHandler.postDelayed(mMyRunnable, 1000);
                     }
                 } catch (NumberFormatException e) {
                     //Error catch in case something I didn't expect.

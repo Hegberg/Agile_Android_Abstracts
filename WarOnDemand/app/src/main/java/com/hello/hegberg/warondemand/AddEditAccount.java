@@ -80,6 +80,7 @@ public class AddEditAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: Return to Main account menu: AccountController.
+                finish();
 
             }
         });
@@ -107,27 +108,6 @@ public class AddEditAccount extends AppCompatActivity {
     }
 
     public void AddAccount() {
-
-       /* //TODO: Prompt user to input info, check user input for unique username info,
-        // and add button to commit it to Json.
-        Button confirm = (Button) findViewById(R.id.confirm);
-        Button cancel = (Button) findViewById(R.id.cancel);//instead of a back button
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                users.createUser();
-                //TODO: when you confirm, commit everything to Json, and pull up the account
-                // to the main account menu: UserController.
-            }
-        });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: Return to Main account menu: AccountController.
-
-            }
-        });
-*/
         MainActivity.profileOption = 0;
         Button done = (Button) findViewById(R.id.doneAddAccount);
         Button back = (Button) findViewById(R.id.backAddAccount);//instead of a back button
@@ -166,6 +146,7 @@ public class AddEditAccount extends AppCompatActivity {
             public void onClick(View v) {
                 MainActivity.profileOption = 0;
                 //startActivity(new Intent(UserController.this, AddEditAccount.class));
+                finish();
 
             }
 
