@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Done"
-        android:id="@+id/done"
+        android:id="@+id/doneAddAccount"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/name"
         android:layout_toEndOf="@+id/name" />
@@ -22,10 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
-        android:id="@+id/back"
-        android:layout_alignTop="@+id/done"
-        android:layout_toRightOf="@+id/done"
-        android:layout_toEndOf="@+id/done"
+        android:id="@+id/backAddAccount"
+        android:layout_alignTop="@+id/doneAddAccount"
+        android:layout_toRightOf="@+id/doneAddAccount"
+        android:layout_toEndOf="@+id/doneAddAccount"
         android:layout_marginLeft="57dp"
         android:layout_marginStart="57dp" />
 

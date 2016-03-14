@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Done"
-        android:id="@+id/edit"
+        android:id="@+id/editAccount"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/name"
         android:layout_toEndOf="@+id/name" />
@@ -25,10 +25,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
-        android:id="@+id/back"
-        android:layout_alignTop="@+id/edit"
-        android:layout_toRightOf="@+id/edit"
-        android:layout_toEndOf="@+id/edit"
+        android:id="@+id/backEditAccount"
+        android:layout_alignTop="@+id/editAccount"
+        android:layout_toRightOf="@+id/editAccount"
+        android:layout_toEndOf="@+id/editAccount"
         android:layout_marginLeft="57dp"
         android:layout_marginStart="57dp" />
 
@@ -89,8 +89,8 @@
         android:layout_above="@+id/description"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/edit"
-        android:layout_alignStart="@+id/edit" />
+        android:layout_alignLeft="@+id/editAccount"
+        android:layout_alignStart="@+id/editAccount" />
 
     <EditText
         android:layout_width="wrap_content"

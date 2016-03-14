@@ -14,6 +14,7 @@ public class AddEditAccount extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if(MainActivity.profileOption == 1) {
             setContentView(R.layout.activity_view_account);
             //ViewAccount();
@@ -21,7 +22,8 @@ public class AddEditAccount extends AppCompatActivity {
         }
         if(MainActivity.profileOption == 2) {
             setContentView(R.layout.activity_add_account);
-            Button done = (Button) findViewById(R.id.done);
+            Button done = (Button) findViewById(R.id.doneAddAccount);
+            Button back = (Button) findViewById(R.id.backAddAccount);
             done.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -29,6 +31,13 @@ public class AddEditAccount extends AppCompatActivity {
                     //uncomment above line when function fixed
                     //TODO: Prompt user to input variables and save then in Json
 
+                }
+            });
+
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
                 }
             });
 
