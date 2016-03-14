@@ -271,10 +271,23 @@ NormalTweet latestTweet = new NormalTweet(text);
 
         DatabaseController.DeleteUsers Delete = new DatabaseController.DeleteUsers();
         Delete.execute(oldUser.getUsername());
-        
+
         AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
         execute.execute(newUser);
     }
+
+    public static void updateItem(WarItem oldItem, WarItem newItem) {
+
+        DatabaseController.DeleteUsers Delete = new DatabaseController.DeleteUsers();
+        Delete.execute(oldItem.getName());
+
+        AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
+        execute.execute(newItem);
+    }
+
+
+
+
 
 
     public static class DeleteUsers extends AsyncTask<String, Void, ArrayList<User>> {
@@ -284,8 +297,8 @@ NormalTweet latestTweet = new NormalTweet(text);
             verifyClient();
 
             DeleteByQuery deleteUser = new DeleteByQuery.Builder("{\"username\":\"" + search_strings[0] + "\"}")
-                    .addIndex("users")
-                    .addType("user")
+                    .addIndex("testing")
+                    .addType("users")
                     .build();
 
 
@@ -299,6 +312,33 @@ NormalTweet latestTweet = new NormalTweet(text);
             return null;
         }
     }
+
+
+
+    public static class DeleteItems extends AsyncTask<String, Void, ArrayList<WarItem>> {
+        // TODO: Get users
+        @Override
+        protected ArrayList<WarItem> doInBackground(String... search_strings) {
+            verifyClient();
+
+            DeleteByQuery deleteItem = new DeleteByQuery.Builder("{\"name\":\"" + search_strings[0] + "\"}")
+                    .addIndex("testing")
+                    .addType("items")
+                    .build();
+
+
+            try {
+                client.execute(deleteItem);
+            } catch (IOException e) {
+                Log.i("TODO", "We actually failed here, deleting a user");
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
+
 
 
 
