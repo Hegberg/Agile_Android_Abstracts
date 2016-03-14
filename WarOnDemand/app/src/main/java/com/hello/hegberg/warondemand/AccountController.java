@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class AccountController extends AppCompatActivity {
     private ArrayList<String> contactInfoHolder;
+    private User tempUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +65,9 @@ public class AccountController extends AppCompatActivity {
                         } else if (contact.equals("")) {
                             Toast.makeText(AccountController.this, "You need to enter your contact information", Toast.LENGTH_SHORT).show();
                         } else {
+                            tempUser = MainActivity.chosenUser;
                             MainActivity.chosenUser.editUser(name, description, contact);
-                            /*
-                            //need update function for this to fully work^
-                            AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
-                            execute.execute(MainActivity.chosenUser);
-                            */
+                            DatabaseController.updateUser(tempUser, MainActivity.chosenUser);
                             finish();
                             startActivity(new Intent(AccountController.this, AccountController.class));
                         }
