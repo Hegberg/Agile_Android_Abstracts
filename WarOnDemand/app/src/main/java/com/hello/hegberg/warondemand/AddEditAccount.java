@@ -35,16 +35,19 @@ public class AddEditAccount extends AppCompatActivity {
                     //uncomment above line when function fixed
                     //TODO: Pull up old record and prompt user to change them
 
-            Button back = (Button) findViewById(R.id.return_from_viewing);
-            //ViewAccount();
-            //uncomment above line when function fixed
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
+                    Button back = (Button) findViewById(R.id.return_from_viewing);
+                    //ViewAccount();
+                    //uncomment above line when function fixed
+                    back.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    });
                 }
             });
         }
+
         if(MainActivity.profileOption == 2) {
             setContentView(R.layout.activity_add_account);
             Button done = (Button) findViewById(R.id.doneAddAccount);
@@ -71,16 +74,6 @@ public class AddEditAccount extends AppCompatActivity {
         if(MainActivity.profileOption == 3) {
             setContentView(R.layout.activity_edit_account);
             Button back = (Button) findViewById(R.id.back);
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //EditAccount();
-                    //uncomment above line when function fixed
-                    //TODO: Pull up old record and prompt user to change them
-
-
-                }
-            });
             back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -139,7 +132,7 @@ public class AddEditAccount extends AppCompatActivity {
 
     }
     */
-    public void AddAccount() {
+    public void AddAccount(){
         //TODO: Prompt user to input info, check user input for unique username info,
         final TextView nameInfo = (TextView) findViewById(R.id.nameUser);
         final TextView descriptionInfo = (TextView) findViewById(R.id.descriptionUser);
