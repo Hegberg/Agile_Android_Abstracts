@@ -1,5 +1,6 @@
 package com.hello.hegberg.warondemand;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,7 +17,7 @@ public class AddWarItemActivity extends AppCompatActivity {
 
     //This activity is used to create a new Waritem, though it may be temporary.
     private ArrayList<WarItem> warItems = new ArrayList<WarItem>();
-    private User owner = null; //Replace when you figure out how to port over current user.
+    private User owner = MainActivity.chosenUser; //Replace when you figure out how to port over current user.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,8 @@ public class AddWarItemActivity extends AppCompatActivity {
                     } else {
                         //No invalid fields, can commit.
                         WarItem latestItem = new WarItem(name, desc, cost, owner);
+                        AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
+                        execute.execute(latestItem);
                         warItems.add(latestItem);
                         finish();
                     }
