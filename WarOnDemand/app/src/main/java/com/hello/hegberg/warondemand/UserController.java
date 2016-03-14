@@ -64,7 +64,6 @@ public class UserController extends AppCompatActivity {
                                         Log.i("username -> ", checkAgainst.get(i).getUsername());
                                         Log.i("username entered -> ", username.getText().toString());
                                         startActivity(new Intent(UserController.this, AccountController.class));
-                                        Log.i("check ", "does this happen");
                                     } else {
                                         Log.i("username_bad->", checkAgainst.get(i).getUsername());
                                         Log.i("username_entered->", username.getText().toString());

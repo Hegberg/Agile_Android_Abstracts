@@ -65,8 +65,6 @@ public class AddEditAccount extends AppCompatActivity {
                     //EditAccount();
                     //uncomment above line when function fixed
                     //TODO: Pull up old record and prompt user to change them
-
-
                 }
             });
             back.setOnClickListener(new View.OnClickListener() {
