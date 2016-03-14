@@ -6,9 +6,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -24,14 +27,23 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 
 public class ViewWarItemActivity extends AppCompatActivity {
 
     //Poorly named, but this is the activity that allows user to view a specific item, and edit it.
+    private ListView ItemList;
+    private User temp;
+
+    /** Called when the activity is first created. */
+    private ArrayList<WarItem> warItems = new ArrayList<WarItem>();
+    private ArrayList<WarItem> warItemsPreSearch = new ArrayList<WarItem>();
+    private ArrayAdapter<WarItem> adapter;
     private User owner = MainActivity.chosenUser;
 
     /** Called when the activity is first created. */
+    private WarItem preEditedLog;
     private WarItem editedLog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +55,13 @@ public class ViewWarItemActivity extends AppCompatActivity {
         Button deleteButton = (Button) findViewById(R.id.delete);
 
         //Get the entry to view and edit.
-        //editedLog = logs.get(ViewMyItemsActivity.editPos);
+        preEditedLog = warItems.get(ViewMyItemsActivity.editPos);
 
         //Fills in text fields with current data.
         //DOES NOT WORK
-        ((EditText) findViewById(R.id.name_entered)).setText(editedLog.getName());
-        ((EditText) findViewById(R.id.desc_entered)).setText(editedLog.getDesc());
-        ((EditText) findViewById(R.id.cost_entered)).setText(editedLog.getCost().toString());
+        ((EditText) findViewById(R.id.name_entered)).setText(preEditedLog.getName());
+        ((EditText) findViewById(R.id.desc_entered)).setText(preEditedLog.getDesc());
+        ((EditText) findViewById(R.id.cost_entered)).setText(preEditedLog.getCost().toString());
 
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +88,7 @@ public class ViewWarItemActivity extends AppCompatActivity {
                         editedLog.setName(name);
                         editedLog.setDesc(desc);
                         editedLog.setCost(cost);
-                        //AsyncTask<WarItem, Void, Void> execute = new DatabaseController.UpdateItem();
+                        AsyncTask<WarItem, Void, Void> execute = new DatabaseController.updateItem(preEditedLog, editedLog);
                         //execute.execute(latestItem);
                         //warItems.add(latestItem);
                         finish();
@@ -100,10 +112,44 @@ public class ViewWarItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //WarItem latestItem = new WarItem(name, desc, cost, owner);
                 AsyncTask<String, Void, ArrayList<WarItem>> execute = new DatabaseController.DeleteItems();
-                execute.execute(editedLog);
+                execute.execute(preEditedLog);
                 finish();
             }
         });
+
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, warItems);
+        ItemList.setAdapter(adapter);
+        search();
+        adapter.notifyDataSetChanged();
+    }
+    public void search(){
+        DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
+
+        try {
+
+            for (int i=warItems.size() - 1; i>=0; i--) {
+                warItems.remove(i);
+            }
+
+            getItemsTask.execute("");
+            warItemsPreSearch = getItemsTask.get();
+            Log.i("size-> ", "" + warItemsPreSearch.size());
+            for (int i=0; i<warItemsPreSearch.size(); i++){
+                temp = warItemsPreSearch.get(i).getOwner();
+                Log.i("owner->",""+warItemsPreSearch.get(i).getOwner() );
+                if (temp.getUsername().equals(MainActivity.chosenUser.getUsername())) {
+                    warItems.add(warItemsPreSearch.get(i));
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
     }
 
