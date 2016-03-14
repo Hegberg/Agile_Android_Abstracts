@@ -1,7 +1,12 @@
 package com.hello.hegberg.warondemand;
 
-import java.util.ArrayList;
 
+
+import android.media.Image;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import io.searchbox.annotations.JestId;
 
 /**
@@ -17,13 +22,18 @@ public class WarItem {
     //0 for Available
     //1 for bid on
     //2 for borrowed
-    private int status;
+    private Integer status;
 
-    private Boolean autoSetAvailable;
     private Boolean bidOn;
     private ArrayList<User> listOfBidders;
     private User owner;
     private User borrower;
+    //Latitude and longitude are stored in the item, but only set when the item has been bid and accepted.
+    private Double latitude;
+    private Double longitude;
+    //private BufferedImage image; //Failed to get this to work.
+    private Image image = null;
+
     @JestId
     protected String id;
 
@@ -32,7 +42,6 @@ public class WarItem {
         this.cost = cost;
         this.desc = desc;
         this.status = 0;
-        this.autoSetAvailable = false;
         this.owner = owner;
 
     }
@@ -44,7 +53,6 @@ public class WarItem {
         this.status = 0;
         this.cost = cost;
         this.status = 0;
-        this.autoSetAvailable = false;
         this.owner = owner;
         //this.returning = Boolean.FALSE;
     }
@@ -90,14 +98,6 @@ public class WarItem {
         this.cost = cost;
     }
 
-    public Boolean getAutoSetAvailable() {
-        return autoSetAvailable;
-    }
-
-    public void setAutoSetAvailable(Boolean autoSetAvailable) {
-        this.autoSetAvailable = autoSetAvailable;
-    }
-
     public Boolean getBidOn() {
         return bidOn;
     }
@@ -128,6 +128,36 @@ public class WarItem {
 
     public void setListOfBidders(ArrayList<User> listOfBidders) {
         this.listOfBidders = listOfBidders;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+    //I'll be honest, this is probably just a temporary measure. I'm not sure how we want to
+    //Actually want to do image in the actual product. Additionally, I, for some reason, could not
+    //use bufferedimage like every guide was telling me to.
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public void AddBidder(User userAdded) {
