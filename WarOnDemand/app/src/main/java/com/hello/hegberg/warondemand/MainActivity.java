@@ -37,16 +37,16 @@ public class MainActivity extends AppCompatActivity {
 
         //when products is clicked go to <somewhere>
 
-        //commented out bad code again
-        /*
+
         products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: insert class to go to when 'products' is clicked.
-                startActivity(new Intent(MainActivity.this, < InsertClass >. class));
+                startActivity(new Intent(MainActivity.this, SearchingActivity.class));
             }
         });
 
+        /* bad code
         //when help is clicked go to <somewhere>
         help.setOnClickListener(new View.OnClickListener() {
             @Override
