@@ -27,7 +27,7 @@ public class User {
         return username;
     }
 
-    public String getContactInfo() {return contactInfo.get(1);}
+    public ArrayList getContactInfo() {return contactInfo;}
 
     public String getId() {
         return id;

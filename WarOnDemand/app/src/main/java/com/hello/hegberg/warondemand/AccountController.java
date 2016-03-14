@@ -9,7 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class AccountController extends AppCompatActivity {
+    private ArrayList<String> contactInfoHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,11 @@ public class AccountController extends AppCompatActivity {
 
                 Button done = (Button) findViewById(R.id.doneAddAccount);
                 Button back = (Button) findViewById(R.id.backAddAccount);
+
+                nameInfo.setText(MainActivity.chosenUser.getUsername());
+                contactInfoHolder = MainActivity.chosenUser.getContactInfo();
+                descriptionInfo.setText(contactInfoHolder.get(0));
+                contactInfo.setText(contactInfoHolder.get(1));
 
                 done.setOnClickListener(new View.OnClickListener() {
                     @Override
