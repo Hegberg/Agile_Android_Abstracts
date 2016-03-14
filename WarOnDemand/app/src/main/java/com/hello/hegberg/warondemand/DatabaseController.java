@@ -280,7 +280,7 @@ NormalTweet latestTweet = new NormalTweet(text);
     public static void updateItem(WarItem oldItem, WarItem newItem) {
 
         DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
-        Delete.execute(oldItem.getName());
+        Delete.execute(oldItem.getId());
 
         AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
         execute.execute(newItem);
@@ -334,7 +334,7 @@ NormalTweet latestTweet = new NormalTweet(text);
             try {
                 client.execute(deleteItem);
             } catch (IOException e) {
-                Log.i("TODO", "We actually failed here, deleting a user");
+                Log.i("TODO", "We actually failed here, deleting a item");
                 e.printStackTrace();
             }
 
