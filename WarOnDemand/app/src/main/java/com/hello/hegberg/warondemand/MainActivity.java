@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        chosenUser = null;
         /*
         //trying something out so commenting out original main code
 
@@ -95,17 +96,16 @@ public class MainActivity extends AppCompatActivity {
                                     if (checkAgainst.get(i).getUsername().equals(username.getText().toString())) {
                                         MainActivity.chosenUser = checkAgainst.get(i);
                                         //for debug purposes
-                                        //Log.i("username -> ", checkAgainst.get(i).getUsername());
-                                        //Log.i("username entered -> ", username.getText().toString());
+                                        Log.i("username -> ", checkAgainst.get(i).getUsername());
+                                        Log.i("username entered -> ", username.getText().toString());
                                         startActivity(new Intent(MainActivity.this, AccountController.class));
-                                    } /*else {
+                                    } else {
                                         //entire else statemnt is for debugging login
                                         Log.i("username_bad->", checkAgainst.get(i).getUsername());
                                         Log.i("username_entered->", username.getText().toString());
                                         Log.i("check->", String.valueOf(checkAgainst.get(i).getUsername() == username.getText().toString()));
-
                                     }
-                                    */
+
                                 }
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
