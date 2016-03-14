@@ -52,7 +52,6 @@ public class AddEditAccount extends AppCompatActivity {
             EditAccount();
 
 
-
         }
 
     }
@@ -172,27 +171,12 @@ public class AddEditAccount extends AppCompatActivity {
             }
 
         });
-
-
     }
 }
-    /*private void saveInFile() {
-        //everything in saveInFile is copy/pasted from lonelytwitter exercise in the lab
-        try {
-            FileOutputStream fos = openFileOutput(FILENAME, 0);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-            Gson gson = new Gson();
-            gson.toJson(entries, out);
-            out.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException();
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
-    }
 
-}/*
+
+
+
 
 
 
