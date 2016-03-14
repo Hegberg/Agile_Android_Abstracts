@@ -30,8 +30,9 @@ public class WarItem {
     private User owner;
     private User borrower;
     //Latitude and longitude are stored in the item, but only set when the item has been bid and accepted.
-    private Double latitude;
-    private Double longitude;
+    //wrong interpretation of requirement
+    //private Double latitude;
+    //private Double longitude;
     //private BufferedImage image; //Failed to get this to work.
 //    private Image image = null;
     DecimalFormat twoDec = new DecimalFormat("#.##");
@@ -131,7 +132,7 @@ public class WarItem {
     public void setListOfBidders(ArrayList<User> listOfBidders) {
         this.listOfBidders = listOfBidders;
     }
-
+    /*
     public Double getLatitude() {
         return latitude;
     }
@@ -151,6 +152,7 @@ public class WarItem {
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
+    */
     //I'll be honest, this is probably just a temporary measure. I'm not sure how we want to
     //Actually want to do image in the actual product. Additionally, I, for some reason, could not
     //use bufferedimage like every guide was telling me to.
