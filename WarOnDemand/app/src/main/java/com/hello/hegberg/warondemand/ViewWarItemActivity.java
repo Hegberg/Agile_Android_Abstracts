@@ -113,7 +113,7 @@ public class ViewWarItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //WarItem latestItem = new WarItem(name, desc, cost, owner);
                 DatabaseController.DeleteItems delete= new DatabaseController.DeleteItems();
-                delete.execute(preEditedLog.id);
+                delete.execute(preEditedLog.getName());
                 finish();
             }
         });
