@@ -20,6 +20,7 @@ public class AccountController extends AppCompatActivity {
         // Initialize Buttons
         Button myProfile = (Button) findViewById(R.id.myProfile);
         Button myProducts = (Button) findViewById(R.id.myProducts);
+        Button back = (Button) findViewById(R.id.backAccountController);
         Button myBids = (Button) findViewById(R.id.myBids);
         Button borrowedProducts = (Button) findViewById(R.id.borrowedProducts);
 
@@ -33,10 +34,19 @@ public class AccountController extends AppCompatActivity {
 
             }
         });
+
         myProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AccountController.this, MyProducts.class));
+
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
 
             }
         });

@@ -23,8 +23,15 @@ public class AddEditAccount extends AppCompatActivity {
 
         if(MainActivity.profileOption == 1) {
             setContentView(R.layout.activity_view_account);
+            Button back = (Button) findViewById(R.id.return_from_viewing);
             //ViewAccount();
             //uncomment above line when function fixed
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
         }
         if(MainActivity.profileOption == 2) {
             setContentView(R.layout.activity_add_account);
@@ -60,6 +67,12 @@ public class AddEditAccount extends AppCompatActivity {
                     //TODO: Pull up old record and prompt user to change them
 
 
+                }
+            });
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
                 }
             });
 
