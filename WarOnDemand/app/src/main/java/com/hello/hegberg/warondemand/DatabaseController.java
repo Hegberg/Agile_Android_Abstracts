@@ -296,11 +296,13 @@ NormalTweet latestTweet = new NormalTweet(text);
         @Override
         protected ArrayList<User> doInBackground(String... search_strings) {
             verifyClient();
-
-            DeleteByQuery deleteUser = new DeleteByQuery.Builder("{\"username\":\"" + search_strings[0] + "\"}")
+            String search_string;
+            search_string = "{\"query\":{\"match\":{\"username\":\"" + search_strings[0] + "\"}}}";
+            DeleteByQuery deleteUser = new DeleteByQuery.Builder(search_string)
                     .addIndex("testing")
                     .addType("users")
                     .build();
+
 
 
             try {
@@ -321,8 +323,9 @@ NormalTweet latestTweet = new NormalTweet(text);
         @Override
         protected ArrayList<WarItem> doInBackground(String... search_strings) {
             verifyClient();
-
-            DeleteByQuery deleteItem = new DeleteByQuery.Builder("{\"name\":\"" + search_strings[0] + "\"}")
+            String search_string;
+            search_string = "{\"query\":{\"match\":{\"name\":\"" + search_strings[0] + "\"}}}";
+            DeleteByQuery deleteItem = new DeleteByQuery.Builder(search_string)
                     .addIndex("testing")
                     .addType("items")
                     .build();
