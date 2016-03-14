@@ -114,7 +114,7 @@ NormalTweet latestTweet = new NormalTweet(text);
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
                         // Set the ID to tweet that elasticsearch told me it was
-                        //user.setId(result.getId());
+                        user.setId(result.getId());
                     } else {
                         // TODO: Add an error message, because this was puzzling.
                         // TODO: Right here it will trigger if the insert fails
