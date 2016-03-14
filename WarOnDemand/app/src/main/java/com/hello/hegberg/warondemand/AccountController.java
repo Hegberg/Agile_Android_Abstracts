@@ -21,6 +21,7 @@ public class AccountController extends AppCompatActivity {
         Button myProfile = (Button) findViewById(R.id.myProfile);
         Button myProducts = (Button) findViewById(R.id.myProducts);
         Button back = (Button) findViewById(R.id.backAccountController);
+        Button search = (Button) findViewById(R.id.searchForItems);
         Button myBids = (Button) findViewById(R.id.myBids);
         Button borrowedProducts = (Button) findViewById(R.id.borrowedProducts);
 
@@ -51,7 +52,13 @@ public class AccountController extends AppCompatActivity {
             }
         });
 
-
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: insert class to go to when 'products' is clicked.
+                startActivity(new Intent(AccountController.this, SearchingActivity.class));
+            }
+        });
         /*
         //commented out since breaks app currently
 

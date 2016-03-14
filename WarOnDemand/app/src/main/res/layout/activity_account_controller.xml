@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="My Products"
         android:id="@+id/myProducts"
-        android:layout_marginTop="59dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/myProfile"
         android:layout_centerHorizontal="true" />
 
@@ -34,7 +34,7 @@
         android:id="@+id/myBids"
         android:layout_below="@+id/myProducts"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp" />
+        android:layout_marginTop="40dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -51,5 +51,14 @@
         android:text="Back"
         android:id="@+id/backAccountController"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search For Items"
+        android:id="@+id/searchForItems"
+        android:layout_below="@+id/borrowedProducts"
+        android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

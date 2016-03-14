@@ -1,7 +1,9 @@
 package com.hello.hegberg.warondemand;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,8 +30,8 @@ public class SearchingActivity extends AppCompatActivity {
 
         ListView listOfItems = (ListView) findViewById(R.id.searchItemsList);
 
+        DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
         try {
-            DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
             getItemsTask.execute("");
             itemsPostFilter = getItemsTask.get();
         }  catch (InterruptedException e) {
@@ -55,7 +57,6 @@ public class SearchingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 keyword = keywordText.getText().toString();
                 search(keyword);
-                //listOfItems.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -80,8 +81,10 @@ public class SearchingActivity extends AppCompatActivity {
 
             getItemsTask.execute("");
             itemsPreFilter = getItemsTask.get();
+            Log.i("size-> ", ""+itemsPreFilter.size());
             for (int i=0; i<itemsPreFilter.size(); i++){
                 temp = itemsPreFilter.get(i).getStatus();
+                Log.i("status ",""+itemsPreFilter.get(i).getStatus() );
                 if (temp != 2) {
                     itemsPostFilter.add(itemsPreFilter.get(i));
                 }
@@ -92,5 +95,7 @@ public class SearchingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //AsyncTask<String, Void, ArrayList<WarItem>> execute = new DatabaseController.GetItems();
+        //execute.execute()
     }
 }

@@ -30,7 +30,7 @@ public class MyProducts extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyProducts.this, AccountController.class));
+                finish();
             }
         });
 

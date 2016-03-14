@@ -160,6 +160,7 @@ NormalTweet latestTweet = new NormalTweet(text);
                     e.printStackTrace();
                 }
             }
+            Log.i("Success", "We have added an item to the DB");
             return null;
         }
     }

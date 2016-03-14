@@ -1,6 +1,7 @@
 package com.hello.hegberg.warondemand;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,8 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -47,27 +50,27 @@ public class UserController extends AppCompatActivity {
 
                     final EditText username = (EditText) findViewById(R.id.usernameSignIn);
 
+
                     signInAgain.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             try {
-                            /*
-                            for (int i=itemsPostFilter.size() - 1; i>=0; i--) {
-                                itemsPostFilter.remove(i);
-                            }
-                            */
-
                                 DatabaseController.GetUsers getUsersTask = new DatabaseController.GetUsers();
                                 getUsersTask.execute("");
                                 checkAgainst = getUsersTask.get();
                                 for (int i = 0; i < checkAgainst.size(); i++) {
-                                    if (checkAgainst.get(i).getUsername() == username.getText().toString()) {
+                                    if (checkAgainst.get(i).getUsername().equals(username.getText().toString())) {
                                         MainActivity.chosenUser = checkAgainst.get(i);
-                                        Log.i(checkAgainst.get(i).getUsername(), " username " + username.getText().toString());
+                                        Log.i("username -> ", checkAgainst.get(i).getUsername());
+                                        Log.i("username entered -> ", username.getText().toString());
                                         startActivity(new Intent(UserController.this, AccountController.class));
+                                        Log.i("check ", "does this happen");
                                     } else {
-                                        Log.i(checkAgainst.get(i).getUsername(), " username " + username.getText().toString());
-                                        Toast.makeText(UserController.this, "You need to enter a correct username", Toast.LENGTH_SHORT).show();
+                                        Log.i("username_bad->", checkAgainst.get(i).getUsername());
+                                        Log.i("username_entered->", username.getText().toString());
+                                        Log.i("check->", String.valueOf(checkAgainst.get(i).getUsername() == username.getText().toString()));
+                                        //Log.i("contactInfo-> ", checkAgainst.get(i).getContactInfo());
+                                        //Toast.makeText(UserController.this, "You need to enter a correct username", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             } catch (InterruptedException e) {
@@ -76,8 +79,6 @@ public class UserController extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-                            //used to skip past Database error
-                            //startActivity(new Intent(UserController.this, AccountController.class));
                         }
                     });
 
