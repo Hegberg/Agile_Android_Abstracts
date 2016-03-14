@@ -66,13 +66,7 @@ public class SearchingActivity extends AppCompatActivity {
 
     public void search(String searchTerm){
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
-        /*
-        try{
-            itemsPostFilter.clear();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        */
+
         try {
 
             for (int i=itemsPostFilter.size() - 1; i>=0; i--) {
@@ -84,8 +78,8 @@ public class SearchingActivity extends AppCompatActivity {
             Log.i("size-> ", ""+itemsPreFilter.size());
             for (int i=0; i<itemsPreFilter.size(); i++){
                 temp = itemsPreFilter.get(i).getStatus();
-                Log.i("status ",""+itemsPreFilter.get(i).getStatus() );
-                if (temp != 2) {
+                Log.i("status->",""+itemsPreFilter.get(i).getStatus() );
+                if ((temp != 2 && itemsPreFilter.get(i).getDesc().contains(searchTerm))) {
                     itemsPostFilter.add(itemsPreFilter.get(i));
                 }
             }
@@ -95,7 +89,5 @@ public class SearchingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //AsyncTask<String, Void, ArrayList<WarItem>> execute = new DatabaseController.GetItems();
-        //execute.execute()
     }
 }
