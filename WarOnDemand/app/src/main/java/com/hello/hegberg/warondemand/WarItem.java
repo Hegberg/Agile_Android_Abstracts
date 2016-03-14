@@ -179,7 +179,8 @@ public class WarItem {
         return  "Name: "+ this.name + ", Description: "
                 + this.desc + ", Cost: "
                // + twoDec.format(this.cost);
-                +this.cost;
+                +this.cost + ", Owner: "
+                +this.owner.getUsername();
 
     }
 
