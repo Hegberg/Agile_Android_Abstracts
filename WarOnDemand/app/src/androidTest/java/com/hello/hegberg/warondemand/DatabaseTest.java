@@ -29,12 +29,11 @@ public class DatabaseTest extends ActivityInstrumentationTestCase2 {
  * Then adding it to the database
  */
     public User testCreateUser() {
-        User user = new User();
         String username = "user";
         String email = "test@something.com";
         String number = "780-2212";
 
-        user.createUser(username, email, number);
+        User user = new User(username, email, number);
         AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
         execute.execute(user);
 

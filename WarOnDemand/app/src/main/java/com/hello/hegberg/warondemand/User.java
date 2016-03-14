@@ -17,7 +17,7 @@ public class User {
     @JestId
     protected String id;
 
-    public void createUser(String name, String email, String phoneNumber) {
+    public User(String name, String email, String phoneNumber) {
         username = name;
         contactInfo.add(0, email);
         contactInfo.add(1, phoneNumber);

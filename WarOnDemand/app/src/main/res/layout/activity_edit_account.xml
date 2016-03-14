@@ -76,15 +76,15 @@
         android:textColor="#ffffff"
         android:layout_above="@+id/contactInfo"
         android:layout_toRightOf="@+id/description"
-        android:layout_alignRight="@+id/add_odometer"
-        android:layout_alignEnd="@+id/add_odometer" />
+        android:layout_alignRight="@+id/nameUser"
+        android:layout_alignEnd="@+id/nameUser" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/add_odometer"
+        android:id="@+id/nameUser"
         android:textColor="#ffffff"
         android:layout_above="@+id/description"
         android:layout_alignParentRight="true"
