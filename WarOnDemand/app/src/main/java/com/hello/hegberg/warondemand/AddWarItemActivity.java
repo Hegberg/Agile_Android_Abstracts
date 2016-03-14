@@ -17,7 +17,7 @@ public class AddWarItemActivity extends AppCompatActivity {
 
     //This activity is used to create a new Waritem, though it may be temporary.
     private ArrayList<WarItem> warItems = new ArrayList<WarItem>();
-    private User owner = MainActivity.chosenUser; //Replace when you figure out how to port over current user.
+    private User owner = MainActivity.chosenUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +53,7 @@ public class AddWarItemActivity extends AppCompatActivity {
                         finish();
                     }
                 } catch (NumberFormatException e) {
-                    //Error catch in case numbers aren't provided. Since I'm lazy, this is a catch all for all number values.
+                    //Error catch in case something I didn't expect.
                     Toast.makeText(AddWarItemActivity.this, "Enter all data, please.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -61,7 +61,7 @@ public class AddWarItemActivity extends AppCompatActivity {
         });
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //Nothings changed, go back to FuelTrackActivity
+                //Nothings changed, go back to previous activity
                 finish();
             }
         });
