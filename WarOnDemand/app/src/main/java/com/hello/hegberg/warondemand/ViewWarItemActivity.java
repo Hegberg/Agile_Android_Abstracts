@@ -112,9 +112,8 @@ public class ViewWarItemActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //WarItem latestItem = new WarItem(name, desc, cost, owner);
-                AsyncTask<String, Void, ArrayList<WarItem>> execute = new DatabaseController.DeleteItems();
-                //execute.execute(editedLog);
-                //execute.execute(preEditedLog);
+                DatabaseController.DeleteItems delete= new DatabaseController.DeleteItems();
+                delete.execute(preEditedLog.id);
                 finish();
             }
         });
