@@ -100,7 +100,7 @@ public class ViewWarItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //WarItem latestItem = new WarItem(name, desc, cost, owner);
                 AsyncTask<String, Void, ArrayList<WarItem>> execute = new DatabaseController.DeleteItems();
-                execute.execute(editedLog);
+                //execute.execute(editedLog);
                 finish();
             }
         });
