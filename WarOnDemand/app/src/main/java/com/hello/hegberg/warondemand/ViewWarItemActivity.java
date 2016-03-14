@@ -114,7 +114,9 @@ public class ViewWarItemActivity extends AppCompatActivity {
                 //WarItem latestItem = new WarItem(name, desc, cost, owner);
                 DatabaseController.DeleteItems delete= new DatabaseController.DeleteItems();
                 delete.execute(preEditedLog.id);
-                finish();
+                //DatabaseController.deleteItem(preEditedLog);
+                Handler myHandler = new Handler();
+                myHandler.postDelayed(mMyRunnable, 1000);
             }
         });
 
