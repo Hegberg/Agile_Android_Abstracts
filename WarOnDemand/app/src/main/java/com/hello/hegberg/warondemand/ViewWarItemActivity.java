@@ -25,6 +25,7 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+
 public class ViewWarItemActivity extends AppCompatActivity {
 
     //Poorly named, but this is the activity that allows user to view a specific item, and edit it.
@@ -45,6 +46,7 @@ public class ViewWarItemActivity extends AppCompatActivity {
         //editedLog = logs.get(ViewMyItemsActivity.editPos);
 
         //Fills in text fields with current data.
+        //DOES NOT WORK
         ((EditText) findViewById(R.id.name_entered)).setText(editedLog.getName());
         ((EditText) findViewById(R.id.desc_entered)).setText(editedLog.getDesc());
         ((EditText) findViewById(R.id.cost_entered)).setText(editedLog.getCost().toString());

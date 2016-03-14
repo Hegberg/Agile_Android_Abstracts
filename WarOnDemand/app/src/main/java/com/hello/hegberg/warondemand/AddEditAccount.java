@@ -33,7 +33,6 @@ public class AddEditAccount extends AppCompatActivity {
 
 
         if (MainActivity.profileOption == 1) {
-
             MainActivity.profileOption = 0;
             setContentView(R.layout.activity_view_account);
             ViewAccount();
