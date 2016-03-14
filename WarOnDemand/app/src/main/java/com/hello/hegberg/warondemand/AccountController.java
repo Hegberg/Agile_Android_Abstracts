@@ -72,7 +72,6 @@ public class AccountController extends AppCompatActivity {
                             startActivity(new Intent(AccountController.this, AccountController.class));
                         }
                     }
-
                 });
 
                 back.setOnClickListener(new View.OnClickListener() {
