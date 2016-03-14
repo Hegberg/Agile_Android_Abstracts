@@ -9,7 +9,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class AddEditAccount extends AppCompatActivity {
+    private ArrayList<User> users = new ArrayList<User>();
+    private static final String FILENAME = "file.sav";
+    //initalizing all Edittext variables present in activity_saved_entry
+    private EditText add_date;
+    private EditText add_station;
+    private EditText add_fuel_grade;
+    private EditText add_odometer;
+    private EditText add_fuel_amount;
+    private EditText add_fuel_unit_cost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +63,7 @@ public class AddEditAccount extends AppCompatActivity {
     }
 
 
-    /*
+
     //commented out since bad code
     public void EditAccount() {
         //TODO: Upload from Json, display text in edit text format, prompt user to change text.
@@ -98,6 +109,7 @@ public class AddEditAccount extends AppCompatActivity {
 
     }
     public void AddAccount() {
+
         //TODO: Prompt user to input info, check user input for unique username info,
         // and add button to commit it to Json.
         Button confirm = (Button) findViewById(R.id.confirm);
@@ -105,6 +117,7 @@ public class AddEditAccount extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                users.createUser();
                 //TODO: when you confirm, commit everything to Json, and pull up the account
                 // to the main account menu: UserController.
             }
@@ -117,5 +130,5 @@ public class AddEditAccount extends AppCompatActivity {
             }
         });
     }
-    */
+
 }
