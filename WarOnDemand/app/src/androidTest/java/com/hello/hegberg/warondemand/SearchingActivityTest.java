@@ -39,4 +39,5 @@ public class SearchingActivityTest extends ActivityInstrumentationTestCase2 {
         */
     }
 
+
 }
