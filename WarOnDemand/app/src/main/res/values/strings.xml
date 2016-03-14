@@ -7,4 +7,5 @@
     <string name="title_activity_add_edit_account">AddEditAccount</string>
     <string name="title_activity_my_products">MyProducts</string>
     <string name="title_activity_view_add_edit_delete_product">ViewAddEditDeleteProduct</string>
+    <string name="title_activity_add_war_item">AddWarItemActivity</string>
 </resources>
