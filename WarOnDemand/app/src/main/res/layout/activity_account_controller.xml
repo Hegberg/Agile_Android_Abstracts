@@ -13,8 +13,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Profile"
-        android:id="@+id/myProfile"
+        android:text="Edit Profile"
+        android:id="@+id/editProfile"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         android:text="My Products"
         android:id="@+id/myProducts"
-        android:layout_below="@+id/myProfile"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="68dp" />
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/editProfile"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -34,14 +34,31 @@
         android:id="@+id/myBids"
         android:layout_below="@+id/myProducts"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp" />
+        android:layout_marginTop="40dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Borrowed Products"
         android:id="@+id/borrowedProducts"
+        android:layout_marginTop="43dp"
         android:layout_below="@+id/myBids"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp" />
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/backAccountController"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search For Items"
+        android:id="@+id/searchForItems"
+        android:layout_below="@+id/borrowedProducts"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
