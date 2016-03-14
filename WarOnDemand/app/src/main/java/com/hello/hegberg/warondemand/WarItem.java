@@ -171,16 +171,16 @@ public class WarItem {
         this.listOfBidders.remove(userRemoved);
     }
 
-    /*
+
     //causes error, so commented out to test other things, uncomment if you want to use
     @Override
     public String toString() {
         //Allows printing of the class.
         return  "Name: "+ this.name + ", Description: "
                 + this.desc + ", Cost: "
-                +", Fuel Cost: $"
-                + twoDec.format(this.cost);
+               // + twoDec.format(this.cost);
+                +this.cost;
 
     }
-    */
+
 }
