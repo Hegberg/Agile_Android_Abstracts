@@ -16,8 +16,21 @@ public class AddEditAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if(MainActivity.profileOption == 1) {
             setContentView(R.layout.activity_view_account);
+            MainActivity.profileOption = 0; //reset variable
             //ViewAccount();
             //uncomment above line when function fixed
+            Button edit = (Button) findViewById(R.id.edit);
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.profileOption = 2; // send to edit interface
+                    //EditAccount();
+                    //uncomment above line when function fixed
+                    //TODO: Pull up old record and prompt user to change them
+
+
+                }
+            });
         }
         if(MainActivity.profileOption == 2) {
             setContentView(R.layout.activity_add_account);
