@@ -107,17 +107,14 @@ NormalTweet latestTweet = new NormalTweet(text);
         @Override
         protected Void doInBackground(User... users) {
             verifyClient();
-
-            // Since AsyncTasks work on arrays, we need to work with arrays as well (>= 1 tweet)
             for(int i = 0; i < users.length; i++) {
                 User user = users[i];
-
-                Index index = new Index.Builder(user).index("Agile_Android_Abstracts").type("users").build();
+                Index index = new Index.Builder(user).index("testing").type("users").build();
                 try {
                     DocumentResult result = client.execute(index);
-                    if(result.isSucceeded()) {
+                    if (result.isSucceeded()) {
                         // Set the ID to tweet that elasticsearch told me it was
-                        user.setId(result.getId());
+                        //user.setId(result.getId());
                     } else {
                         // TODO: Add an error message, because this was puzzling.
                         // TODO: Right here it will trigger if the insert fails
@@ -127,6 +124,7 @@ NormalTweet latestTweet = new NormalTweet(text);
                     e.printStackTrace();
                 }
             }
+            Log.i("Success", "We have added a user to the DB");
             return null;
         }
     }
@@ -147,7 +145,7 @@ NormalTweet latestTweet = new NormalTweet(text);
             for(int i = 0; i < items.length; i++) {
                 WarItem item = items[i];
 
-                Index index = new Index.Builder(item).index("Agile_Android_Abstracts").type("items").build();
+                Index index = new Index.Builder(item).index("testing").type("items").build();
                 try {
                     DocumentResult result = client.execute(index);
                     if(result.isSucceeded()) {
@@ -169,7 +167,7 @@ NormalTweet latestTweet = new NormalTweet(text);
     /**
      * Getting users from the database
      * Returns all a list of users unless a username is a parameter
-     * @param String
+     * @param
      * @return
      *
      */
@@ -193,7 +191,7 @@ NormalTweet latestTweet = new NormalTweet(text);
             }
 
             Search search = new Search.Builder(search_string)
-                    .addIndex("Agile_Android_Abstracts")
+                    .addIndex("testing")
                     .addType("users")
                     .build();
 
@@ -220,7 +218,7 @@ NormalTweet latestTweet = new NormalTweet(text);
     /**
      * class for returning items in the database
      * Returns a list of items. Unless search value is a parameter
-     * @param String
+     * @param
      * @return Items object
      */
     public static class GetItems extends AsyncTask<String, Void, ArrayList<WarItem>> {
@@ -243,7 +241,7 @@ NormalTweet latestTweet = new NormalTweet(text);
             }
 
             Search search = new Search.Builder(search_string)
-                    .addIndex("Agile_Android_Abstracts")
+                    .addIndex("testing")
                     .addType("items")
                     .build();
 

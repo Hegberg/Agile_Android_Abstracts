@@ -2,7 +2,7 @@ package com.hello.hegberg.warondemand;
 
 
 
-import android.media.Image;
+//import android.media.Image;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,7 +32,7 @@ public class WarItem {
     private Double latitude;
     private Double longitude;
     //private BufferedImage image; //Failed to get this to work.
-    private Image image = null;
+//    private Image image = null;
 
     @JestId
     protected String id;
@@ -152,13 +152,13 @@ public class WarItem {
     //I'll be honest, this is probably just a temporary measure. I'm not sure how we want to
     //Actually want to do image in the actual product. Additionally, I, for some reason, could not
     //use bufferedimage like every guide was telling me to.
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
+//    public Image getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(Image image) {
+//        this.image = image;
+//    }
 
     public void AddBidder(User userAdded) {
         this.listOfBidders.add(userAdded);
