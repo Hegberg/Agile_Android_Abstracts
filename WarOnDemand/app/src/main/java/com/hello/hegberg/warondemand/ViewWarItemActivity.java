@@ -28,6 +28,7 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import android.os.Handler;
 
 
 public class ViewWarItemActivity extends AppCompatActivity {
@@ -87,13 +88,11 @@ public class ViewWarItemActivity extends AppCompatActivity {
                         //No invalid fields, can commit.
                         //Everything is fine, commit changes.
                         editedLog = new WarItem(name,desc,cost,owner);
-                        //editedLog.setName(name);
-                        //editedLog.setDesc(desc);
-                        //editedLog.setCost(cost);
                         DatabaseController.updateItem(preEditedLog, editedLog);
-                        //execute.execute(latestItem);
-                        //warItems.add(latestItem);
-                        finish();
+
+                        //delays return so server has time to update
+                        Handler myHandler = new Handler();
+                        myHandler.postDelayed(mMyRunnable, 500);
                     }
                 } catch (NumberFormatException e) {
                     //Error catch in case something I didn't expect.
@@ -156,6 +155,14 @@ public class ViewWarItemActivity extends AppCompatActivity {
         }
 
     }
+    private Runnable mMyRunnable = new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            finish();
+        }
+    };
 
 
 

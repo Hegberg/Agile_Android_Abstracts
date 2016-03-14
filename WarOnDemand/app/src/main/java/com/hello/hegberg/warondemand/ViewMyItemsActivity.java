@@ -17,6 +17,9 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+//import java.util.logging.Handler;
+import android.os.Handler;
+import java.util.logging.LogRecord;
 
 public class ViewMyItemsActivity extends AppCompatActivity {
     //This activity allows you to view a crude list of all your items you own. This links to
@@ -43,6 +46,11 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         Button backButton = (Button) findViewById(R.id.back);
 
         ItemList = (ListView) findViewById(R.id.itemlist);
+
+        adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, warItems);
+        ItemList.setAdapter(adapter);
+        search();
+        adapter.notifyDataSetChanged();
 
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
         try {
@@ -81,6 +89,11 @@ public class ViewMyItemsActivity extends AppCompatActivity {
                 editPos = position;
                 Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemActivity.class);
                 startActivity(intent);
+
+                Handler myHandler = new Handler();
+                myHandler.postDelayed(mMyRunnable, 1000);
+
+                adapter.notifyDataSetChanged();
             }
 
         });
@@ -94,6 +107,15 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         search();
         adapter.notifyDataSetChanged();
     }
+
+    private Runnable mMyRunnable = new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            adapter.notifyDataSetChanged();
+        }
+    };
 
     public void search(){
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();

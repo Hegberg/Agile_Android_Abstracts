@@ -2,6 +2,7 @@ package com.hello.hegberg.warondemand;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -50,7 +51,9 @@ public class AddWarItemActivity extends AppCompatActivity {
                         AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
                         execute.execute(latestItem);
                         warItems.add(latestItem);
-                        finish();
+                        Handler myHandler = new Handler();
+                        myHandler.postDelayed(mMyRunnable, 500);
+                        //finish();
                     }
                 } catch (NumberFormatException e) {
                     //Error catch in case something I didn't expect.
@@ -66,4 +69,12 @@ public class AddWarItemActivity extends AppCompatActivity {
             }
         });
     }
+    private Runnable mMyRunnable = new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            finish();
+        }
+    };
 }
