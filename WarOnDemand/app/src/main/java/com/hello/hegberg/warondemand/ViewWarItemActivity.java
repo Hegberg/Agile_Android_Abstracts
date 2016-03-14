@@ -38,7 +38,7 @@ public class ViewWarItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_war_item);
 
-        Button editButton = (Button) findViewById(R.id.edit);
+        Button saveButton = (Button) findViewById(R.id.saveEditOfItem);
         Button backButton = (Button) findViewById(R.id.back);
         Button deleteButton = (Button) findViewById(R.id.delete);
 
@@ -52,7 +52,7 @@ public class ViewWarItemActivity extends AppCompatActivity {
         ((EditText) findViewById(R.id.cost_entered)).setText(editedLog.getCost().toString());
 
 
-        editButton.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 //The submit button creates the log. You must fill in all fields.
@@ -88,9 +88,19 @@ public class ViewWarItemActivity extends AppCompatActivity {
             }
 
         });
+
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //Nothings changed, go back to FuelTrackActivity
+                finish();
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //WarItem latestItem = new WarItem(name, desc, cost, owner);
+                AsyncTask<String, Void, ArrayList<WarItem>> execute = new DatabaseController.DeleteItems();
+                execute.execute(editedLog);
                 finish();
             }
         });
