@@ -9,101 +9,71 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import java.util.ArrayList;
 
 public class AddEditAccount extends AppCompatActivity {
-    private ArrayList<User> users = new ArrayList<User>();
     private static final String FILENAME = "file.sav";
-    //initalizing all Edittext variables present in activity_saved_entry
-    private EditText add_date;
-    private EditText add_station;
-    private EditText add_fuel_grade;
-    private EditText add_odometer;
-    private EditText add_fuel_amount;
-    private EditText add_fuel_unit_cost;
+    //profileOption 1 = ViewAccount, 2 = CreateAccount, 3 = EditAccount
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(MainActivity.profileOption == 1) {
+
+        if (MainActivity.profileOption == 1) {
+
+            MainActivity.profileOption = 0;
             setContentView(R.layout.activity_view_account);
-            Button back = (Button) findViewById(R.id.return_from_viewing);
-            //ViewAccount();
-            //uncomment above line when function fixed
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
+            ViewAccount();
+
         }
-        if(MainActivity.profileOption == 2) {
+        if (MainActivity.profileOption == 2) {
+            MainActivity.profileOption = 0;
             setContentView(R.layout.activity_add_account);
-            Button done = (Button) findViewById(R.id.doneAddAccount);
-            Button back = (Button) findViewById(R.id.backAddAccount);
+            AddAccount();
 
-            done.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AddAccount();
-                    //uncomment above line when function fixed
-                    //TODO: Prompt user to input variables and save then in Json
-                    finish();
-                }
-            });
-
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
 
         }
-        if(MainActivity.profileOption == 3) {
+        if (MainActivity.profileOption == 3) {
+            MainActivity.profileOption = 0;
             setContentView(R.layout.activity_edit_account);
-            Button back = (Button) findViewById(R.id.back);
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //EditAccount();
-                    //uncomment above line when function fixed
-                    //TODO: Pull up old record and prompt user to change them
+            EditAccount();
 
-
-                }
-            });
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
 
         }
 
     }
 
 
-
     //commented out since bad code
     public void EditAccount() {
-        //TODO: Upload from Json, display text in edit text format, prompt user to change text.
+        MainActivity.profileOption = 0;
+        final EditText nameInfo = (EditText) findViewById(R.id.add_name);
+        final EditText descriptionInfo = (EditText) findViewById(R.id.nameUser);
+        final EditText contactInfo = (EditText) findViewById(R.id.editText);
 
+        final String name = nameInfo.getText().toString();
+        final String description = descriptionInfo.getText().toString();
+        final String contact = contactInfo.getText().toString();
+        Button confirm = (Button) findViewById(R.id.editAccount);
+        Button cancel = (Button) findViewById(R.id.backEditAccount);
 
-        Button confirm = (Button) findViewById(R.id.confirm);
-        Button cancel = (Button) findViewById(R.id.cancel);//instead of a back button
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Save to Json
+
 
             }
         });
@@ -115,11 +85,10 @@ public class AddEditAccount extends AppCompatActivity {
             }
         });
     }
+
     public void ViewAccount() {
-        //TODO: Upload from Json, display text, add button for option to edit.
-        Button edit = (Button) findViewById(R.id.edit);
-        Button back = (Button) findViewById(R.id.back);//instead of a back button
-        edit.setOnClickListener(new View.OnClickListener() {
+        Button back = (Button) findViewById(R.id.return_from_viewing);
+        /*edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //changed static profileOption to 2: editAccount.
@@ -127,7 +96,7 @@ public class AddEditAccount extends AppCompatActivity {
                 startActivity(new Intent(AddEditAccount.this, AddEditAccount.class));
 
             }
-        });
+        });*/
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,27 +129,71 @@ public class AddEditAccount extends AppCompatActivity {
             }
         });
 */
+        MainActivity.profileOption = 0;
+        Button done = (Button) findViewById(R.id.doneAddAccount);
+        Button back = (Button) findViewById(R.id.backAddAccount);//instead of a back button
         final TextView nameInfo = (TextView) findViewById(R.id.nameUser);
         final TextView descriptionInfo = (TextView) findViewById(R.id.descriptionUser);
         final TextView contactInfo = (TextView) findViewById(R.id.contactInfoUser);
 
-        String name = nameInfo.getText().toString();
-        String description = descriptionInfo.getText().toString();
-        String contact = contactInfo.getText().toString();
+        final String name = nameInfo.getText().toString();
+        final String description = descriptionInfo.getText().toString();
+        final String contact = contactInfo.getText().toString();
 
-        if (name.equals("")) {
-            Toast.makeText(AddEditAccount.this, "You need to enter a name", Toast.LENGTH_SHORT).show();
-        } else if (description.equals("")) {
-            Toast.makeText(AddEditAccount.this, "You need to enter a description", Toast.LENGTH_SHORT).show();
-        } else if (contact.equals("")) {
-            Toast.makeText(AddEditAccount.this, "You need to enter your contact information", Toast.LENGTH_SHORT).show();
-        } else {
 
-            User user = new User(name, description, contact);
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (nameInfo.equals("")) {
+                    Toast.makeText(AddEditAccount.this, "You need to enter a name", Toast.LENGTH_SHORT).show();
+                } else if (descriptionInfo.equals("")) {
+                    Toast.makeText(AddEditAccount.this, "You need to enter a description", Toast.LENGTH_SHORT).show();
+                } else if (contactInfo.equals("")) {
+                    Toast.makeText(AddEditAccount.this, "You need to enter your contact information", Toast.LENGTH_SHORT).show();
+                } else {
+                    User user = new User(name, description, contact);
 
-            AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
-            execute.execute(user);
+                    AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
+                    execute.execute(user);
+                    //startActivity(new Intent(AccountController.this, AddEditAccount.class));
+
+                }
+
+            }
+
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.profileOption = 0;
+                //startActivity(new Intent(UserController.this, AddEditAccount.class));
+
+            }
+
+        });
+
+
+    }
+}
+    /*private void saveInFile() {
+        //everything in saveInFile is copy/pasted from lonelytwitter exercise in the lab
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME, 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(entries, out);
+            out.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException();
+        } catch (IOException e) {
+            throw new RuntimeException();
         }
     }
 
-}
+}/*
+
+
+
+
+
