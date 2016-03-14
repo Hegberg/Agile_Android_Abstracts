@@ -14,21 +14,21 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testCreateUser() {
-        User user = new User();
         String username = "user";
         String email = "test@something.com";
         String number = "780-2212";
 
-        user.createUser(username, email, number);
+        User user = new User(username, email, number);
+
+
     }
 
     public void testReturnContactInfo(){
-        User user = new User();
         String username = "user";
         String email = "test@something.com";
         String number = "780-2212";
 
-        user.createUser(username, email, number);
+        User user = new User(username, email, number);
 
         ArrayList<String> contactInfo = new ArrayList<>();
         contactInfo.add(email);
@@ -38,14 +38,13 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testEditProfile(){
-        User user = new User();
         String username = "user";
         String email = "test@something.com";
         String email2 = "test2@something.com";
         String number = "780-1111";
         String number2 = "780-2222";
 
-        user.createUser(username, email, number);
+        User user = new User(username, email, number);
         user.editUser(username, email2, number2);
 
         ArrayList<String> contactInfo = new ArrayList<>();
@@ -57,12 +56,11 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testAddItemToInventory(){
-        User user = new User();
         String username = "user";
         String email = "test@something.com";
         String number = "780-1111";
 
-        user.createUser(username, email, number);
+        User user = new User(username, email, number);
 
         String itemName = "item";
         String itemDesc = "new item";
@@ -78,12 +76,11 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testRemoveItemInInventory(){
-        User user = new User();
         String username = "user";
         String email = "test@something.com";
         String number = "780-1111";
 
-        user.createUser(username, email, number);
+        User user = new User(username, email, number);
 
         String itemName = "item";
         String itemDesc = "new item";
@@ -99,12 +96,11 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testAddItemToBidOn(){
-        User user = new User();
         String username = "user";
         String email = "test@something.com";
         String number = "780-1111";
 
-        user.createUser(username, email, number);
+        User user = new User(username, email, number);
 
         String itemName = "item";
         String itemDesc = "new item";
@@ -120,12 +116,11 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testRemoveItemFromBidOn(){
-        User user = new User();
         String username = "user";
         String email = "test@something.com";
         String number = "780-1111";
 
-        user.createUser(username, email, number);
+        User user = new User(username, email, number);
 
         String itemName = "item";
         String itemDesc = "new item";
@@ -141,12 +136,11 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testAddItemToBorrowing(){
-        User user = new User();
         String username = "user";
         String email = "test@something.com";
         String number = "780-1111";
 
-        user.createUser(username, email, number);
+        User user = new User(username, email, number);
 
         String itemName = "item";
         String itemDesc = "new item";
@@ -162,12 +156,11 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testRemoveItemFromBorrowing(){
-        User user = new User();
         String username = "user";
         String email = "test@something.com";
         String number = "780-1111";
 
-        user.createUser(username, email, number);
+        User user = new User(username, email, number);
 
         String itemName = "item";
         String itemDesc = "new item";
@@ -183,12 +176,11 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testPendingBids() {
-        User user = new User();
         String username = "user";
         String email = "test@something.com";
         String number = "780-1111";
 
-        user.createUser(username, email, number);
+        User user = new User(username, email, number);
 
         String itemName = "item";
         String itemDesc = "new item";

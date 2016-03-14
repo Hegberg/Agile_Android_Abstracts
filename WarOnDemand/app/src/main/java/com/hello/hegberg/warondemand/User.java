@@ -9,19 +9,25 @@ import io.searchbox.annotations.JestId;
  */
 public class User {
     private String username;
-    private ArrayList<String> contactInfo = new ArrayList<>(); //email 1st, phoneNumber 2nd, something 3rd
-    private ArrayList<String> notifications = new ArrayList<>();
-    private ArrayList<WarItem> inventory = new ArrayList<>();
-    private ArrayList<WarItem> itemsBidOn = new ArrayList<>();
-    private ArrayList<WarItem> itemsBorrowed = new ArrayList<>();
+    private ArrayList<String> contactInfo = new ArrayList<String>(); //email 1st, phoneNumber 2nd, something 3rd
+    private ArrayList<String> notifications = new ArrayList<String>();
+    private ArrayList<WarItem> inventory = new ArrayList<WarItem>();
+    private ArrayList<WarItem> itemsBidOn = new ArrayList<WarItem>();
+    private ArrayList<WarItem> itemsBorrowed = new ArrayList<WarItem>();
     @JestId
-    protected String id;
+    public String id;
 
-    public void createUser(String name, String email, String phoneNumber) {
+    public User(String name, String email, String phoneNumber) {
         username = name;
         contactInfo.add(0, email);
         contactInfo.add(1, phoneNumber);
     }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public String getContactInfo() {return contactInfo.get(1);}
 
     public String getId() {
         return id;
@@ -76,7 +82,7 @@ public class User {
 
     //user finding their items that are being bid on
     public ArrayList pendingBids() {
-        ArrayList<WarItem> itemsBeingBidOn = new ArrayList<>();
+        ArrayList<WarItem> itemsBeingBidOn = new ArrayList<WarItem>();
         for (int i = 0; i < inventory.size(); i++){
             if (inventory.get(i).getStatus() == 1){
                 itemsBeingBidOn.add(inventory.get(i));

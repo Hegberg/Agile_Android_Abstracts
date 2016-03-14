@@ -16,10 +16,8 @@ public class BorrowingActivityTest extends ActivityInstrumentationTestCase2 {
      * 06.01.01
      */
     public void testViewBorrowedItems(){
-        User chris = new User();
-        User ismail =  new User();
-        ismail.createUser("ismail", "test@something.com", "7802422122");
-        chris.createUser("chris", "test@something.com", "7802453455");
+        User ismail = new User("ismail", "test@something.com", "7802422122");
+        User chris = new User("chris", "test@something.com", "7802453455");
 
         //chris is the owner
         /*
@@ -42,10 +40,8 @@ public class BorrowingActivityTest extends ActivityInstrumentationTestCase2 {
      * 06.02.01
      */
     public void testViewItemsBorrowed(){
-        User chris = new User();
-        User ismail =  new User();
-        ismail.createUser("ismail", "test@something.com", "7802422122");
-        chris.createUser("chris", "test@something.com", "7802453455");
+        User ismail = new User("ismail", "test@something.com", "7802422122");
+        User chris = new User("chris", "test@something.com", "7802453455");
 
         //chris is the owner
         /*
