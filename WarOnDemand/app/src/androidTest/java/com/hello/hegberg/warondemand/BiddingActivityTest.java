@@ -17,10 +17,9 @@ public class BiddingActivityTest extends ActivityInstrumentationTestCase2 {
      * 05.01.01
      */
     public void testBidForItem(){
-        User chris = new User();
-        User ismail =  new User();
-        ismail.createUser("ismail", "test@something.com", "7802422122");
-        chris.createUser("chris", "test@something.com", "7802453455");
+
+        User ismail = new User("ismail", "test@something.com", "7802422122");
+        User chris = new User("chris", "test@something.com", "7802453455");
 
         //chris is the owner
         /*
@@ -44,10 +43,8 @@ public class BiddingActivityTest extends ActivityInstrumentationTestCase2 {
      * @return ArrayList
      */
     public void testPendingBids(){
-        User chris = new User();
-        User ismail =  new User();
-        ismail.createUser("ismail", "test@something.com", "7802422122");
-        chris.createUser("chris", "test@something.com", "7802453455");
+        User ismail = new User("ismail", "test@something.com", "7802422122");
+        User chris = new User("chris", "test@something.com", "7802453455");
 
         /*
         //chris is the owner
@@ -72,10 +69,8 @@ public class BiddingActivityTest extends ActivityInstrumentationTestCase2 {
      */
     public void testGetBidNotifications(){
 
-        User chris = new User();
-        User ismail =  new User();
-        ismail.createUser("ismail", "test@something.com", "7802422122");
-        chris.createUser("chris", "test@something.com", "7802453455");
+        User ismail = new User("ismail", "test@something.com", "7802422122");
+        User chris = new User("chris", "test@something.com", "7802453455");
 
         //chris is the owner
         /*
@@ -96,10 +91,8 @@ public class BiddingActivityTest extends ActivityInstrumentationTestCase2 {
      * 05.04.01
      */
     public void testListItemsBidded(){
-        User chris = new User();
-        User ismail =  new User();
-        ismail.createUser("ismail", "test@something.com", "7802422122");
-        chris.createUser("chris", "test@something.com", "7802453455");
+        User ismail = new User("ismail", "test@something.com", "7802422122");
+        User chris = new User("chris", "test@something.com", "7802453455");
 
         //chris is the owner
         /*
@@ -121,10 +114,8 @@ public class BiddingActivityTest extends ActivityInstrumentationTestCase2 {
      */
 
     public void testViewItemsBidded(){
-        User chris = new User();
-        User ismail =  new User();
-        ismail.createUser("ismail", "test@something.com", "7802422122");
-        chris.createUser("chris", "test@something.com", "7802453455");
+        User ismail = new User("ismail", "test@something.com", "7802422122");
+        User chris = new User("chris", "test@something.com", "7802453455");
 
         //chris is the owner
         /*
@@ -149,10 +140,8 @@ public class BiddingActivityTest extends ActivityInstrumentationTestCase2 {
      */
 
     public void testAcceptBid(){
-        User chris = new User();
-        User ismail =  new User();
-        ismail.createUser("ismail", "test@something.com", "7802422122");
-        chris.createUser("chris", "test@something.com", "7802453455");
+        User ismail = new User("ismail", "test@something.com", "7802422122");
+        User chris = new User("chris", "test@something.com", "7802453455");
 
         /*
         chris.getBids();
@@ -177,10 +166,8 @@ public class BiddingActivityTest extends ActivityInstrumentationTestCase2 {
      */
 
     public void testDeclineBid(){
-        User chris = new User();
-        User ismail =  new User();
-        ismail.createUser("ismail", "test@something.com", "7802422122");
-        chris.createUser("chris", "test@something.com", "7802453455");
+        User ismail = new User("ismail", "test@something.com", "7802422122");
+        User chris = new User("chris", "test@something.com", "7802453455");
 
         //chris is the owner
         /*

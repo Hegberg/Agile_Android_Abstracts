@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Done"
-        android:id="@+id/done"
+        android:id="@+id/doneAddAccount"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/name"
         android:layout_toEndOf="@+id/name" />
@@ -23,10 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
-        android:id="@+id/back"
-        android:layout_alignTop="@+id/done"
-        android:layout_toRightOf="@+id/done"
-        android:layout_toEndOf="@+id/done"
+        android:id="@+id/backAddAccount"
+        android:layout_alignTop="@+id/doneAddAccount"
+        android:layout_toRightOf="@+id/doneAddAccount"
+        android:layout_toEndOf="@+id/doneAddAccount"
         android:layout_marginLeft="57dp"
         android:layout_marginStart="57dp" />
 
@@ -70,35 +70,48 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:id="@+id/add_name"
         android:textColor="#ffffff"
+=======
+        android:id="@+id/descriptionUser"
+>>>>>>> 2cd25b9f416babb0195bc29509b743fb213fad7b
         android:layout_above="@+id/contactInfo"
         android:layout_toRightOf="@+id/description"
-        android:layout_alignRight="@+id/add_odometer"
-        android:layout_alignEnd="@+id/add_odometer" />
+        android:layout_alignRight="@+id/nameUser"
+        android:layout_alignEnd="@+id/nameUser" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/add_odometer"
         android:textColor="#ffffff"
         android:layout_above="@+id/description"
+=======
+        android:id="@+id/nameUser"
+        android:layout_above="@+id/descriptionUser"
+>>>>>>> 2cd25b9f416babb0195bc29509b743fb213fad7b
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/done"
-        android:layout_alignStart="@+id/done" />
+        android:layout_alignLeft="@+id/doneAddAccount"
+        android:layout_alignStart="@+id/doneAddAccount" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:id="@+id/editText"
         android:textColor="#ffffff"
+=======
+        android:id="@+id/contactInfoUser"
+>>>>>>> 2cd25b9f416babb0195bc29509b743fb213fad7b
         android:layout_alignBottom="@+id/contactInfo"
         android:layout_toRightOf="@+id/contactInfo"
-        android:layout_alignRight="@+id/add_name"
-        android:layout_alignEnd="@+id/add_name" />
+        android:layout_alignRight="@+id/descriptionUser"
+        android:layout_alignEnd="@+id/descriptionUser" />
 
 
 </RelativeLayout>

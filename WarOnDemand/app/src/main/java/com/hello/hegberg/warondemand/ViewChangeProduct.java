@@ -3,7 +3,8 @@ package com.hello.hegberg.warondemand;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
+import android.widget.Button;
+import android.content.Intent;
 
 public class ViewChangeProduct extends AppCompatActivity {
     /* Depending on which button is clicked to get here the view will be different.
@@ -38,8 +39,9 @@ public class ViewChangeProduct extends AppCompatActivity {
 
     }
 
-/*
+
     public void ViewProducts() {
+        MainActivity.productOption = 0;
         setContentView(R.layout.activity_view_products);
 
 
@@ -47,8 +49,8 @@ public class ViewChangeProduct extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.productOption = 0;
-                startActivity(new Intent(ViewChangeProduct.this, MyProduct.class));
+
+                startActivity(new Intent(ViewChangeProduct.this, MyProducts.class));
 
 
             }
@@ -57,13 +59,13 @@ public class ViewChangeProduct extends AppCompatActivity {
 
     }
     public void AddProducts() {
-
-        Button edit = (Button) findViewById(R.id.edit);
+        MainActivity.productOption = 0;
+        /*Button add = (Button) findViewById(R.id.add);
         Button back = (Button) findViewById(R.id.back);//instead of a back button
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.productOption = 0;
+
                 //json change
 
             }
@@ -71,16 +73,17 @@ public class ViewChangeProduct extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ViewChangeProduct.this, MyProduct.class));
+                startActivity(new Intent(ViewChangeProduct.this, MyProducts.class));
 
             }
-        });
+        });*/
 
     }
     public void EditProducts() {
+        MainActivity.productOption = 0;
         //TODO: Prompt user to input info, check user input for unique username info,
         // and add button to commit it to Json.
-        Button confirm = (Button) findViewById(R.id.confirm);
+        /*Button confirm = (Button) findViewById(R.id.confirm);
         Button cancel = (Button) findViewById(R.id.cancel);//instead of a back button
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,16 +94,17 @@ public class ViewChangeProduct extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ViewChangeProduct.this, MyProduct.class));
+                startActivity(new Intent(ViewChangeProduct.this, MyProducts.class));
 
             }
-        });
+        });*/
 
     }
     public void DeleteProducts() {
+        MainActivity.productOption = 0;
         //TODO: Prompt user to input info, check user input for unique username info,
         // and add button to commit it to Json.
-        Button confirm = (Button) findViewById(R.id.confirm);
+       /*Button confirm = (Button) findViewById(R.id.confirm);
         Button cancel = (Button) findViewById(R.id.cancel);//instead of a back button
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,10 +117,10 @@ public class ViewChangeProduct extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO: return to my product
             }
-        });
+        });*/
     }
 
-*/
+
 
 
 
