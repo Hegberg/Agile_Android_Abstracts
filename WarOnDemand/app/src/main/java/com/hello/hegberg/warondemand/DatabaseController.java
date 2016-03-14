@@ -80,7 +80,8 @@ NormalTweet latestTweet = new NormalTweet(text);
      * Verifying the database client
      * We verify the client before reading the values in the database and writing to the database
      *
-     * Returns nothing and accepts nothing
+     * @param
+     * @return
      */
     public static void verifyClient() {
         if(client == null) {
@@ -99,6 +100,8 @@ NormalTweet latestTweet = new NormalTweet(text);
     /**
      * Adding users to the database.
      * Separating the users list and items list
+     * @param
+     * @return
      */
     public static class AddUsers extends AsyncTask<User,Void,Void>{
         @Override
@@ -132,6 +135,8 @@ NormalTweet latestTweet = new NormalTweet(text);
      * Adding items to the database
      * We have owner usernames in the database so the user
      * connected to the item can be connected
+     * @param
+     * @return
      */
     public static class AddItems extends AsyncTask<WarItem,Void,Void>{
         @Override
@@ -142,7 +147,7 @@ NormalTweet latestTweet = new NormalTweet(text);
             for(int i = 0; i < items.length; i++) {
                 WarItem item = items[i];
 
-                Index index = new Index.Builder(item).index("Agile_Android_Abstracts").type("users").build();
+                Index index = new Index.Builder(item).index("Agile_Android_Abstracts").type("items").build();
                 try {
                     DocumentResult result = client.execute(index);
                     if(result.isSucceeded()) {
@@ -164,6 +169,8 @@ NormalTweet latestTweet = new NormalTweet(text);
     /**
      * Getting users from the database
      * Returns all a list of users unless a username is a parameter
+     * @param String
+     * @return
      *
      */
     public static class GetUsers extends AsyncTask<String, Void, ArrayList<User>> {
@@ -209,10 +216,12 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 
+
     /**
      * class for returning items in the database
      * Returns a list of items. Unless search value is a parameter
-     *
+     * @param String
+     * @return Items object
      */
     public static class GetItems extends AsyncTask<String, Void, ArrayList<WarItem>> {
         // TODO: Get items
@@ -257,3 +266,6 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 }
+
+
+
