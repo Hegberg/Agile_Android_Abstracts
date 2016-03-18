@@ -35,16 +35,14 @@ public class MyProducts extends AppCompatActivity {
         });
 
         //when view is clicked go to list of your products, where you can click a specific product
-        /*
-        //commented out bad code again, and moved into onCreate method
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: insert class to go to when 'view' is clicked.
-                startActivity(new Intent(MyProducts.this, <InsertClass>.class));
+                MainActivity.productOption = 1;
+                startActivity(new Intent(MyProducts.this, ViewChangeProduct.class));
             }
         });
-*/
         // when add is clicked go to screen to add
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,18 +57,21 @@ public class MyProducts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: insert class to go to when 'edit' is clicked.
-                startActivity(new Intent(MyProducts.this, <InsertClass>.class));
+                MainActivity.productOption = 3;
+                startActivity(new Intent(MyProducts.this, ViewChangeProduct.class));
             }
         });
 
-        // when edit is clicked, go to a list of your products, where you can delete a specific product
+        // when delete is clicked, go to a list of your products, where you can delete a specific product
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: insert class to go to when 'delete' is clicked.
-                startActivity(new Intent(MyProducts.this, <InsertClass>.class));
+                MainActivity.productOption = 4;
+                startActivity(new Intent(MyProducts.this, ViewChangeProduct.class));
             }
         });
+        /*
         //when pendingBids is clicked, go to list of pending bids.
         pendingBids.setOnClickListener(new View.OnClickListener() {
             @Override

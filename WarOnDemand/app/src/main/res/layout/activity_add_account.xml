@@ -27,6 +27,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Email: "
         android:id="@+id/description"
+
         android:layout_marginTop="30dp"
         android:layout_below="@+id/name"
         android:layout_alignLeft="@+id/name"
@@ -43,6 +44,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Phone Number: "
         android:id="@+id/contactInfo"
+
         android:layout_marginTop="30dp"
         android:layout_below="@+id/description"
         android:layout_alignLeft="@+id/description"

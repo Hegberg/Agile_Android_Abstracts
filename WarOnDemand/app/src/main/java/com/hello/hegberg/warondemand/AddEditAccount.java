@@ -50,7 +50,6 @@ public class AddEditAccount extends AppCompatActivity {
             setContentView(R.layout.activity_edit_account);
             EditAccount();
 
-
         }
 
     }
@@ -109,7 +108,7 @@ public class AddEditAccount extends AppCompatActivity {
     public void AddAccount() {
         MainActivity.profileOption = 0;
         Button done = (Button) findViewById(R.id.doneAddAccount);
-        Button back = (Button) findViewById(R.id.backAddAccount);//instead of a back button
+        Button back = (Button) findViewById(R.id.backAddAccount);
         final TextView nameInfo = (TextView) findViewById(R.id.nameUser);
         final TextView descriptionInfo = (TextView) findViewById(R.id.descriptionUser);
         final TextView contactInfo = (TextView) findViewById(R.id.contactInfoUser);
@@ -136,6 +135,7 @@ public class AddEditAccount extends AppCompatActivity {
                     startActivity(new Intent(AddEditAccount.this, AccountController.class));
 
                 }
+
 
             }
 
