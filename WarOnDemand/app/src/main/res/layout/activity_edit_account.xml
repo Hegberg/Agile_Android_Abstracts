@@ -85,18 +85,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:gravity="bottom">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Done"
-            android:id="@+id/editAccount"/>
+            android:id="@+id/editAccount"
+            android:layout_marginLeft="57dp"
+            android:layout_marginStart="57dp"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Back"
-            android:id="@+id/backEditAccount"/>
+            android:id="@+id/backEditAccount"
+            android:layout_marginLeft="57dp"
+            android:layout_marginStart="57dp"/>
 
     </LinearLayout>
 
