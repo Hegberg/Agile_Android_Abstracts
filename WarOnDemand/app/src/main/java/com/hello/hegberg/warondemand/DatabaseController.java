@@ -334,12 +334,17 @@ NormalTweet latestTweet = new NormalTweet(text);
             try {
                 client.execute(deleteItem);
             } catch (IOException e) {
-                Log.i("TODO", "We actually failed here, deleting a user");
+                Log.i("TODO", "We actually failed here, deleting a item");
                 e.printStackTrace();
             }
 
             return null;
         }
+    }
+
+    public static void deleteItem(WarItem oldItem) {
+        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
+        Delete.execute(oldItem.getName());
     }
 
 
