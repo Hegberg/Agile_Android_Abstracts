@@ -51,15 +51,9 @@ public class AddWarItemActivity extends AppCompatActivity {
                         AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
                         execute.execute(latestItem);
                         warItems.add(latestItem);
-<<<<<<< HEAD
-                        Handler myHandler = new Handler();
-                        myHandler.postDelayed(mMyRunnable, 500);
-                        //finish();
-=======
                         //delays return to list screen so server can update in time
                         Handler myHandler = new Handler();
                         myHandler.postDelayed(mMyRunnable, 1000);
->>>>>>> a3796a6a85abfbb2f8b4e4a8ba28c523756cd51a
                     }
                 } catch (NumberFormatException e) {
                     //Error catch in case something I didn't expect.

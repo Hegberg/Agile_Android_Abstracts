@@ -56,7 +56,6 @@ public class AddEditAccount extends AppCompatActivity {
     }
 
 
-    //commented out since bad code
     public void EditAccount() {
         MainActivity.profileOption = 0;
         final EditText nameInfo = (EditText) findViewById(R.id.add_name);
