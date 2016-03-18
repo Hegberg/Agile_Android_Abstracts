@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_controller);
+        chosenUser = null;
+
         /*
         //trying something out so commenting out original main code
 
@@ -57,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
         //when products is clicked go to <somewhere>
 
 
-        setContentView(R.layout.activity_user_controller);
-
         //initalizing all buttons
         Button createUser = (Button) findViewById(R.id.createProfile);
         Button signIn = (Button) findViewById(R.id.signIn);
@@ -76,13 +78,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (MainActivity.chosenUser == null) {
+                    //change view to sign in view
                     setContentView(R.layout.sing_in_info);
                     Button signInAgain = (Button) findViewById(R.id.signInWithInfo);
                     Button backAgain = (Button) findViewById(R.id.backSignInWithInfo);
 
                     final EditText username = (EditText) findViewById(R.id.usernameSignIn);
-
-
+                    username.setText("");
+                    //checks if username is a valid one, can login tro any user with just username
                     signInAgain.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -90,20 +93,30 @@ public class MainActivity extends AppCompatActivity {
                                 DatabaseController.GetUsers getUsersTask = new DatabaseController.GetUsers();
                                 getUsersTask.execute("");
                                 checkAgainst = getUsersTask.get();
+                                Log.i("size->",""+checkAgainst.size());
                                 for (int i = 0; i < checkAgainst.size(); i++) {
+                                    Log.i("check->", String.valueOf(checkAgainst.get(i).getUsername().equals(username.getText().toString())));
+                                    Log.i("username -> ", checkAgainst.get(i).getUsername());
+                                    Log.i("username entered -> ", username.getText().toString());
+                                    /*
+                                    //no name causes error
+                                    if (username.getText().equals("")){
+                                        Toast.makeText(MainActivity.this, "Enter a Username, please.", Toast.LENGTH_SHORT).show();
+                                    }
+                                    */
                                     if (checkAgainst.get(i).getUsername().equals(username.getText().toString())) {
                                         MainActivity.chosenUser = checkAgainst.get(i);
+                                        //for debug purposes
                                         Log.i("username -> ", checkAgainst.get(i).getUsername());
                                         Log.i("username entered -> ", username.getText().toString());
                                         startActivity(new Intent(MainActivity.this, AccountController.class));
-                                        Log.i("check ", "does this happen");
                                     } else {
-                                        Log.i("username_bad->", checkAgainst.get(i).getUsername());
-                                        Log.i("username_entered->", username.getText().toString());
-                                        Log.i("check->", String.valueOf(checkAgainst.get(i).getUsername() == username.getText().toString()));
-                                        //Log.i("contactInfo-> ", checkAgainst.get(i).getContactInfo());
-                                        //Toast.makeText(UserController.this, "You need to enter a correct username", Toast.LENGTH_SHORT).show();
+                                        //entire else statemnt is for debugging login
+                                        //Log.i("username_bad->", checkAgainst.get(i).getUsername());
+                                        //Log.i("username_entered->", username.getText().toString());
+                                        //Log.i("check->", String.valueOf(checkAgainst.get(i).getUsername().equals(username.getText().toString())));
                                     }
+
                                 }
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
@@ -114,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
+                    //return to main screen
                     backAgain.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -129,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //exit application
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

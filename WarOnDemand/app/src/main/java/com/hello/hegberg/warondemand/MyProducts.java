@@ -43,18 +43,12 @@ public class MyProducts extends AppCompatActivity {
                 startActivity(new Intent(MyProducts.this, ViewChangeProduct.class));
             }
         });
-*/
         // when add is clicked go to screen to add
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: insert class to go to when 'add' is clicked.
-<<<<<<< HEAD
-                MainActivity.productOption = 2;
-                startActivity(new Intent(MyProducts.this, ViewChangeProduct.class));
-=======
                 startActivity(new Intent(MyProducts.this, AddWarItemActivity.class));
->>>>>>> 2cd25b9f416babb0195bc29509b743fb213fad7b
             }
         });
         // when edit is clicked, go to a list of your products, where you can edit a specific product

@@ -10,6 +10,9 @@ import com.searchly.jestdroid.JestDroidClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -264,6 +267,90 @@ NormalTweet latestTweet = new NormalTweet(text);
             return items;
         }
     }
+
+    public static void updateUser(User oldUser, User newUser) {
+
+        DatabaseController.DeleteUsers Delete = new DatabaseController.DeleteUsers();
+        Delete.execute(oldUser.getUsername());
+
+        AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
+        execute.execute(newUser);
+    }
+
+    public static void updateItem(WarItem oldItem, WarItem newItem) {
+
+        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
+        Delete.execute(oldItem.getName());
+
+        AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
+        execute.execute(newItem);
+    }
+
+
+
+
+
+
+    public static class DeleteUsers extends AsyncTask<String, Void, ArrayList<User>> {
+        // TODO: Get users
+        @Override
+        protected ArrayList<User> doInBackground(String... search_strings) {
+            verifyClient();
+            String search_string;
+            search_string = "{\"query\":{\"match\":{\"username\":\"" + search_strings[0] + "\"}}}";
+            DeleteByQuery deleteUser = new DeleteByQuery.Builder(search_string)
+                    .addIndex("testing")
+                    .addType("users")
+                    .build();
+
+
+
+            try {
+                client.execute(deleteUser);
+            } catch (IOException e) {
+                Log.i("TODO", "We actually failed here, deleting a user");
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
+
+
+    public static class DeleteItems extends AsyncTask<String, Void, ArrayList<WarItem>> {
+        // TODO: Get users
+        @Override
+        protected ArrayList<WarItem> doInBackground(String... search_strings) {
+            verifyClient();
+            String search_string;
+            search_string = "{\"query\":{\"match\":{\"name\":\"" + search_strings[0] + "\"}}}";
+            DeleteByQuery deleteItem = new DeleteByQuery.Builder(search_string)
+                    .addIndex("testing")
+                    .addType("items")
+                    .build();
+
+
+            try {
+                client.execute(deleteItem);
+            } catch (IOException e) {
+                Log.i("TODO", "We actually failed here, deleting a item");
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
+    public static void deleteItem(WarItem oldItem) {
+        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
+        Delete.execute(oldItem.getName());
+    }
+
+
+
+
+
 }
 
 

@@ -6,6 +6,7 @@ package com.hello.hegberg.warondemand;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import io.searchbox.annotations.JestId;
 
@@ -29,10 +30,12 @@ public class WarItem {
     private User owner;
     private User borrower;
     //Latitude and longitude are stored in the item, but only set when the item has been bid and accepted.
-    private Double latitude;
-    private Double longitude;
+    //wrong interpretation of requirement
+    //private Double latitude;
+    //private Double longitude;
     //private BufferedImage image; //Failed to get this to work.
 //    private Image image = null;
+    DecimalFormat twoDec = new DecimalFormat("#.##");
 
     @JestId
     protected String id;
@@ -129,7 +132,7 @@ public class WarItem {
     public void setListOfBidders(ArrayList<User> listOfBidders) {
         this.listOfBidders = listOfBidders;
     }
-
+    /*
     public Double getLatitude() {
         return latitude;
     }
@@ -149,6 +152,7 @@ public class WarItem {
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
+    */
     //I'll be honest, this is probably just a temporary measure. I'm not sure how we want to
     //Actually want to do image in the actual product. Additionally, I, for some reason, could not
     //use bufferedimage like every guide was telling me to.
@@ -166,4 +170,18 @@ public class WarItem {
     public void RemoveBidder(User userRemoved){
         this.listOfBidders.remove(userRemoved);
     }
+
+
+    //causes error, so commented out to test other things, uncomment if you want to use
+    @Override
+    public String toString() {
+        //Allows printing of the class.
+        return  "Name: "+ this.name + ", Description: "
+                + this.desc + ", Cost: "
+               // + twoDec.format(this.cost);
+                +this.cost + ", Owner: "
+                +this.owner.getUsername();
+
+    }
+
 }

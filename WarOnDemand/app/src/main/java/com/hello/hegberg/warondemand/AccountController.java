@@ -1,13 +1,19 @@
 package com.hello.hegberg.warondemand;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class AccountController extends AppCompatActivity {
+    private ArrayList<String> contactInfoHolder;
+    private User tempUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +24,7 @@ public class AccountController extends AppCompatActivity {
         //TODO: Pulls profile
 
         // Initialize Buttons
-        Button myProfile = (Button) findViewById(R.id.myProfile);
+        Button editProfile = (Button) findViewById(R.id.editProfile);
         Button myProducts = (Button) findViewById(R.id.myProducts);
         Button back = (Button) findViewById(R.id.backAccountController);
         Button search = (Button) findViewById(R.id.searchForItems);
@@ -27,19 +33,62 @@ public class AccountController extends AppCompatActivity {
 
         //TODO: Create classes to go to with products, bids, borrowed.
         // Create Buttons
-        myProfile.setOnClickListener(new View.OnClickListener() {
+        editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.profileOption = 1;
-                startActivity(new Intent(AccountController.this, AddEditAccount.class));
+                //MainActivity.profileOption = 1;
+                //startActivity(new Intent(AccountController.this, AddEditAccount.class));
+                setContentView(R.layout.activity_add_account);
+                final TextView nameInfo = (TextView) findViewById(R.id.nameUser);
+                final TextView descriptionInfo = (TextView) findViewById(R.id.descriptionUser);
+                final TextView contactInfo = (TextView) findViewById(R.id.contactInfoUser);
 
+                Button done = (Button) findViewById(R.id.doneAddAccount);
+                Button back = (Button) findViewById(R.id.backAddAccount);
+
+                nameInfo.setText(MainActivity.chosenUser.getUsername());
+                contactInfoHolder = MainActivity.chosenUser.getContactInfo();
+                descriptionInfo.setText(contactInfoHolder.get(0));
+                contactInfo.setText(contactInfoHolder.get(1));
+
+                done.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String name = nameInfo.getText().toString();
+                        String description = descriptionInfo.getText().toString();
+                        String contact = contactInfo.getText().toString();
+
+                        if (name.equals("")) {
+                            Toast.makeText(AccountController.this, "You need to enter a name", Toast.LENGTH_SHORT).show();
+                        } else if (description.equals("")) {
+                            Toast.makeText(AccountController.this, "You need to enter a description", Toast.LENGTH_SHORT).show();
+                        } else if (contact.equals("")) {
+                            Toast.makeText(AccountController.this, "You need to enter your contact information", Toast.LENGTH_SHORT).show();
+                        } else {
+                            tempUser = MainActivity.chosenUser;
+                            MainActivity.chosenUser.editUser(name, description, contact);
+                            DatabaseController.updateUser(tempUser, MainActivity.chosenUser);
+                            finish();
+                            startActivity(new Intent(AccountController.this, AccountController.class));
+                        }
+                    }
+                });
+
+                back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                        startActivity((new Intent(AccountController.this, AccountController.class)));
+                    }
+                });
             }
         });
 
         myProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AccountController.this, MyProducts.class));
+                //startActivity(new Intent(AccountController.this, MyProducts.class));
+                startActivity(new Intent(AccountController.this, ViewMyItemsActivity.class));
 
             }
         });
@@ -55,7 +104,6 @@ public class AccountController extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: insert class to go to when 'products' is clicked.
                 startActivity(new Intent(AccountController.this, SearchingActivity.class));
             }
         });
