@@ -43,7 +43,15 @@
             android:label="@string/title_activity_view_add_edit_delete_product"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AddEditAccount" />
-        <activity android:name=".AddWarItemActivity"></activity>
+        <activity android:name=".AddWarItemActivity" />
+        <activity
+            android:name=".ViewWarItemActivity"
+            android:label="@string/title_activity_view_war_item"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewMyItemsActivity"
+            android:label="@string/title_activity_view_my_items"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

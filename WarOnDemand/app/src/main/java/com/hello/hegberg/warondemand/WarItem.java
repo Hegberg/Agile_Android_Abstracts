@@ -6,6 +6,7 @@ package com.hello.hegberg.warondemand;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import io.searchbox.annotations.JestId;
 
@@ -34,6 +35,7 @@ public class WarItem {
     //private Double longitude;
     //private BufferedImage image; //Failed to get this to work.
 //    private Image image = null;
+    DecimalFormat twoDec = new DecimalFormat("#.##");
 
     @JestId
     protected String id;
@@ -168,4 +170,18 @@ public class WarItem {
     public void RemoveBidder(User userRemoved){
         this.listOfBidders.remove(userRemoved);
     }
+
+
+    //causes error, so commented out to test other things, uncomment if you want to use
+    @Override
+    public String toString() {
+        //Allows printing of the class.
+        return  "Name: "+ this.name + ", Description: "
+                + this.desc + ", Cost: "
+               // + twoDec.format(this.cost);
+                +this.cost + ", Owner: "
+                +this.owner.getUsername();
+
+    }
+
 }

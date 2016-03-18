@@ -104,7 +104,7 @@ public class ViewChangeProduct extends AppCompatActivity {
         MainActivity.productOption = 0;
         //TODO: Prompt user to input info, check user input for unique username info,
         // and add button to commit it to Json.
-       Button confirm = (Button) findViewById(R.id.doneDeleteProducts);
+        Button confirm = (Button) findViewById(R.id.doneDeleteProducts);
         Button cancel = (Button) findViewById(R.id.backDeleteProducts);//instead of a back button
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
