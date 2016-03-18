@@ -50,7 +50,7 @@ public class ViewChangeProduct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(ViewChangeProduct.this, MyProducts.class));
+
 
 
             }

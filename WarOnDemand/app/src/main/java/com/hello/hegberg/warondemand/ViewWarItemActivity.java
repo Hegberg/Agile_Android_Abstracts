@@ -92,7 +92,11 @@ public class ViewWarItemActivity extends AppCompatActivity {
 
                         //delays return so server has time to update
                         Handler myHandler = new Handler();
+<<<<<<< HEAD
+                        myHandler.postDelayed(mMyRunnable, 500);
+=======
                         myHandler.postDelayed(mMyRunnable, 1000);
+>>>>>>> a3796a6a85abfbb2f8b4e4a8ba28c523756cd51a
                     }
                 } catch (NumberFormatException e) {
                     //Error catch in case something I didn't expect.
@@ -113,9 +117,14 @@ public class ViewWarItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //WarItem latestItem = new WarItem(name, desc, cost, owner);
                 DatabaseController.DeleteItems delete= new DatabaseController.DeleteItems();
+<<<<<<< HEAD
+                delete.execute(preEditedLog.id);
+                finish();
+=======
                 delete.execute(preEditedLog.getName());
                 finish();
 
+>>>>>>> a3796a6a85abfbb2f8b4e4a8ba28c523756cd51a
             }
         });
 

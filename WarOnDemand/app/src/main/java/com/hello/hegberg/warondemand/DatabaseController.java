@@ -324,7 +324,7 @@ NormalTweet latestTweet = new NormalTweet(text);
         protected ArrayList<WarItem> doInBackground(String... search_strings) {
             verifyClient();
             String search_string;
-            search_string = "{\"query\":{\"match\":{\"name\":\"" + search_strings[0] + "\"}}}";
+            search_string = "{\"query\":{\"match\":{\"id\":\"" + search_strings[0] + "\"}}}";
             DeleteByQuery deleteItem = new DeleteByQuery.Builder(search_string)
                     .addIndex("testing")
                     .addType("items")

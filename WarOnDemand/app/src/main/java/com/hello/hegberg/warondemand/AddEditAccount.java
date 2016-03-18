@@ -133,7 +133,8 @@ public class AddEditAccount extends AppCompatActivity {
 
                     AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
                     execute.execute(user);
-                    //startActivity(new Intent(AccountController.this, AddEditAccount.class));
+                    startActivity(new Intent(AddEditAccount.this, AccountController.class));
+
                 }
 
 
@@ -144,8 +145,7 @@ public class AddEditAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.profileOption = 0;
-                //startActivity(new Intent(UserController.this, AddEditAccount.class));
-                finish();
+
 
             }
 
