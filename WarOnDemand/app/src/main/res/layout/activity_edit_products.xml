@@ -71,9 +71,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Confirm"
-            android:layout_alignRight="@+id/backEditProducts"
+            android:layout_alignRight="@+id/editProducts"
             android:orientation="horizontal"
-            android:id="@+id/confirmEditProducts" />
+            android:id="@+id/editProducts" />
 
         <Button
             android:orientation="horizontal"
