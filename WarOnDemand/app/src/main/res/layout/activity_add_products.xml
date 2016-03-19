@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/backAddProducts"
             android:text="Back"
-            android:id="@+id/backAddItem" />
+            android:id="@+id/backAddProducts" />
 
     </LinearLayout>
 
