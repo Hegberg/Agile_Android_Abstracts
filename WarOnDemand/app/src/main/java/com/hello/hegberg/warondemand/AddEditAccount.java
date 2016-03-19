@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -148,36 +149,37 @@ public class AddEditAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    if (nameInfo.equals("")) {
+                    final String name = nameInfo.getText().toString();
+                    final String description = descriptionInfo.getText().toString();
+                    final String contact = contactInfo.getText().toString();
+                    if (name.equals("")) {
                         Toast.makeText(AddEditAccount.this, "You need to enter a name", Toast.LENGTH_SHORT).show();
-                    } else if (descriptionInfo.equals("")) {
-                        Toast.makeText(AddEditAccount.this, "You need to enter a description", Toast.LENGTH_SHORT).show();
-                    } else if (contactInfo.equals("")) {
-                        Toast.makeText(AddEditAccount.this, "You need to enter your contact information", Toast.LENGTH_SHORT).show();
+                    } else if (description.equals("")) {
+                        Toast.makeText(AddEditAccount.this, "You need to enter a email", Toast.LENGTH_SHORT).show();
+                    } else if (contact.equals("")) {
+                        Toast.makeText(AddEditAccount.this, "You need to enter your phone number", Toast.LENGTH_SHORT).show();
                     } else {
                         User user = new User(name, description, contact);
-
                         AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
                         execute.execute(user);
-                        startActivity(new Intent(AddEditAccount.this, AccountController.class));
+                        finish();
+                        //startActivity(new Intent(AddEditAccount.this, MainActivity.class));
 
                     }
                 } catch (NumberFormatException e) {
                     //final check for inconsistencies
                     Toast toast = Toast.makeText(AddEditAccount.this, "Not all data present", Toast.LENGTH_SHORT);
                     toast.show();
-
-
                 }
             }
 
         });
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity.profileOption = 0;
-
-
+                finish();
             }
 
         });

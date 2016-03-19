@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                                         //for debug purposes
                                         Log.i("username -> ", checkAgainst.get(i).getUsername());
                                         Log.i("username entered -> ", username.getText().toString());
+                                        Log.i("chosen username -> ", MainActivity.chosenUser.getUsername());
                                         startActivity(new Intent(MainActivity.this, AccountController.class));
                                     } else {
                                         //entire else statemnt is for debugging login
