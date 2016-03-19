@@ -17,6 +17,13 @@
         android:text="Name: "
         android:layout_marginTop="30dp"
         android:id="@+id/name" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:layout_marginTop="30dp"
+        android:id="@+id/nameDelete" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,10 +32,14 @@
         android:textColor="#ffffff"
         android:text="Cost: "
         android:id="@+id/cost"
+        android:layout_marginTop="30dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/name"
-        android:layout_alignStart="@+id/name" />
+        android:id="@+id/costDelete" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,10 +48,15 @@
         android:textColor="#ffffff"
         android:text="Description: "
         android:id="@+id/description"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/cost"
-        android:layout_alignLeft="@+id/cost"
-        android:layout_alignStart="@+id/cost" />
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:id="@+id/descriptionDelete"
+        android:layout_marginTop="30dp" />
 
 
     <LinearLayout
