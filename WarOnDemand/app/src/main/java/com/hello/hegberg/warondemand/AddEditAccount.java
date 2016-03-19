@@ -68,9 +68,31 @@ public class AddEditAccount extends AppCompatActivity {
         Button cancel = (Button) findViewById(R.id.back);
 
         confirm.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                try {
 
+                    if (nameInfo.equals("")) {
+                        Toast.makeText(AddEditAccount.this, "You need to enter a name", Toast.LENGTH_SHORT).show();
+                    } else if (descriptionInfo.equals("")) {
+                        Toast.makeText(AddEditAccount.this, "You need to enter a description", Toast.LENGTH_SHORT).show();
+                    } else if (contactInfo.equals("")) {
+                        Toast.makeText(AddEditAccount.this, "You need to enter your contact information", Toast.LENGTH_SHORT).show();
+                    } else {
+                        User user = new User(name, description, contact);
+
+                        AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
+                        execute.execute(user);
+                        finish();
+
+                    }
+
+                } catch (NumberFormatException e) {
+                    //final check for inconsistencies
+                    Toast toast = Toast.makeText(AddEditAccount.this, "Not all data present", Toast.LENGTH_SHORT);
+                    toast.show();
+            }
 
             }
         });
@@ -121,20 +143,25 @@ public class AddEditAccount extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (nameInfo.equals("")) {
-                    Toast.makeText(AddEditAccount.this, "You need to enter a name", Toast.LENGTH_SHORT).show();
-                } else if (descriptionInfo.equals("")) {
-                    Toast.makeText(AddEditAccount.this, "You need to enter a description", Toast.LENGTH_SHORT).show();
-                } else if (contactInfo.equals("")) {
-                    Toast.makeText(AddEditAccount.this, "You need to enter your contact information", Toast.LENGTH_SHORT).show();
-                } else {
-                    User user = new User(name, description, contact);
+                try {
+                    if (nameInfo.equals("")) {
+                        Toast.makeText(AddEditAccount.this, "You need to enter a name", Toast.LENGTH_SHORT).show();
+                    } else if (descriptionInfo.equals("")) {
+                        Toast.makeText(AddEditAccount.this, "You need to enter a description", Toast.LENGTH_SHORT).show();
+                    } else if (contactInfo.equals("")) {
+                        Toast.makeText(AddEditAccount.this, "You need to enter your contact information", Toast.LENGTH_SHORT).show();
+                    } else {
+                        User user = new User(name, description, contact);
 
-                    AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
-                    execute.execute(user);
-                    startActivity(new Intent(AddEditAccount.this, AccountController.class));
+                        AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
+                        execute.execute(user);
+                        startActivity(new Intent(AddEditAccount.this, AccountController.class));
 
-                }
+                    }
+                } catch (NumberFormatException e) {
+                //final check for inconsistencies
+                Toast toast = Toast.makeText(AddEditAccount.this, "Not all data present", Toast.LENGTH_SHORT);
+                toast.show();
 
 
             }
