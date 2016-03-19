@@ -65,7 +65,7 @@ public class AddEditAccount extends AppCompatActivity {
         final String description = descriptionInfo.getText().toString();
         final String contact = contactInfo.getText().toString();
         Button confirm = (Button) findViewById(R.id.editAccount);
-        Button cancel = (Button) findViewById(R.id.backEditAccount);
+        Button cancel = (Button) findViewById(R.id.back);
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override

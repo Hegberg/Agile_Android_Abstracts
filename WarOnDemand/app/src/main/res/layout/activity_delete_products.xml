@@ -71,7 +71,7 @@
             android:text="Delete"
             android:layout_alignRight="@+id/backDeleteItem"
             android:orientation="horizontal"
-            android:id="@+id/doneDeleteItem" />
+            android:id="@+id/doneDeleteProducts" />
 
         <Button
             android:orientation="horizontal"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/doneDeleteItem"
             android:text="Back"
-            android:id="@+id/backDeleteItem" />
+            android:id="@+id/backDeleteProducts" />
 
     </LinearLayout>
 
