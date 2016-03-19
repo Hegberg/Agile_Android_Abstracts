@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 public class AddEditAccount extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
+
     //profileOption 1 = ViewAccount, 2 = CreateAccount, 3 = EditAccount
 
     @Override
@@ -108,7 +109,9 @@ public class AddEditAccount extends AppCompatActivity {
 
     public void ViewAccount() {
         Button back = (Button) findViewById(R.id.return_from_viewing);
-        /*edit.setOnClickListener(new View.OnClickListener() {
+        Button edit = (Button) findViewById(R.id.return_from_viewing);
+
+        edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //changed static profileOption to 2: editAccount.
@@ -116,7 +119,7 @@ public class AddEditAccount extends AppCompatActivity {
                 startActivity(new Intent(AddEditAccount.this, AddEditAccount.class));
 
             }
-        });*/
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +132,7 @@ public class AddEditAccount extends AppCompatActivity {
 
     public void AddAccount() {
         MainActivity.profileOption = 0;
+
         Button done = (Button) findViewById(R.id.doneAddAccount);
         Button back = (Button) findViewById(R.id.backAddAccount);
         final TextView nameInfo = (TextView) findViewById(R.id.nameUser);
