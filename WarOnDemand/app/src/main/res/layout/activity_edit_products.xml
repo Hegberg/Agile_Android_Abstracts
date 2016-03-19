@@ -71,17 +71,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Confirm"
-            android:layout_alignRight="@+id/backEditItem"
+            android:layout_alignRight="@+id/backEditProducts"
             android:orientation="horizontal"
-            android:id="@+id/confirmEditItem" />
+            android:id="@+id/confirmEditProducts" />
 
         <Button
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/confirmEditItem"
+            android:layout_alignLeft="@+id/confirmEditProducts"
             android:text="Back"
-            android:id="@+id/backEditItem" />
+            android:id="@+id/backEditProducts" />
 
     </LinearLayout>
 
