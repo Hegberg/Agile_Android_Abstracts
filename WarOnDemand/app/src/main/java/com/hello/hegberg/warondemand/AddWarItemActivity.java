@@ -24,8 +24,8 @@ public class AddWarItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_war_item);
 
-        Button submitButton = (Button) findViewById(R.id.submit);
-        Button backButton = (Button) findViewById(R.id.back);
+        Button submitButton = (Button) findViewById(R.id.doneAddItem);
+        Button backButton = (Button) findViewById(R.id.backAddItem);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
 
@@ -34,9 +34,9 @@ public class AddWarItemActivity extends AppCompatActivity {
                 try {
                     setResult(RESULT_OK);
                     //Go through each text field and make sure all constraints are filled.
-                    String name = ((EditText) findViewById(R.id.name_entered)).getText().toString();
-                    Double cost = Double.parseDouble(((EditText) findViewById(R.id.cost_entered)).getText().toString());
-                    String desc = ((EditText) findViewById(R.id.desc_entered)).getText().toString();
+                    String name = ((EditText) findViewById(R.id.nameItem)).getText().toString();
+                    Double cost = Double.parseDouble(((EditText) findViewById(R.id.costItem)).getText().toString());
+                    String desc = ((EditText) findViewById(R.id.descriptionItem)).getText().toString();
 
                     //Checks to make sure all string fields are filled in.
                     if (name.equals("")) {
@@ -58,6 +58,8 @@ public class AddWarItemActivity extends AppCompatActivity {
                 } catch (NumberFormatException e) {
                     //Error catch in case something I didn't expect.
                     Toast.makeText(AddWarItemActivity.this, "Enter all data, please.", Toast.LENGTH_SHORT).show();
+                } catch (NullPointerException e){
+
                 }
             }
 

@@ -113,9 +113,14 @@ public class ViewWarItemActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //WarItem latestItem = new WarItem(name, desc, cost, owner);
-                DatabaseController.DeleteItems delete= new DatabaseController.DeleteItems();
+                Log.i("username -> ", preEditedLog.getName());
+                //DatabaseController.DeleteItems delete= new DatabaseController.DeleteItems();
 
-                delete.execute(preEditedLog.getName());
+                //delete.execute(preEditedLog.getName());
+
+                DatabaseController.deleteItem(preEditedLog);
+                Handler myHandler = new Handler();
+                myHandler.postDelayed(mMyRunnable, 1000);
                 finish();
 
             }
@@ -125,12 +130,8 @@ public class ViewWarItemActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        //adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, warItems);
-        //ListView ItemList = (ListView) findViewById(R.id.);
-        //ItemList.setAdapter(adapter);
-        //search();
-        //adapter.notifyDataSetChanged();
     }
+
     public void search(){
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
 
@@ -165,7 +166,4 @@ public class ViewWarItemActivity extends AppCompatActivity {
             finish();
         }
     };
-
-
-
 }

@@ -31,93 +31,31 @@ public class ItemTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testAddItem(){
-        /*Intent intent = new Intent();
-        TestActivity ta = (TestActivity) getActivity();
-        int oldLength = ta.getAdapter().getCount();
-        ArrayAdapter<WarItem> arrayAdapter = ta.getAdapter();
-        addItem("Test name", "Test description");
-        assertEquals(oldLength + 1, arrayAdapter.getCount());
-        ItemList items = new ItemList();
-        WarItem warItem = new WarItem("Test Item");
-        items.add(warItem);
-        assertTrue(items.hasItem(warItem));*/
+
     }
+
     public void testViewItems(){
-        //Test will fail, because not properally integrated backend.
-        /*
-        ItemList items = new ItemList();
-        WarItem warItem = new WarItem("Test Item");
-        items.add(warItem);
-        Intent intent = new Intent();
-        setActivityIntent(intent);
-        viewActivity ta = (viewActivity) getActivity();
 
-        TextView textView = (TextView) ta.findViewById(R.id.intentText);
-        assertEquals("The text should be displayed!", warItem.getName(), textView.getText().toString());
-
-         //Unsure what to do here.
-         */
 
     }
+
     public void testViewItem() {
-        //Not sure if correct.
-        /*
-        ItemList items = new ItemList();
-        WarItem warItem = new WarItem("Test Item");
-        items.add(warItem);
-        WarItem returnedItem = items.getItem(0);
-        assertEquals(returnedItem.getName(),warItem.getName());
-        assertEquals(returnedItem.getDesc(), warItem.getDesc());
-        assertEquals(returnedItem.getStatus(), warItem.getStatus());
-        */
+
 
     }
+
     public void testEditItem(){
-/*        Intent intent = new Intent();
-        TestActivity ta = (TestActivity) getActivity();
-        ArrayAdapter<WarItem> arrayAdapter = ta.getAdapter();
-        addItem("Test name", "Test description");
-        int oldLength = ta.getAdapter().getCount();
-        editItem("new Test");
-        assertEquals(oldLength, arrayAdapter.getCount());
-        assertEquals()
-        ItemList items = new ItemList();
-        WarItem warItem = new WarItem("Test Item");
-        items.add(warItem);
-        String editedText = "New Text";
-        items.editItemName(editedText, 0);
-        assertEquals(items.getItem(0).getName(), editedText);*/
     }
+
     public void testDeleteItem(){
-/*        Intent intent = new Intent();
-        TestActivity ta = (TestActivity) getActivity();
-        int oldLength = ta.getAdapter().getCount();
-        deleteItem("Test Name");
-        ArrayAdapter<WarItem> arrayAdapter = ta.getAdapter();
-        assertEquals(oldLength - 1, arrayAdapter.getCount());
-        ItemList items = new ItemList();
-        WarItem warItem = new WarItem("Test Item");
-        items.add(warItem);
-        items.delete(warItem);
-        assertFalse(items.hasItem(warItem));*/
+
     }
+
     public void testSetReturn(){
-        /*
-        ItemList items = new ItemList();
-        WarItem warItem = new WarItem("Test Item");
-        warItem.setStatus(2);
-        items.add(warItem);
-        int editedStatus = 0;
-        items.editItemStatus(editedStatus, 0);
-        assertEquals(items.getItem(0).getStatus(), editedStatus);*/
+
     }
+
     public void testOffline(){
-        //Similar to AddItem.
-        //ItemList items = new ItemList();
-        //WarItem warItem = new WarItem("Test Item");
-        //added when offline.
-        //When online
-        //items.add(warItem);
-        //assertTrue(items.hasItem(warItem));
+
     }
 }

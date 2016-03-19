@@ -79,7 +79,7 @@ public class SearchingActivity extends AppCompatActivity {
             for (int i=0; i<itemsPreFilter.size(); i++){
                 temp = itemsPreFilter.get(i).getStatus();
                 Log.i("status->",""+itemsPreFilter.get(i).getStatus() );
-                if ((temp != 2 && itemsPreFilter.get(i).getDesc().contains(searchTerm))) {
+                if ((temp != 2 && itemsPreFilter.get(i).getName().contains(searchTerm))) {
                     itemsPostFilter.add(itemsPreFilter.get(i));
                 }
             }

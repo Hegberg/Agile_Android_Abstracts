@@ -17,10 +17,8 @@ public class MainActivity extends AppCompatActivity {
     //initialize variables
     //profileOption variable is for selecting the correct interface in AddEditAccount
     //profileOption 1 = ViewAccount, 2 = CreateAccount, 3 = EditAccount
+    Boolean validUsnername = new Boolean(false);
     public static int profileOption;
-    //productOption variable is for selecting the correct interface in ViewChangeProduct
-    //productOption 1 = ViewProduct, 2 = AddProduct, 3 = EditProduct, 4 = DeleteProduct,
-    public static int productOption;
     public static User chosenUser = null;
     private ArrayList<User> checkAgainst = new ArrayList<>();
 
@@ -29,37 +27,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_controller);
         chosenUser = null;
-
-        /*
-        //trying something out so commenting out original main code
-
-        setContentView(R.layout.activity_main);
-
-        Button account = (Button) findViewById(R.id.Account);
-        Button products = (Button) findViewById(R.id.Products);
-        Button help = (Button) findViewById(R.id.Help);
-
-
-        //when account clicked go to UserController
-
-        account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, UserController.class));
-            }
-        });
-
-        products.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: insert class to go to when 'products' is clicked.
-                startActivity(new Intent(MainActivity.this, SearchingActivity.class));
-            }
-        });
-        */
-
-        //when products is clicked go to <somewhere>
-
 
         //initalizing all buttons
         Button createUser = (Button) findViewById(R.id.createProfile);
@@ -94,22 +61,18 @@ public class MainActivity extends AppCompatActivity {
                                 getUsersTask.execute("");
                                 checkAgainst = getUsersTask.get();
                                 Log.i("size->",""+checkAgainst.size());
+                                validUsnername = false;
                                 for (int i = 0; i < checkAgainst.size(); i++) {
                                     Log.i("check->", String.valueOf(checkAgainst.get(i).getUsername().equals(username.getText().toString())));
                                     Log.i("username -> ", checkAgainst.get(i).getUsername());
                                     Log.i("username entered -> ", username.getText().toString());
-                                    /*
-                                    //no name causes error
-                                    if (username.getText().equals("")){
-                                        Toast.makeText(MainActivity.this, "Enter a Username, please.", Toast.LENGTH_SHORT).show();
-                                    }
-                                    */
                                     if (checkAgainst.get(i).getUsername().equals(username.getText().toString())) {
                                         MainActivity.chosenUser = checkAgainst.get(i);
                                         //for debug purposes
                                         Log.i("username -> ", checkAgainst.get(i).getUsername());
                                         Log.i("username entered -> ", username.getText().toString());
                                         Log.i("chosen username -> ", MainActivity.chosenUser.getUsername());
+                                        validUsnername = true;
                                         startActivity(new Intent(MainActivity.this, AccountController.class));
                                     } else {
                                         //entire else statemnt is for debugging login
@@ -118,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
                                         //Log.i("check->", String.valueOf(checkAgainst.get(i).getUsername().equals(username.getText().toString())));
                                     }
 
+                                }
+                                if (validUsnername == false){
+                                    Toast.makeText(MainActivity.this, "Incorrect username entered", Toast.LENGTH_SHORT).show();
                                 }
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
@@ -144,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //exit application
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,15 +118,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /* bad code
-        //when help is clicked go to <somewhere>
-        help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: insert class to go to when 'help' is clicked.
-                startActivity(new Intent(MainActivity.this, < InsertClass >. class));
-            }
-        });
-        */
     }
 }

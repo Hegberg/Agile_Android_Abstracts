@@ -87,7 +87,6 @@ public class AccountController extends AppCompatActivity {
         myProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(AccountController.this, MyProducts.class));
                 startActivity(new Intent(AccountController.this, ViewMyItemsActivity.class));
 
             }
