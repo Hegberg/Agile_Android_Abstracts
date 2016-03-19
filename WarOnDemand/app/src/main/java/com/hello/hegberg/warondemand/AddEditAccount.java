@@ -159,11 +159,12 @@ public class AddEditAccount extends AppCompatActivity {
 
                     }
                 } catch (NumberFormatException e) {
-                //final check for inconsistencies
-                Toast toast = Toast.makeText(AddEditAccount.this, "Not all data present", Toast.LENGTH_SHORT);
-                toast.show();
+                    //final check for inconsistencies
+                    Toast toast = Toast.makeText(AddEditAccount.this, "Not all data present", Toast.LENGTH_SHORT);
+                    toast.show();
 
 
+                }
             }
 
         });
