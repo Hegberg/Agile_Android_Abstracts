@@ -6,12 +6,14 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:orientation="vertical"
+    android:background="#000000"
     tools:context="com.hello.hegberg.warondemand.addActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
         android:text="Name: "
         android:layout_marginTop="30dp"
         android:id="@+id/name" />
@@ -19,15 +21,16 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:id="@+id/nameUser" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
         android:text="Email: "
         android:id="@+id/description"
-
         android:layout_marginTop="30dp"
         android:layout_below="@+id/name"
         android:layout_alignLeft="@+id/name"
@@ -36,15 +39,16 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:id="@+id/contactInfoUser" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
         android:text="Phone Number: "
         android:id="@+id/contactInfo"
-
         android:layout_marginTop="30dp"
         android:layout_below="@+id/description"
         android:layout_alignLeft="@+id/description"
@@ -54,6 +58,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:id="@+id/descriptionUser" />
 
     <LinearLayout
@@ -63,12 +68,12 @@
         android:orientation="horizontal">
 
         <Button
-        android:orientation="horizontal"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/doneAddAccount"
-        android:text="Back"
-        android:id="@+id/backAddAccount" />
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/doneAddAccount"
+            android:text="Back"
+            android:id="@+id/backAddAccount" />
 
         <Button
             android:layout_width="wrap_content"

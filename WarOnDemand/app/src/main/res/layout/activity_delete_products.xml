@@ -1,31 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hello.hegberg.warondemand.addActivity">>
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical"
+    android:background="#000000"
+    tools:context="com.hello.hegberg.warondemand.addActivity">
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done"
-        android:id="@+id/doneDeleteProducts"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/name"
-        android:layout_toEndOf="@+id/name" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:text="Name: "
+        android:layout_marginTop="30dp"
+        android:id="@+id/name" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
-        android:id="@+id/backDeleteProducts"
-        android:layout_alignTop="@+id/doneDeleteProducts"
-        android:layout_toRightOf="@+id/doneDeleteProducts"
-        android:layout_toEndOf="@+id/doneDeleteProducts"
-        android:layout_marginLeft="57dp"
-        android:layout_marginStart="57dp" />
-</RelativeLayout>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:text="Cost: "
+        android:id="@+id/cost"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/name"
+        android:layout_alignLeft="@+id/name"
+        android:layout_alignStart="@+id/name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:text="Description: "
+        android:id="@+id/description"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/cost"
+        android:layout_alignLeft="@+id/cost"
+        android:layout_alignStart="@+id/cost" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity ="bottom|center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:layout_alignRight="@+id/backDeleteItem"
+            android:orientation="horizontal"
+            android:id="@+id/doneDeleteItem" />
+
+        <Button
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/doneDeleteItem"
+            android:text="Back"
+            android:id="@+id/backDeleteItem" />
+
+    </LinearLayout>
+
+</LinearLayout>

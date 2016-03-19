@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,15 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.hello.hegberg.hegberg_fueltrack.ViewEntry">
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:id="@+id/return_from_viewing"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,7 +19,18 @@
         android:layout_marginTop="40dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/name_info"
+
+        android:layout_below="@+id/name"
+        android:layout_alignLeft="@+id/name"
+        android:layout_alignStart="@+id/name"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,9 +39,21 @@
         android:text="Description: "
         android:id="@+id/description"
         android:layout_marginTop="30dp"
+
         android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/name"
-        android:layout_alignStart="@+id/name" />
+        android:layout_alignLeft="@+id/description_info"
+        android:layout_alignStart="@+id/description_info"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/description_info"
+
+        android:layout_below="@+id/name_info"
+        android:layout_alignLeft="@+id/description"
+        android:layout_alignStart="@+id/description"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,33 +62,10 @@
         android:text="Contact Info: "
         android:id="@+id/contactInfo"
         android:layout_marginTop="30dp"
+
         android:layout_below="@+id/description"
-        android:layout_alignLeft="@+id/description"
-        android:layout_alignStart="@+id/description" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/name_info"
-        android:layout_toRightOf="@+id/name"
-        android:layout_alignTop="@+id/name"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/description_info"
-        android:layout_alignRight="@+id/contact_info"
-        android:layout_alignEnd="@+id/contact_info"
-        android:layout_alignTop="@+id/contactInfo"
-        android:layout_toRightOf="@+id/contactInfo"
-        android:layout_toEndOf="@+id/contactInfo" />
+        android:layout_alignLeft="@+id/contact_info"
+        android:layout_alignStart="@+id/contact_info"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,10 +73,24 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/contact_info"
-        android:layout_alignTop="@+id/description"
-        android:layout_toRightOf="@+id/description"
-        android:layout_alignRight="@+id/name_info"
-        android:layout_alignEnd="@+id/name_info" />
 
+        android:layout_below="@+id/d"
+        android:layout_alignLeft="@+id/description_info"
+        android:layout_alignStart="@+id/description_info"/>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity ="bottom|center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:id="@+id/return_from_viewing"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
+
+</LinearLayout>
