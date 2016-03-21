@@ -24,13 +24,14 @@
         android:layout_alignTop="@+id/name_entered" />
 
     <EditText android:id="@+id/name_entered"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
         android:layout_toRightOf="@+id/name"
         android:textColor="#ffffff"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:background="#134260"/>
 
     <TextView
         android:id="@+id/cost"
@@ -46,15 +47,16 @@
         android:layout_marginTop="30dp" />
 
     <EditText android:id="@+id/cost_entered"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
         android:inputType="numberDecimal"
         android:textColor="#ffffff"
         android:layout_below="@+id/name_entered"
         android:layout_toRightOf="@+id/cost"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:background="#134260" />
 
     <TextView
         android:id="@+id/desc"
@@ -71,13 +73,14 @@
 
     <EditText android:id="@+id/desc_entered"
         android:textColor="#ffffff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
         android:layout_below="@+id/cost_entered"
         android:layout_toRightOf="@+id/desc"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:background="#134260" />
 
 
     <LinearLayout

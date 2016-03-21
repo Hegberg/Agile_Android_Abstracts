@@ -19,10 +19,11 @@
         android:layout_marginTop="60dp" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
         android:textColor="#ffffff"
-        android:id="@+id/usernameSignIn"/>
+        android:id="@+id/usernameSignIn"
+        android:background="#134260"/>
 
     <LinearLayout
         android:layout_width="match_parent"
