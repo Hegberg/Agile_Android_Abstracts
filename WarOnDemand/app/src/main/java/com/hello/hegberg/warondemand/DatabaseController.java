@@ -2,21 +2,42 @@ package com.hello.hegberg.warondemand;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 //import org.apache.http.client.HttpClient;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
+
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.widget.ArrayAdapter;
+
+import java.lang.Boolean;
+
+
 
 
 /**
@@ -29,6 +50,21 @@ import io.searchbox.core.SearchResult;
 public class DatabaseController {
     private static JestDroidClient client;
     private static Gson gson;
+    private static final String additem="additem";
+    private static final String deleteitem="deleteitem";
+    private static final String updateitem="updateitem";
+
+    private static final String adduser="adduser";
+    private static final String deleteuser="deleteuser";
+    private static final String updateuser="updateuser";
+
+    private Context context;
+
+    private ArrayList<User> users = new ArrayList<User>();
+    private ArrayAdapter<User> adapterUsers;
+
+    private ArrayList<WarItem> items = new ArrayList<WarItem>();
+    private ArrayAdapter<WarItem> adapterItems;
 
 
 /**
@@ -99,6 +135,10 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 
+    public Context getContext() {
+        return this.context;
+    }
+
 
     /**
      * Adding users to the database.
@@ -109,10 +149,13 @@ NormalTweet latestTweet = new NormalTweet(text);
     public static class AddUsers extends AsyncTask<User,Void,Void>{
         @Override
         protected Void doInBackground(User... users) {
+
+
+
             verifyClient();
             for(int i = 0; i < users.length; i++) {
                 User user = users[i];
-                Index index = new Index.Builder(user).index("testing").type("users").build();
+                Index index = new Index.Builder(user).index("warondemand").type("users").build();
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
@@ -148,7 +191,7 @@ NormalTweet latestTweet = new NormalTweet(text);
             for(int i = 0; i < items.length; i++) {
                 WarItem item = items[i];
 
-                Index index = new Index.Builder(item).index("testing").type("items").build();
+                Index index = new Index.Builder(item).index("warondemand").type("items").build();
                 try {
                     DocumentResult result = client.execute(index);
                     if(result.isSucceeded()) {
@@ -195,7 +238,7 @@ NormalTweet latestTweet = new NormalTweet(text);
             }
 
             Search search = new Search.Builder(search_string)
-                    .addIndex("testing")
+                    .addIndex("warondemand")
                     .addType("users")
                     .build();
 
@@ -245,7 +288,7 @@ NormalTweet latestTweet = new NormalTweet(text);
             }
 
             Search search = new Search.Builder(search_string)
-                    .addIndex("testing")
+                    .addIndex("warondemand")
                     .addType("items")
                     .build();
 
@@ -268,6 +311,12 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 
+
+    /**
+     *
+     * @param
+     * @return Items object
+     */
     public static void updateUser(User oldUser, User newUser) {
 
         DatabaseController.DeleteUsers Delete = new DatabaseController.DeleteUsers();
@@ -277,6 +326,12 @@ NormalTweet latestTweet = new NormalTweet(text);
         execute.execute(newUser);
     }
 
+
+    /**
+     *
+     * @param
+     * @return Items object
+     */
     public static void updateItem(WarItem oldItem, WarItem newItem) {
 
         DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
@@ -290,7 +345,11 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
-
+    /**
+     *
+     * @param
+     * @return Items object
+     */
     public static class DeleteUsers extends AsyncTask<String, Void, ArrayList<User>> {
         // TODO: Get users
         @Override
@@ -299,7 +358,7 @@ NormalTweet latestTweet = new NormalTweet(text);
             String search_string;
             search_string = "{\"query\":{\"match\":{\"username\":\"" + search_strings[0] + "\"}}}";
             DeleteByQuery deleteUser = new DeleteByQuery.Builder(search_string)
-                    .addIndex("testing")
+                    .addIndex("warondemand")
                     .addType("users")
                     .build();
 
@@ -318,6 +377,11 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
+    /**
+     *
+     * @param
+     * @return Items object
+     */
     public static class DeleteItems extends AsyncTask<String, Void, ArrayList<WarItem>> {
         // TODO: Get users
         @Override
@@ -326,7 +390,7 @@ NormalTweet latestTweet = new NormalTweet(text);
             String search_string;
             search_string = "{\"query\":{\"match\":{\"name\":\"" + search_strings[0] + "\"}}}";
             DeleteByQuery deleteItem = new DeleteByQuery.Builder(search_string)
-                    .addIndex("testing")
+                    .addIndex("warondemand")
                     .addType("items")
                     .build();
 
@@ -342,6 +406,13 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 
+
+
+    /**
+     *
+     * @param
+     * @return Items object
+     */
     public static void deleteItem(WarItem oldItem) {
         DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
         Delete.execute(oldItem.getName());
@@ -350,8 +421,130 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
+    /**
+     *
+     * @param
+     * @return Items object
+     */
+    private void loadFromFileItems(String filename) {
+        try {
+            FileInputStream fis = context.openFileInput(filename);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+
+            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
+            Type listType = new TypeToken<ArrayList<WarItem>>() {
+            }.getType();
+            items = gson.fromJson(in, listType);
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            items = new ArrayList<WarItem>();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
+
+
+    /**
+     *
+     * @param
+     * @return Items object
+     */
+    private void saveInFileItems(String filename) {
+        try {
+            FileOutputStream fos = context.openFileOutput(filename, 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(items, out);
+            out.flush();
+            fos.close();
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
+
+
+    /**
+     *
+     * @param
+     * @return Items object
+     */
+    private void loadFromFileUsers(String filename) {
+        try {
+            FileInputStream fis = context.openFileInput(filename);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+
+            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
+            Type listType = new TypeToken<ArrayList<User>>() {
+            }.getType();
+            users = gson.fromJson(in, listType);
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            users = new ArrayList<User>();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
+
+
+    /**
+     *
+     * @param
+     * @return Items object
+     */
+    private void saveInFileUsers(String filename) {
+        try {
+            FileOutputStream fos = context.openFileOutput(filename, 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(users, out);
+            out.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
+
+
+    /**
+     *
+     * @param
+     * @return Items object
+     */
+    public Boolean isOnline(){
+        ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isAvailable() && activeNetwork.isConnected();
+        return isConnected;
+    }
+
+
+
+
 
 }
+
+
 
 
 
