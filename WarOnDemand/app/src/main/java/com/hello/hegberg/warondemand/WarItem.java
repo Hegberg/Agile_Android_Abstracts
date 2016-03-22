@@ -4,6 +4,11 @@ package com.hello.hegberg.warondemand;
 
 //import android.media.Image;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -37,6 +42,8 @@ public class WarItem {
 //    private Image image = null;
     DecimalFormat twoDec = new DecimalFormat("#.##");
 
+    private transient Bitmap thumbnail;
+    private String thumbnailBase64;
     @JestId
     protected String id;
 
@@ -182,6 +189,26 @@ public class WarItem {
                 +this.cost + ", Owner: "
                 +this.owner.getUsername();
 
+    }
+
+    public void addThumbnail(Bitmap newThumbnail){
+        if (newThumbnail != null) {
+            thumbnail = newThumbnail;
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            newThumbnail.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+
+            byte[] b = byteArrayOutputStream.toByteArray();
+            thumbnailBase64 = Base64.encodeToString(b, Base64.DEFAULT);
+        }
+    }
+
+    public Bitmap getThumbnail(){
+        if (thumbnail == null && thumbnailBase64 != null){
+            byte[] decodeString = Base64.decode(thumbnailBase64, Base64.DEFAULT);
+            thumbnail = BitmapFactory.decodeByteArray(decodeString, 0, decodeString.length);
+        }
+        return thumbnail;
     }
 
 }
