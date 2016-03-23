@@ -21,14 +21,14 @@
         android:textColor="#ffffff" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="53dp"
         android:id="@+id/editKeyword"
         android:textColor="#ffffff"
         android:background="#134260"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity ="bottom|center_horizontal"
         android:orientation="horizontal">
