@@ -52,13 +52,12 @@ public class DatabaseController {
     private static Gson gson;
     private static final String additem="additem";
     private static final String deleteitem="deleteitem";
-    private static final String updateitem="updateitem";
 
     private static final String adduser="adduser";
     private static final String deleteuser="deleteuser";
-    private static final String updateuser="updateuser";
 
     private Context context;
+    CheckNetwork check=new CheckNetwork(this.context);
 
     private ArrayList<User> users = new ArrayList<User>();
     private ArrayAdapter<User> adapterUsers;
@@ -146,11 +145,14 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return
      */
-    public static class AddUsers extends AsyncTask<User,Void,Void>{
+    public class AddUsers extends AsyncTask<User,Void,Void>{
         @Override
         protected Void doInBackground(User... users) {
 
 
+            if(check.isOnline()==false){
+
+            }
 
             verifyClient();
             for(int i = 0; i < users.length; i++) {
@@ -182,9 +184,14 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return
      */
-    public static class AddItems extends AsyncTask<WarItem,Void,Void>{
+    public class AddItems extends AsyncTask<WarItem,Void,Void>{
         @Override
         protected Void doInBackground(WarItem... items) {
+
+            if(check.isOnline()==false){
+
+
+            }
             verifyClient();
 
             // Since AsyncTasks work on arrays, we need to work with arrays as well (>= 1 tweet)
@@ -218,10 +225,16 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @return
      *
      */
-    public static class GetUsers extends AsyncTask<String, Void, ArrayList<User>> {
+    public class GetUsers extends AsyncTask<String, Void, ArrayList<User>> {
         // TODO: Get users
         @Override
         protected ArrayList<User> doInBackground(String... search_strings) {
+
+            if(check.isOnline()==false){
+                return null;
+
+            }
+
             verifyClient();
 
             // Start our initial array list (empty)
@@ -268,10 +281,17 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return Items object
      */
-    public static class GetItems extends AsyncTask<String, Void, ArrayList<WarItem>> {
+    public class GetItems extends AsyncTask<String, Void, ArrayList<WarItem>> {
         // TODO: Get items
         @Override
         protected ArrayList<WarItem> doInBackground(String... search_strings) {
+
+
+            if(check.isOnline()==false){
+                return null;
+
+            }
+
             verifyClient();
 
             // Start our initial array list (empty)
@@ -317,7 +337,11 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return Items object
      */
-    public static void updateUser(User oldUser, User newUser) {
+    public void updateUser(User oldUser, User newUser) {
+
+        if(check.isOnline()==false){
+
+        }
 
         DatabaseController.DeleteUsers Delete = new DatabaseController.DeleteUsers();
         Delete.execute(oldUser.getUsername());
@@ -332,7 +356,11 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return Items object
      */
-    public static void updateItem(WarItem oldItem, WarItem newItem) {
+    public void updateItem(WarItem oldItem, WarItem newItem) {
+
+        if(check.isOnline()==false){
+
+        }
 
         DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
         Delete.execute(oldItem.getName());
@@ -413,132 +441,16 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return Items object
      */
-    public static void deleteItem(WarItem oldItem) {
+    public void deleteItem(WarItem oldItem) {
+
+
+        if(check.isOnline()==false){
+
+        }
+
         DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
         Delete.execute(oldItem.getName());
     }
-
-
-
-
-    /**
-     *
-     * @param
-     * @return Items object
-     */
-    private void loadFromFileItems(String filename) {
-        try {
-            FileInputStream fis = context.openFileInput(filename);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-
-            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
-            Type listType = new TypeToken<ArrayList<WarItem>>() {
-            }.getType();
-            items = gson.fromJson(in, listType);
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            items = new ArrayList<WarItem>();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }
-
-
-
-    /**
-     *
-     * @param
-     * @return Items object
-     */
-    private void saveInFileItems(String filename) {
-        try {
-            FileOutputStream fos = context.openFileOutput(filename, 0);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-            Gson gson = new Gson();
-            gson.toJson(items, out);
-            out.flush();
-            fos.close();
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }
-
-
-
-    /**
-     *
-     * @param
-     * @return Items object
-     */
-    private void loadFromFileUsers(String filename) {
-        try {
-            FileInputStream fis = context.openFileInput(filename);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-
-            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
-            Type listType = new TypeToken<ArrayList<User>>() {
-            }.getType();
-            users = gson.fromJson(in, listType);
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            users = new ArrayList<User>();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }
-
-
-
-    /**
-     *
-     * @param
-     * @return Items object
-     */
-    private void saveInFileUsers(String filename) {
-        try {
-            FileOutputStream fos = context.openFileOutput(filename, 0);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-            Gson gson = new Gson();
-            gson.toJson(users, out);
-            out.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }
-
-
-
-    /**
-     *
-     * @param
-     * @return Items object
-     */
-    public Boolean isOnline(){
-        ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isAvailable() && activeNetwork.isConnected();
-        return isConnected;
-    }
-
-
 
 
 
