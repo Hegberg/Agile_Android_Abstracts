@@ -32,10 +32,7 @@
         android:textColor="#ffffff"
         android:text="Cost: "
         android:id="@+id/cost"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/name"
-        android:layout_alignStart="@+id/name" />
+        android:layout_marginTop="30dp"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -51,10 +48,7 @@
         android:textColor="#ffffff"
         android:text="Description: "
         android:id="@+id/description"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/cost"
-        android:layout_alignLeft="@+id/cost"
-        android:layout_alignStart="@+id/cost" />
+        android:layout_marginTop="30dp"/>
 
 
     <EditText

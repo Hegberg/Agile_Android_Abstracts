@@ -35,15 +35,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign In"
-            android:id="@+id/signInWithInfo"
-            android:layout_alignRight="@+id/backSignInWithInfo"/>
+            android:id="@+id/signInWithInfo"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Back"
-            android:id="@+id/backSignInWithInfo"
-            android:layout_alignLeft="@+id/signInWithInfo"/>
+            android:id="@+id/backSignInWithInfo"/>
 
     </LinearLayout>
 

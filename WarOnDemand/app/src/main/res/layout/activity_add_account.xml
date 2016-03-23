@@ -35,10 +35,7 @@
         android:textColor="#ffffff"
         android:text="Email: "
         android:id="@+id/description"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/name"
-        android:layout_alignStart="@+id/name" />
+        android:layout_marginTop="30dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -54,10 +51,7 @@
         android:textColor="#ffffff"
         android:text="Phone Number: "
         android:id="@+id/contactInfo"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/description"
-        android:layout_alignLeft="@+id/description"
-        android:layout_alignStart="@+id/description" />
+        android:layout_marginTop="30dp" />
 
 
     <EditText

@@ -53,10 +53,7 @@
         android:textColor="#ffffff"
         android:text="Description: "
         android:id="@+id/description"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/cost"
-        android:layout_alignLeft="@+id/cost"
-        android:layout_alignStart="@+id/cost" />
+        android:layout_marginTop="30dp" />
 
 
     <EditText
