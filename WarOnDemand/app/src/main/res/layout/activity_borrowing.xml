@@ -33,8 +33,25 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:text="Email: "
-        android:id="@+id/description"
+        android:text="Cost: "
+        android:id="@+id/cost"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:text="Medium Text"
+        android:id="@+id/cost_info"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:text="Description: "
+        android:id="@+id/desc"
         android:layout_marginTop="30dp"/>
 
     <TextView
@@ -50,8 +67,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:text="Phone Number: "
-        android:id="@+id/contactInfo"
+        android:text="Bid Amount: "
+        android:id="@+id/bid_amount"
         android:layout_marginTop="30dp"/>
 
     <TextView
@@ -60,7 +77,24 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Medium Text"
-        android:id="@+id/contact_info"/>
+        android:id="@+id/bid_amount_info"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:text="Owner's Name: "
+        android:id="@+id/owners_name"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:text="Medium Text"
+        android:id="@+id/bidder_name_info"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -71,8 +105,18 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Return Item"
+            android:id="@+id/return_item"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Back"
-            android:id="@+id/return_from_viewing" />
+            android:id="@+id/return_from_bid"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
     </LinearLayout>
 
 </LinearLayout>

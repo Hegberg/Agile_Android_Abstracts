@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:background="#000000"
     tools:context="com.hello.hegberg.warondemand.addActivity">
@@ -32,10 +35,7 @@
         android:textColor="#ffffff"
         android:text="Email: "
         android:id="@+id/description"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/name"
-        android:layout_alignStart="@+id/name" />
+        android:layout_marginTop="30dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -51,10 +51,7 @@
         android:textColor="#ffffff"
         android:text="Phone Number: "
         android:id="@+id/contactInfo"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/description"
-        android:layout_alignLeft="@+id/description"
-        android:layout_alignStart="@+id/description" />
+        android:layout_marginTop="30dp" />
 
 
     <EditText
@@ -76,7 +73,6 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/doneAddAccount"
             android:text="Back"
             android:id="@+id/backAddAccount" />
 
@@ -84,7 +80,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Done"
-            android:layout_alignRight="@+id/backAddAccount"
             android:orientation="horizontal"
             android:id="@+id/doneAddAccount" />
     </LinearLayout>
