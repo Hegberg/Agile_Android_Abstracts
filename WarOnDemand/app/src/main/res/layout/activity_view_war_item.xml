@@ -26,8 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:layout_toRightOf="@+id/name"
-        android:textColor="#ffffff"
         android:layout_marginTop="30dp"
+        android:textColor="#ffffff"
         android:background="#134260"/>
 
     <TextView
