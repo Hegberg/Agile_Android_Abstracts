@@ -16,9 +16,9 @@ import java.util.concurrent.ExecutionException;
 
 public class SearchingActivity extends AppCompatActivity {
     private String keyword;
-    private ArrayList<WarItem> itemsPreFilter;
+
     private ArrayList<WarItem> itemsPostFilter = null;
-    private int temp;
+
     private ArrayAdapter<WarItem> adapter;
 
     @Override
@@ -65,6 +65,7 @@ public class SearchingActivity extends AppCompatActivity {
     }
 
     public void search(String searchTerm){
+        ArrayList<WarItem> itemsPreFilter;
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
 
         try {
@@ -72,7 +73,7 @@ public class SearchingActivity extends AppCompatActivity {
             for (int i=itemsPostFilter.size() - 1; i>=0; i--) {
                 itemsPostFilter.remove(i);
             }
-
+            int temp;
             getItemsTask.execute("");
             itemsPreFilter = getItemsTask.get();
             Log.i("size-> ", ""+itemsPreFilter.size());
