@@ -73,7 +73,6 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/doneAddAccount"
             android:text="Back"
             android:id="@+id/backAddAccount" />
 
@@ -81,7 +80,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Done"
-            android:layout_alignRight="@+id/backAddAccount"
             android:orientation="horizontal"
             android:id="@+id/doneAddAccount" />
     </LinearLayout>
