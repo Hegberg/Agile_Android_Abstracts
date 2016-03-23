@@ -57,7 +57,7 @@ public class DatabaseController {
     private static final String deleteuser="deleteuser";
 
     private Context context;
-    CheckNetwork check=new CheckNetwork(this.context);
+
 
     private ArrayList<User> usersList = new ArrayList<User>();
     private ArrayAdapter<User> adapterUsers;
@@ -175,7 +175,7 @@ NormalTweet latestTweet = new NormalTweet(text);
         protected Void doInBackground(User... users) {
 
 
-            if(check.isOnline()==false){
+            if(isOnline()==false){
                 for(int i = 0; i < users.length; i++) {
                     User user = users[i];
                     usersList.add(user);
@@ -220,7 +220,7 @@ NormalTweet latestTweet = new NormalTweet(text);
         @Override
         protected Void doInBackground(WarItem... items) {
 
-            if(check.isOnline()==false){
+            if(isOnline()==false){
                 for(int i = 0; i < items.length; i++) {
                     WarItem waritem = items[i];
                     itemsList.add(waritem);
@@ -269,7 +269,7 @@ NormalTweet latestTweet = new NormalTweet(text);
         @Override
         protected ArrayList<User> doInBackground(String... search_strings) {
 
-            if(check.isOnline()==false){
+            if(isOnline()==false){
                 return null;
 
             }
@@ -326,7 +326,7 @@ NormalTweet latestTweet = new NormalTweet(text);
         protected ArrayList<WarItem> doInBackground(String... search_strings) {
 
 
-            if(check.isOnline()==false){
+            if(isOnline()==false){
                 return null;
 
             }
@@ -378,7 +378,7 @@ NormalTweet latestTweet = new NormalTweet(text);
      */
     public void updateUser(User oldUser, User newUser) {
 
-        if(check.isOnline()==false){
+        if(isOnline()==false){
 
         }
 
@@ -397,7 +397,7 @@ NormalTweet latestTweet = new NormalTweet(text);
      */
     public void updateItem(WarItem oldItem, WarItem newItem) {
 
-        if(check.isOnline()==false){
+        if(isOnline()==false){
 
         }
 
@@ -483,7 +483,7 @@ NormalTweet latestTweet = new NormalTweet(text);
     public void deleteItem(WarItem oldItem) {
 
 
-        if(check.isOnline()==false){
+        if(isOnline()==false){
 
         }
 
