@@ -59,11 +59,36 @@ public class DatabaseController {
     private Context context;
     CheckNetwork check=new CheckNetwork(this.context);
 
-    private ArrayList<User> users = new ArrayList<User>();
+    private ArrayList<User> usersList = new ArrayList<User>();
     private ArrayAdapter<User> adapterUsers;
 
-    private ArrayList<WarItem> items = new ArrayList<WarItem>();
+    private ArrayList<WarItem> itemsList = new ArrayList<WarItem>();
     private ArrayAdapter<WarItem> adapterItems;
+
+
+    public ArrayAdapter<User> getUsers() {
+        return adapterUsers;
+    }
+
+    public void setUsers(ArrayAdapter<User> adapterUser) {
+        this.adapterUsers = adapterUser;
+    }
+
+
+
+    public ArrayAdapter<WarItem> getItems() {
+        return adapterItems;
+    }
+
+    public void setItems(ArrayAdapter<WarItem> adapterItem) {
+        this.adapterItems = adapterItem;
+    }
+
+
+
+
+
+
 
 
 /**
@@ -151,6 +176,13 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
             if(check.isOnline()==false){
+                for(int i = 0; i < users.length; i++) {
+                    User user = users[i];
+                    usersList.add(user);
+                }
+                adapterUsers.notifyDataSetChanged();
+                saveInFileUsers(adduser);
+                return null;
 
             }
 
@@ -189,6 +221,13 @@ NormalTweet latestTweet = new NormalTweet(text);
         protected Void doInBackground(WarItem... items) {
 
             if(check.isOnline()==false){
+                for(int i = 0; i < items.length; i++) {
+                    WarItem waritem = items[i];
+                    itemsList.add(waritem);
+                }
+                adapterItems.notifyDataSetChanged();
+                saveInFileUsers(additem);
+                return null;
 
 
             }
@@ -451,6 +490,126 @@ NormalTweet latestTweet = new NormalTweet(text);
         DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
         Delete.execute(oldItem.getName());
     }
+
+
+
+    private void loadFromFileItems(String filename) {
+        try {
+            FileInputStream fis = context.openFileInput(filename);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+
+            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
+            Type listType = new TypeToken<ArrayList<WarItem>>() {
+            }.getType();
+            itemsList = gson.fromJson(in, listType);
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            itemsList = new ArrayList<WarItem>();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
+
+
+    /**
+     *
+     * @param
+     * @return Items object
+     */
+    private void saveInFileItems(String filename) {
+        try {
+            FileOutputStream fos = context.openFileOutput(filename, 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(itemsList, out);
+            out.flush();
+            fos.close();
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
+
+
+    /**
+     *
+     * @param
+     * @return Items object
+     */
+    private void loadFromFileUsers(String filename) {
+        try {
+            FileInputStream fis = context.openFileInput(filename);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+
+            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
+            Type listType = new TypeToken<ArrayList<User>>() {
+            }.getType();
+            usersList = gson.fromJson(in, listType);
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            usersList = new ArrayList<User>();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
+
+
+    /**
+     *
+     * @param
+     * @return Items object
+     */
+    private void saveInFileUsers(String filename) {
+        try {
+            FileOutputStream fos = context.openFileOutput(filename, 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(usersList, out);
+            out.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
+
+
+    /**
+     *
+     * @param
+     * @return Items object
+     */
+    public Boolean isOnline(){
+        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isAvailable() && activeNetwork.isConnected();
+        return isConnected;
+    }
+
+
+
+
+
+
 
 
 
