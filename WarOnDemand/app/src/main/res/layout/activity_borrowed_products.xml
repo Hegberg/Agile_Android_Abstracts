@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="#134260"
     tools:context="com.hello.hegberg.warondemand.ViewWarItemActivity">
 
     <android.support.design.widget.AppBarLayout
