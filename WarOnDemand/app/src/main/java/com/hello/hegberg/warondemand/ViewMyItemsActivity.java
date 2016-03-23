@@ -25,11 +25,11 @@ public class ViewMyItemsActivity extends AppCompatActivity {
     //This activity allows you to view a crude list of all your items you own. This links to
     //add item and view item
     private ListView ItemList;
-    private User temp;
+
 
     /** Called when the activity is first created. */
     private ArrayList<WarItem> warItems = new ArrayList<WarItem>();
-    private ArrayList<WarItem> warItemsPreSearch = new ArrayList<WarItem>();
+
     private ArrayAdapter<WarItem> adapter;
 
     //To edit a log we must, gasp, use a global variable that contains its index number.
@@ -125,7 +125,8 @@ public class ViewMyItemsActivity extends AppCompatActivity {
             for (int i=warItems.size() - 1; i>=0; i--) {
                 warItems.remove(i);
             }
-
+            ArrayList<WarItem> warItemsPreSearch = new ArrayList<WarItem>();
+            User temp;
             getItemsTask.execute("");
             warItemsPreSearch = getItemsTask.get();
             Log.i("size-> ", "" + warItemsPreSearch.size());

@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     //initialize variables
     //profileOption variable is for selecting the correct interface in AddEditAccount
     //profileOption 1 = ViewAccount, 2 = CreateAccount, 3 = EditAccount
-    Boolean validUsnername = new Boolean(false);
+    Boolean validUsername = false;
     public static int profileOption;
     public static User chosenUser = null;
     private ArrayList<User> checkAgainst = new ArrayList<>();
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                                 getUsersTask.execute("");
                                 checkAgainst = getUsersTask.get();
                                 Log.i("size->",""+checkAgainst.size());
-                                validUsnername = false;
+                                validUsername = false;
                                 for (int i = 0; i < checkAgainst.size(); i++) {
                                     Log.i("check->", String.valueOf(checkAgainst.get(i).getUsername().equals(username.getText().toString())));
                                     Log.i("username -> ", checkAgainst.get(i).getUsername());
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                                         Log.i("username -> ", checkAgainst.get(i).getUsername());
                                         Log.i("username entered -> ", username.getText().toString());
                                         Log.i("chosen username -> ", MainActivity.chosenUser.getUsername());
-                                        validUsnername = true;
+                                        validUsername = true;
                                         startActivity(new Intent(MainActivity.this, AccountController.class));
                                     } else {
                                         //entire else statemnt is for debugging login
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
 
                                 }
-                                if (validUsnername == false){
+                                if (validUsername == false){
                                     Toast.makeText(MainActivity.this, "Incorrect username entered", Toast.LENGTH_SHORT).show();
                                 }
                             } catch (InterruptedException e) {

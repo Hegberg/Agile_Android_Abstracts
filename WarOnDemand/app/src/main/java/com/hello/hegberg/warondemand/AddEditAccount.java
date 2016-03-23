@@ -48,7 +48,7 @@ public class AddEditAccount extends AppCompatActivity {
 
 
 
-    public void ViewAccount() {
+    private void ViewAccount() {
         Button back = (Button) findViewById(R.id.return_from_viewing);
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +60,7 @@ public class AddEditAccount extends AppCompatActivity {
 
     }
 
-    public void AddAccount() {
+    private void AddAccount() {
         MainActivity.profileOption = 0;
 
         Button done = (Button) findViewById(R.id.doneAddAccount);
