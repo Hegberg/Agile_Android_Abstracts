@@ -66,6 +66,36 @@ public class DatabaseController {
     private ArrayAdapter<WarItem> adapterItems;
 
 
+
+
+    public DatabaseController(){
+        if (isOnline()==true){
+
+            loadFromFileItems(additem);
+            for(int i = 0; i < itemsList.size(); i++) {
+
+                WarItem waritem = itemsList.get(i);
+                AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
+                execute.execute(waritem);
+            }
+
+            itemsList.clear();
+
+            for(int i = 0; i < usersList.size(); i++) {
+
+                User user = usersList.get(i);
+                AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
+                execute.execute(user);
+            }
+
+
+        }
+
+    }
+
+
+
+
     public ArrayAdapter<User> getUsers() {
         return adapterUsers;
     }
@@ -181,7 +211,7 @@ NormalTweet latestTweet = new NormalTweet(text);
                     usersList.add(user);
                 }
                 adapterUsers.notifyDataSetChanged();
-                saveInFileUsers(adduser);
+                saveInFileItems(adduser);
                 return null;
 
             }
@@ -226,9 +256,8 @@ NormalTweet latestTweet = new NormalTweet(text);
                     itemsList.add(waritem);
                 }
                 adapterItems.notifyDataSetChanged();
-                saveInFileUsers(additem);
+                saveInFileItems(additem);
                 return null;
-
 
             }
             verifyClient();
@@ -269,15 +298,17 @@ NormalTweet latestTweet = new NormalTweet(text);
         @Override
         protected ArrayList<User> doInBackground(String... search_strings) {
 
-            if(isOnline()==false){
-                return null;
 
-            }
 
             verifyClient();
 
             // Start our initial array list (empty)
             ArrayList<User> users = new ArrayList<User>();
+
+            if(isOnline()==false){
+                return users;
+
+            }
 
             // NOTE: I'm a making a huge assumption here, that only the first search term
             // will be used.
@@ -325,23 +356,38 @@ NormalTweet latestTweet = new NormalTweet(text);
         @Override
         protected ArrayList<WarItem> doInBackground(String... search_strings) {
 
+            // Start our initial array list (empty)
+            ArrayList<WarItem> items = new ArrayList<WarItem>();
+
 
             if(isOnline()==false){
-                return null;
+                return items;
 
             }
 
+
+
+
+
+
+
+
+
             verifyClient();
 
-            // Start our initial array list (empty)
-            ArrayList<WarItem> items = new ArrayList<WarItem>();
 
             // NOTE: I'm a making a huge assumption here, that only the first search term
             // will be used.
             String search_string;
+            String search_string_desc;
             if(search_strings[0] != "") {
                 //search_string = "{\"from\" : 0, \"size\" : 10000,\"query\":{\"match\":{\"message\":\"" + search_strings[0] + "\"}}}";
                 search_string = "{\"query\":{\"match\":{\"name\":\"" + search_strings[0] + "\"}}}";
+
+
+                //search_string_desc = "{\"query\":{\"match\":{\"description\":\"" + search_strings[0] + "\"}}}";
+
+
             } else {
                 search_string = "{\"from\" : 0, \"size\" : 100}";
             }
@@ -379,6 +425,7 @@ NormalTweet latestTweet = new NormalTweet(text);
     public void updateUser(User oldUser, User newUser) {
 
         if(isOnline()==false){
+
 
         }
 
@@ -444,6 +491,9 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
+
+
+
     /**
      *
      * @param
@@ -475,6 +525,9 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
+
+
+
     /**
      *
      * @param
@@ -490,6 +543,10 @@ NormalTweet latestTweet = new NormalTweet(text);
         DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
         Delete.execute(oldItem.getName());
     }
+
+
+
+
 
 
 
@@ -515,6 +572,8 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
+
+
     /**
      *
      * @param
@@ -537,6 +596,8 @@ NormalTweet latestTweet = new NormalTweet(text);
             throw new RuntimeException();
         }
     }
+
+
 
 
 
@@ -567,6 +628,8 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
+
+
     /**
      *
      * @param
@@ -588,6 +651,8 @@ NormalTweet latestTweet = new NormalTweet(text);
             throw new RuntimeException();
         }
     }
+
+
 
 
 
