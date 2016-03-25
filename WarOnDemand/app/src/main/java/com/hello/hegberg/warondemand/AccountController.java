@@ -67,7 +67,8 @@ public class AccountController extends AppCompatActivity {
                         } else {
                             tempUser = MainActivity.chosenUser;
                             MainActivity.chosenUser.editUser(name, description, contact);
-                            DatabaseController.updateUser(tempUser, MainActivity.chosenUser);
+                            DatabaseController controller = new DatabaseController();
+                            controller.updateUser(tempUser, MainActivity.chosenUser);
                             finish();
                             startActivity(new Intent(AccountController.this, AccountController.class));
                         }

@@ -1,6 +1,8 @@
 package com.hello.hegberg.warondemand;
 
+import android.app.Application;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.google.common.reflect.TypeToken;
@@ -47,7 +49,7 @@ import java.lang.Boolean;
 
 
 
-public class DatabaseController {
+public class DatabaseController extends Application {
     private static JestDroidClient client;
     private static Gson gson;
     private static final String additem="additem";
@@ -56,16 +58,24 @@ public class DatabaseController {
     private static final String adduser="adduser";
     private static final String deleteuser="deleteuser";
 
-    private Context context;
+    private static Context context;
 
 
-    private ArrayList<User> usersList = new ArrayList<User>();
-    private ArrayAdapter<User> adapterUsers;
+    private static ArrayList<User> usersList = new ArrayList<User>();
+    private static ArrayAdapter<User> adapterUsers;
 
-    private ArrayList<WarItem> itemsList = new ArrayList<WarItem>();
-    private ArrayAdapter<WarItem> adapterItems;
+    private static ArrayList<WarItem> itemsList = new ArrayList<WarItem>();
+    private static ArrayAdapter<WarItem> adapterItems;
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        context = this;
+    }
 
+    public static Context getContext() {
+        return context;
+    }
 
 
     public DatabaseController(){
@@ -189,10 +199,6 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 
-    public Context getContext() {
-        return this.context;
-    }
-
 
     /**
      * Adding users to the database.
@@ -200,7 +206,7 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return
      */
-    public class AddUsers extends AsyncTask<User,Void,Void>{
+    public static class AddUsers extends AsyncTask<User,Void,Void>{
         @Override
         protected Void doInBackground(User... users) {
 
@@ -246,7 +252,7 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return
      */
-    public class AddItems extends AsyncTask<WarItem,Void,Void>{
+    public static class AddItems extends AsyncTask<WarItem,Void,Void>{
         @Override
         protected Void doInBackground(WarItem... items) {
 
@@ -293,7 +299,7 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @return
      *
      */
-    public class GetUsers extends AsyncTask<String, Void, ArrayList<User>> {
+    public static class GetUsers extends AsyncTask<String, Void, ArrayList<User>> {
         // TODO: Get users
         @Override
         protected ArrayList<User> doInBackground(String... search_strings) {
@@ -351,7 +357,7 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return Items object
      */
-    public class GetItems extends AsyncTask<String, Void, ArrayList<WarItem>> {
+    public static class GetItems extends AsyncTask<String, Void, ArrayList<WarItem>> {
         // TODO: Get items
         @Override
         protected ArrayList<WarItem> doInBackground(String... search_strings) {
@@ -382,7 +388,7 @@ NormalTweet latestTweet = new NormalTweet(text);
             String search_string_desc;
             if(search_strings[0] != "") {
                 //search_string = "{\"from\" : 0, \"size\" : 10000,\"query\":{\"match\":{\"message\":\"" + search_strings[0] + "\"}}}";
-                search_string = "{\"query\":{\"match\":{\"name\":\"" + search_strings[0] + "\"}}}";
+                search_string = "{\"queries\":{\"match_phrase_prefix\":{\"name\":\"" + search_strings[0] + "\"}{\"desc\":\"\"" + search_strings[0] + "\"\"}{\"owner\":\"\"" + search_strings[0] + "\"\"}}}";
 
 
                 //search_string_desc = "{\"query\":{\"match\":{\"description\":\"" + search_strings[0] + "\"}}}";
@@ -422,7 +428,7 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return Items object
      */
-    public void updateUser(User oldUser, User newUser) {
+    public static void updateUser(User oldUser, User newUser) {
 
         if(isOnline()==false){
 
@@ -442,7 +448,7 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return Items object
      */
-    public void updateItem(WarItem oldItem, WarItem newItem) {
+    public static void updateItem(WarItem oldItem, WarItem newItem) {
 
         if(isOnline()==false){
 
@@ -533,7 +539,7 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return Items object
      */
-    public void deleteItem(WarItem oldItem) {
+    public static void deleteItem(WarItem oldItem) {
 
 
         if(isOnline()==false){
@@ -550,9 +556,9 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
-    private void loadFromFileItems(String filename) {
+    private static void loadFromFileItems(String filename) {
         try {
-            FileInputStream fis = context.openFileInput(filename);
+            FileInputStream fis = DatabaseController.getContext().openFileInput(filename);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
 
@@ -579,9 +585,9 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return Items object
      */
-    private void saveInFileItems(String filename) {
+    private static void saveInFileItems(String filename) {
         try {
-            FileOutputStream fos = context.openFileOutput(filename, 0);
+            FileOutputStream fos = DatabaseController.getContext().openFileOutput(filename, 0);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
             Gson gson = new Gson();
             gson.toJson(itemsList, out);
@@ -606,9 +612,9 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return Items object
      */
-    private void loadFromFileUsers(String filename) {
+    private static void loadFromFileUsers(String filename) {
         try {
-            FileInputStream fis = context.openFileInput(filename);
+            FileInputStream fis = DatabaseController.getContext().openFileInput(filename);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
 
@@ -635,9 +641,9 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return Items object
      */
-    private void saveInFileUsers(String filename) {
+    private static void saveInFileUsers(String filename) {
         try {
-            FileOutputStream fos = context.openFileOutput(filename, 0);
+            FileOutputStream fos = DatabaseController.getContext().openFileOutput(filename, 0);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
             Gson gson = new Gson();
             gson.toJson(usersList, out);
@@ -661,7 +667,11 @@ NormalTweet latestTweet = new NormalTweet(text);
      * @param
      * @return Items object
      */
-    public Boolean isOnline(){
+    public static Boolean isOnline(){
+        context = getContext();
+        if (context==null){
+            return false;
+        }
         ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -675,12 +685,224 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
+    /*
+    public class AddBids extends AsyncTask<WarItem,Void,Void>{
+
+        @Override
+        protected Void doInBackground(WarItem... items) {
+
+            if(isOnline()==false){
+                for(int i = 0; i < items.length; i++) {
+                    WarItem waritem = items[i];
+                    itemsList.add(waritem);
+                }
+                adapterItems.notifyDataSetChanged();
+                saveInFileItems(additem);
+                return null;
+
+            }
+            verifyClient();
+
+            // Since AsyncTasks work on arrays, we need to work with arrays as well (>= 1 tweet)
+            for(int i = 0; i < items.length; i++) {
+                WarItem item = items[i];
+
+                Index index = new Index.Builder(item).index("warondemand").type("items").build();
+                try {
+                    DocumentResult result = client.execute(index);
+                    if(result.isSucceeded()) {
+                        // Set the ID to tweet that elasticsearch told me it was
+                        item.setId(result.getId());
+                    } else {
+                        // TODO: Add an error message, because this was puzzling.
+                        // TODO: Right here it will trigger if the insert fails
+                        Log.i("TODO", "We actually failed here, adding a user");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            Log.i("Success", "We have added an item to the DB");
+            return null;
+        }
+    }
+
+    /**
+     * Getting users from the database
+     * Returns all a list of users unless a username is a parameter
+     * @param
+     * @return
+     *
+
+    public class GetBids extends AsyncTask<String, Void, ArrayList<User>> {
+        // TODO: Get Bids
+        @Override
+        protected ArrayList<User> doInBackground(String... search_strings) {
+
+
+
+            verifyClient();
+
+            // Start our initial array list (empty)
+            ArrayList<User> users = new ArrayList<User>();
+
+            if(isOnline()==false){
+                return users;
+
+            }
+
+            // NOTE: I'm a making a huge assumption here, that only the first search term
+            // will be used.
+            String search_string;
+            if(search_strings[0] != "") {
+                //search_string = "{\"from\" : 0, \"size\" : 10000,\"query\":{\"match\":{\"message\":\"" + search_strings[0] + "\"}}}";
+                search_string = "{\"query\":{\"match\":{\"username\":\"" + search_strings[0] + "\"}}}";
+            } else {
+                search_string = "{\"from\" : 0, \"size\" : 100}";
+            }
+
+            Search search = new Search.Builder(search_string)
+                    .addIndex("warondemand")
+                    .addType("users")
+                    .build();
+
+            try {
+                SearchResult execute = client.execute(search);
+                if(execute.isSucceeded()) {
+                    // Return our list of tweets
+                    List<User> returned_tweets = execute.getSourceAsObjectList(User.class);
+                    users.addAll(returned_tweets);
+                } else {
+                    // TODO: Add an error message, because that other thing was puzzling.
+                    // TODO: Right here it will trigger if the search fails
+                    Log.i("TODO", "We actually failed here, searching for users");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return users;
+        }
+    }
+
+
+
+
+
+
+
+    private void loadFromFileBids(String filename) {
+        try {
+            FileInputStream fis = context.openFileInput(filename);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+
+            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
+            Type listType = new TypeToken<ArrayList<User>>() {
+            }.getType();
+            usersList = gson.fromJson(in, listType);
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            usersList = new ArrayList<User>();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
+
+    private void saveInFileBids(String filename) {
+        try {
+            FileOutputStream fos = context.openFileOutput(filename, 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(usersList, out);
+            out.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
+
+
+
+
+    public static class DeleteBids extends AsyncTask<String, Void, ArrayList<WarItem>> {
+        // TODO: Get users
+        @Override
+        protected ArrayList<WarItem> doInBackground(String... search_strings) {
+            verifyClient();
+            String search_string;
+            search_string = "{\"query\":{\"match\":{\"name\":\"" + search_strings[0] + "\"}}}";
+            DeleteByQuery deleteItem = new DeleteByQuery.Builder(search_string)
+                    .addIndex("warondemand")
+                    .addType("items")
+                    .build();
+
+
+            try {
+                client.execute(deleteItem);
+            } catch (IOException e) {
+                Log.i("TODO", "We actually failed here, deleting a item");
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
+
+
+
+
+
+
+    public void deleteBids(WarItem oldItem) {
+
+
+        if(isOnline()==false){
+
+        }
+
+        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
+        Delete.execute(oldItem.getName());
+    }
+
+
+
+
+    public void updateBids(WarItem oldBid, WarItem newBid) {
+
+        if(isOnline()==false){
+
+        }
+
+        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
+        Delete.execute(oldItem.getName());
+
+        AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
+        execute.execute(newItem);
+    }
+
+
+
+
+
+
+    */
+
+
+
+
 
 
 
 }
-
-
-
 
 
