@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:text="Cost: "
+        android:text="Minimum Starting Bid Price: "
         android:id="@+id/cost"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/name"

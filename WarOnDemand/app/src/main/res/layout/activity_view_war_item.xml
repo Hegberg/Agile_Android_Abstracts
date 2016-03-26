@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
-        android:text="Cost: "
+        android:text="Mimimum Starting Bid Price: "
         android:layout_marginTop="30dp" />
 
     <EditText android:id="@+id/cost_entered"

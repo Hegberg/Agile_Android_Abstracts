@@ -184,7 +184,7 @@ public class WarItem {
     public String toString() {
         //Allows printing of the class.
         return  "Name: "+ this.name + ", Description: "
-                + this.desc + ", Cost: "
+                + this.desc + ", Minimum Bid Price: "
                // + twoDec.format(this.cost);
                 +this.cost + ", Owner: "
                 +this.owner.getUsername();

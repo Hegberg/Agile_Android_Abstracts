@@ -116,7 +116,6 @@ public class AddEditAccount extends AppCompatActivity {
                         AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
                         execute.execute(user);
                         finish();
-                        //startActivity(new Intent(AddEditAccount.this, MainActivity.class));
 
                     }
                 } catch (NumberFormatException e) {

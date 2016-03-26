@@ -81,7 +81,7 @@ public class ViewWarItemActivity extends AppCompatActivity {
                     if (name.equals("")) {
                         Toast.makeText(ViewWarItemActivity.this, "Enter a name, please.", Toast.LENGTH_SHORT).show();
                     } else if (cost.equals("")) {
-                        Toast.makeText(ViewWarItemActivity.this, "Enter a cost, please.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewWarItemActivity.this, "Enter a minimum starting bid price, please.", Toast.LENGTH_SHORT).show();
                     } else if (desc.equals("")) {
                         Toast.makeText(ViewWarItemActivity.this, "Enter a description, please.", Toast.LENGTH_SHORT).show();
                     } else {
