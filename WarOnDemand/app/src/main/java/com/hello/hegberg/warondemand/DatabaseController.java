@@ -385,17 +385,17 @@ NormalTweet latestTweet = new NormalTweet(text);
             // NOTE: I'm a making a huge assumption here, that only the first search term
             // will be used.
             String search_string;
-            String search_string_desc;
+            String search_string_desc="";
             if(search_strings[0] != "") {
                 //search_string = "{\"from\" : 0, \"size\" : 10000,\"query\":{\"match\":{\"message\":\"" + search_strings[0] + "\"}}}";
-                search_string = "{\"queries\":{\"match_phrase_prefix\":{\"name\":\"" + search_strings[0] + "\"}{\"desc\":\"\"" + search_strings[0] + "\"\"}{\"owner\":\"\"" + search_strings[0] + "\"\"}}}";
+                search_string = "{\"queries\":{\"match_match\":{\"desc\":\"" + search_strings[0] + "\"}{\"desc\":\"\"" + search_strings[0] + "\"\"}{\"owner\":\"\"" + search_strings[0] + "\"\"}}}";
 
 
-                //search_string_desc = "{\"query\":{\"match\":{\"description\":\"" + search_strings[0] + "\"}}}";
+                 search_string_desc = "{\"multi_match\":{\"query\":\""+search_strings[0]+ "\",type\": phrase_prefix\",fields\":\"[ name, desc]";
 
-
-            } else {
+            }else {
                 search_string = "{\"from\" : 0, \"size\" : 100}";
+                search_string_desc = "{\"from\" : 0, \"size\" : 100}";
             }
 
             Search search = new Search.Builder(search_string)

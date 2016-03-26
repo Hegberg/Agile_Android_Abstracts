@@ -83,6 +83,9 @@ public class SearchingActivity extends AppCompatActivity {
                 if ((temp != 2 && itemsPreFilter.get(i).getName().contains(searchTerm))) {
                     itemsPostFilter.add(itemsPreFilter.get(i));
                 }
+                if ((temp != 2 && itemsPreFilter.get(i).getDesc().contains(searchTerm))) {
+                    itemsPostFilter.add(itemsPreFilter.get(i));
+                }
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
