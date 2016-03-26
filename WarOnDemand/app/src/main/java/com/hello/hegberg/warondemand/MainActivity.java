@@ -102,11 +102,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(new Intent(MainActivity.this, MainActivity.class));
                         }
                     });
-
-                } else { //already logged in
-                    startActivity(new Intent(MainActivity.this, AccountController.class));
                 }
-
             }
         });
 
