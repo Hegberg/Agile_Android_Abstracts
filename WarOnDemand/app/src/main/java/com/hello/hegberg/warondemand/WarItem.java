@@ -20,16 +20,13 @@ import io.searchbox.annotations.JestId;
  */
 public class WarItem {
     private String name;
-
     private Double cost;
-
     private String desc;
     //Using an int for ease of coding in status.
     //0 for Available
     //1 for bid on
     //2 for borrowed
     private Integer status;
-
     private Boolean bidOn;
     private ArrayList<User> listOfBidders;
     private User owner;

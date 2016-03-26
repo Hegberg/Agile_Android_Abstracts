@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/bid"
             android:text="Bid"
-            android:id="@+id/backAddAccount" />
+            android:id="@+id/doneBidding" />
 
         <Button
             android:layout_width="wrap_content"
@@ -53,6 +53,6 @@
             android:text="Back"
             android:layout_alignRight="@+id/back"
             android:orientation="horizontal"
-            android:id="@+id/doneAddAccount" />
+            android:id="@+id/backBidding" />
     </LinearLayout>
 </LinearLayout>

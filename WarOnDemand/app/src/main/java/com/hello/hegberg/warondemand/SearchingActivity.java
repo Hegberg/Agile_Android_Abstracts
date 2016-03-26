@@ -1,10 +1,13 @@
 package com.hello.hegberg.warondemand;
 
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -20,6 +23,8 @@ public class SearchingActivity extends AppCompatActivity {
     private ArrayList<WarItem> itemsPostFilter = null;
 
     private ArrayAdapter<WarItem> adapter;
+
+    public static int itemPosClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,20 @@ public class SearchingActivity extends AppCompatActivity {
             }
         });
 
+        listOfItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            //http://stackoverflow.com/questions/17851687/how-to-handle-the-click-event-in-listview-in-android
+            //User wishes to edit a log.
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                itemPosClicked = position;
+                Intent intent = new Intent(SearchingActivity.this, BiddingActivity.class);
+                startActivity(intent);
+                Handler myHandler = new Handler();
+                myHandler.postDelayed(mMyRunnable, 1000);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
 
     }
 
@@ -94,4 +113,12 @@ public class SearchingActivity extends AppCompatActivity {
         }
 
     }
+    private Runnable mMyRunnable = new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            adapter.notifyDataSetChanged();
+        }
+    };
 }
