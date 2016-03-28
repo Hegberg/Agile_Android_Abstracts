@@ -3,12 +3,12 @@ package com.hello.hegberg.warondemand;
 /**
  * Created by Chris on 3/28/2016.
  */
-public class Bids {
+public class Bid {
     private User bidder;
     private WarItem itemBidOn;
     private double bidAmount;
 
-    public Bids(User userBidder, WarItem itemBiddingOn, double bid){
+    public Bid(User userBidder, WarItem itemBiddingOn, double bid){
         bidder = userBidder;
         itemBidOn = itemBiddingOn;
         bidAmount = bid;
@@ -23,3 +23,4 @@ public class Bids {
     }
 
 }
+

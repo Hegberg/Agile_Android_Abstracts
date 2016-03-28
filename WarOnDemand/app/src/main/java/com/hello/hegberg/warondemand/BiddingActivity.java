@@ -50,7 +50,7 @@ public class BiddingActivity extends AppCompatActivity {
                     if (bidAmount < itemBiddingOn.getCost()){
                         Toast.makeText(BiddingActivity.this, "Bid lower than Minimum Bid Price", Toast.LENGTH_SHORT).show();
                     } else {
-                        Bids bid = new Bids(MainActivity.chosenUser, itemBiddingOn, bidAmount);
+                        Bid bid = new Bid(MainActivity.chosenUser, itemBiddingOn, bidAmount);
                         //add database functionality
                         //Toast.makeText(BiddingActivity.this, "Bid successfully recorded", Toast.LENGTH_SHORT).show();
                         finish();
