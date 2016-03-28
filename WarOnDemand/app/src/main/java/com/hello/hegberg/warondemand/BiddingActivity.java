@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class BiddingActivity extends AppCompatActivity {
         Button doneBidding = (Button) findViewById(R.id.doneBidding);
         Button back = (Button) findViewById(R.id.backBidding);
         final EditText bidAmountString = (EditText) findViewById(R.id.bid_amount);
+        TextView itemInfo = (TextView) findViewById(R.id.biddingItemInfo);
 
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
         try {
@@ -36,6 +38,7 @@ public class BiddingActivity extends AppCompatActivity {
         }
 
         itemBiddingOn = warItems.get(SearchingActivity.itemPosClicked);
+        itemInfo.setText(itemBiddingOn.toString());
 
         doneBidding.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +50,10 @@ public class BiddingActivity extends AppCompatActivity {
                     if (bidAmount < itemBiddingOn.getCost()){
                         Toast.makeText(BiddingActivity.this, "Bid lower than Minimum Bid Price", Toast.LENGTH_SHORT).show();
                     } else {
-                        //complete bid here
+                        Bids bid = new Bids(MainActivity.chosenUser, itemBiddingOn, bidAmount);
+                        //add database functionality
+                        //Toast.makeText(BiddingActivity.this, "Bid successfully recorded", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }
             }
