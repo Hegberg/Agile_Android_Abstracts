@@ -268,7 +268,7 @@ NormalTweet latestTweet = new NormalTweet(text);
                     WarItem waritem = items[i];
                     itemsList.add(waritem);
                 }
-                adapterItems.notifyDataSetChanged();
+                //adapterItems.notifyDataSetChanged();
                 saveInFileItems(additem);
                 return null;
 
@@ -378,7 +378,19 @@ NormalTweet latestTweet = new NormalTweet(text);
 
             }
 
+            if (isOnline()==true){
 
+                loadFromFileItems(additem);
+                for(int i = 0; i < itemsList.size(); i++) {
+
+                    WarItem waritem = itemsList.get(i);
+                    AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
+                    updateAddItem(waritem);
+                }
+
+                itemsList.clear();
+                saveInFileItems(additem);
+            }
 
 
             verifyClient();
@@ -424,6 +436,13 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 
+
+
+    public static void updateAddItem(WarItem item){
+        AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
+        execute.execute(item);
+
+    }
 
     /**
      *
