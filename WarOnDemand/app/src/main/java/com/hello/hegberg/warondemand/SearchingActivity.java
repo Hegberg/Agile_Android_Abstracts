@@ -24,7 +24,7 @@ public class SearchingActivity extends AppCompatActivity {
 
     private ArrayAdapter<WarItem> adapter;
 
-    public static int itemPosClicked;
+    public static WarItem itemClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class SearchingActivity extends AppCompatActivity {
             //User wishes to edit a log.
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                itemPosClicked = position;
+                itemClicked = itemsPostFilter.get(position);
                 Intent intent = new Intent(SearchingActivity.this, BiddingActivity.class);
                 startActivity(intent);
                 Handler myHandler = new Handler();

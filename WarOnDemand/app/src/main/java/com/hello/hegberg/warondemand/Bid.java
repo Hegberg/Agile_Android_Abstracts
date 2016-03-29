@@ -7,11 +7,13 @@ public class Bid {
     private User bidder;
     private WarItem itemBidOn;
     private double bidAmount;
+    private User owner;
 
-    public Bid(User userBidder, WarItem itemBiddingOn, double bid){
+    public Bid(User userBidder, User ownerOfItem, WarItem itemBiddingOn, double bid){
         bidder = userBidder;
         itemBidOn = itemBiddingOn;
         bidAmount = bid;
+        owner = ownerOfItem;
     }
 
     private void acceptBid(){

@@ -31,6 +31,13 @@ public class AccountController extends AppCompatActivity {
         Button myBids = (Button) findViewById(R.id.myBids);
         Button borrowedProducts = (Button) findViewById(R.id.borrowedProducts);
 
+        //bid notification functionality
+        /*
+        if (){
+
+        }
+        */
+
         //TODO: Create classes to go to with products, bids, borrowed.
         // Create Buttons
         editProfile.setOnClickListener(new View.OnClickListener() {
