@@ -64,8 +64,15 @@ public class DatabaseController extends Application {
     private static ArrayList<User> usersList = new ArrayList<User>();
     private static ArrayAdapter<User> adapterUsers;
 
+
     private static ArrayList<WarItem> itemsList = new ArrayList<WarItem>();
     private static ArrayAdapter<WarItem> adapterItems;
+
+
+    private static ArrayList<Bid> bidsList = new ArrayList<Bid>();
+    private static ArrayAdapter<Bid> bidsItems;
+
+
 
     @Override
     public void onCreate() {
@@ -370,11 +377,6 @@ NormalTweet latestTweet = new NormalTweet(text);
                 return items;
 
             }
-
-
-
-
-
 
 
 
@@ -685,16 +687,16 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
-    /*
-    public class AddBids extends AsyncTask<WarItem,Void,Void>{
+
+    public class AddBids extends AsyncTask<Bid,Void,Void>{
 
         @Override
-        protected Void doInBackground(WarItem... items) {
+        protected Void doInBackground(Bid... bids) {
 
             if(isOnline()==false){
-                for(int i = 0; i < items.length; i++) {
-                    WarItem waritem = items[i];
-                    itemsList.add(waritem);
+                for(int i = 0; i < bids.length; i++) {
+                    Bid bid = bids[i];
+                    bidsList.add(bid);
                 }
                 adapterItems.notifyDataSetChanged();
                 saveInFileItems(additem);
@@ -704,15 +706,15 @@ NormalTweet latestTweet = new NormalTweet(text);
             verifyClient();
 
             // Since AsyncTasks work on arrays, we need to work with arrays as well (>= 1 tweet)
-            for(int i = 0; i < items.length; i++) {
-                WarItem item = items[i];
+            for(int i = 0; i < bids.length; i++) {
+                Bid bid = bids[i];
 
-                Index index = new Index.Builder(item).index("warondemand").type("items").build();
+                Index index = new Index.Builder(bid).index("warondemand").type("bids").build();
                 try {
                     DocumentResult result = client.execute(index);
                     if(result.isSucceeded()) {
                         // Set the ID to tweet that elasticsearch told me it was
-                        item.setId(result.getId());
+                        //bid.setId(result.getId());
                     } else {
                         // TODO: Add an error message, because this was puzzling.
                         // TODO: Right here it will trigger if the insert fails
@@ -732,22 +734,22 @@ NormalTweet latestTweet = new NormalTweet(text);
      * Returns all a list of users unless a username is a parameter
      * @param
      * @return
-     *
+     */
 
-    public class GetBids extends AsyncTask<String, Void, ArrayList<User>> {
+    public class GetBids extends AsyncTask<String, Void, ArrayList<Bid>> {
         // TODO: Get Bids
         @Override
-        protected ArrayList<User> doInBackground(String... search_strings) {
+        protected ArrayList<Bid> doInBackground(String... search_strings) {
 
 
 
             verifyClient();
 
             // Start our initial array list (empty)
-            ArrayList<User> users = new ArrayList<User>();
+            ArrayList<Bid> bids = new ArrayList<Bid>();
 
             if(isOnline()==false){
-                return users;
+                return bids;
 
             }
 
@@ -756,22 +758,22 @@ NormalTweet latestTweet = new NormalTweet(text);
             String search_string;
             if(search_strings[0] != "") {
                 //search_string = "{\"from\" : 0, \"size\" : 10000,\"query\":{\"match\":{\"message\":\"" + search_strings[0] + "\"}}}";
-                search_string = "{\"query\":{\"match\":{\"username\":\"" + search_strings[0] + "\"}}}";
+                search_string = "{\"query\":{\"match\":{\"bidder\":\"" + search_strings[0] + "\"}}}";
             } else {
                 search_string = "{\"from\" : 0, \"size\" : 100}";
             }
 
             Search search = new Search.Builder(search_string)
                     .addIndex("warondemand")
-                    .addType("users")
+                    .addType("bids")
                     .build();
 
             try {
                 SearchResult execute = client.execute(search);
                 if(execute.isSucceeded()) {
                     // Return our list of tweets
-                    List<User> returned_tweets = execute.getSourceAsObjectList(User.class);
-                    users.addAll(returned_tweets);
+                    List<Bid> returned_tweets = execute.getSourceAsObjectList(Bid.class);
+                    bids.addAll(returned_tweets);
                 } else {
                     // TODO: Add an error message, because that other thing was puzzling.
                     // TODO: Right here it will trigger if the search fails
@@ -781,15 +783,15 @@ NormalTweet latestTweet = new NormalTweet(text);
                 e.printStackTrace();
             }
 
-            return users;
+            return bids;
         }
     }
 
 
 
+//Offline activity for adding bids not needed right now.
 
-
-
+/**
 
     private void loadFromFileBids(String filename) {
         try {
@@ -831,18 +833,19 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
+ */
 
 
-    public static class DeleteBids extends AsyncTask<String, Void, ArrayList<WarItem>> {
+    public static class DeleteBids extends AsyncTask<String, Void, ArrayList<Bid>> {
         // TODO: Get users
         @Override
-        protected ArrayList<WarItem> doInBackground(String... search_strings) {
+        protected ArrayList<Bid> doInBackground(String... search_strings) {
             verifyClient();
             String search_string;
-            search_string = "{\"query\":{\"match\":{\"name\":\"" + search_strings[0] + "\"}}}";
+            search_string = "{\"query\":{\"match\":{\"bidID\":\"" + search_strings[0] + "\"}}}";
             DeleteByQuery deleteItem = new DeleteByQuery.Builder(search_string)
                     .addIndex("warondemand")
-                    .addType("items")
+                    .addType("bids")
                     .build();
 
 
@@ -856,10 +859,6 @@ NormalTweet latestTweet = new NormalTweet(text);
             return null;
         }
     }
-
-
-
-
 
 
 
@@ -877,25 +876,19 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
-    public void updateBids(WarItem oldBid, WarItem newBid) {
+    public void updateBids(Bid oldBid, Bid newBid) {
 
         if(isOnline()==false){
 
         }
 
         DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
-        Delete.execute(oldItem.getName());
+        //Delete.execute(oldBid.bidder);
 
-        AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
-        execute.execute(newItem);
+        AsyncTask<Bid, Void, Void> execute = new DatabaseController.AddBids();
+        execute.execute(newBid);
     }
 
-
-
-
-
-
-    */
 
 
 
