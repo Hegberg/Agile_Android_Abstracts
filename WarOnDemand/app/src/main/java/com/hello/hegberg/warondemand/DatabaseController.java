@@ -110,6 +110,24 @@ public class DatabaseController extends Application {
 
     }
 
+    /**
+     * Checking if the database is connected to the internet
+     * @param
+     * @return Items object
+     */
+    public static Boolean isOnline(){
+        context = getContext();
+        if (context==null){
+            return false;
+        }
+        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isAvailable() && activeNetwork.isConnected();
+        return isConnected;
+    }
+
 
 
 
@@ -136,56 +154,6 @@ public class DatabaseController extends Application {
 
 
 
-
-
-/**
- * Some info and examples to the other developers on how to use the
- * methods in the database class.
- *
-  */
-/* how to use GetUsers/ GetItems:
-------------------------------------
-ElasticsearchTweetController.GetTweetsTask getTweetsTask = new ElasticsearchTweetController.GetTweetsTask();
-        try {
-            getTweetsTask.execute("");
-            tweets = getTweetsTask.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-NormalTweet latestTweet = new NormalTweet(text);
-
-    tweets.add(latestTweet);
-    adapter.notifyDataSetChanged();
-
-    // TODO: Replace with Elasticsearch
-    AsyncTask<NormalTweet, Void, Void> execute = new ElasticsearchTweetController.AddTweetTask();
-    execute.execute(latestTweet);
-    //saveInFile();
-
-    setResult(RESULT_OK);
-/*
------------------------------------------
-
-
-How to use AddUser/Additem
------------------------------------------
-NormalTweet latestTweet = new NormalTweet(text);
-
-                tweets.add(latestTweet);
-                adapter.notifyDataSetChanged();
-
-                // TODO: Replace with Elasticsearch
-                AsyncTask<NormalTweet, Void, Void> execute = new ElasticsearchTweetController.AddTweetTask();
-                execute.execute(latestTweet);
-                //saveInFile();
-
-                setResult(RESULT_OK);
- */
-
-
     /**
      * Verifying the database client
      * We verify the client before reading the values in the database and writing to the database
@@ -205,6 +173,15 @@ NormalTweet latestTweet = new NormalTweet(text);
             client = (JestDroidClient) factory.getObject();
         }
     }
+
+
+
+
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+        // ADDING
+
 
 
     /**
@@ -252,6 +229,14 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 
+
+
+
+
+
+
+
+
     /**
      * Adding items to the database
      * We have owner usernames in the database so the user
@@ -298,6 +283,64 @@ NormalTweet latestTweet = new NormalTweet(text);
             return null;
         }
     }
+
+
+
+
+    /**
+     * Adding bids to the database
+     * @param
+     * @return
+     */
+    public class AddBids extends AsyncTask<Bid,Void,Void>{
+
+        @Override
+        protected Void doInBackground(Bid... bids) {
+
+            if(isOnline()==false){
+                for(int i = 0; i < bids.length; i++) {
+                    Bid bid = bids[i];
+                    bidsList.add(bid);
+                }
+                adapterItems.notifyDataSetChanged();
+                saveInFileItems(additem);
+                return null;
+
+            }
+            verifyClient();
+
+            // Since AsyncTasks work on arrays, we need to work with arrays as well (>= 1 tweet)
+            for(int i = 0; i < bids.length; i++) {
+                Bid bid = bids[i];
+
+                Index index = new Index.Builder(bid).index("warondemand").type("bids").build();
+                try {
+                    DocumentResult result = client.execute(index);
+                    if(result.isSucceeded()) {
+                        // Set the ID to tweet that elasticsearch told me it was
+                        //bid.setId(result.getId());
+                    } else {
+                        // TODO: Add an error message, because this was puzzling.
+                        // TODO: Right here it will trigger if the insert fails
+                        Log.i("TODO", "We actually failed here, adding a user");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            Log.i("Success", "We have added an item to the DB");
+            return null;
+        }
+    }
+
+
+
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+    // GETTTING
+
+
 
     /**
      * Getting users from the database
@@ -358,6 +401,73 @@ NormalTweet latestTweet = new NormalTweet(text);
     }
 
 
+
+
+
+
+    /**
+     * Getting users from the database
+     * Returns all a list of users unless a username is a parameter
+     * @param
+     * @return
+     */
+    public class GetBids extends AsyncTask<String, Void, ArrayList<Bid>> {
+        // TODO: Get Bids
+        @Override
+        protected ArrayList<Bid> doInBackground(String... search_strings) {
+
+
+
+            verifyClient();
+
+            // Start our initial array list (empty)
+            ArrayList<Bid> bids = new ArrayList<Bid>();
+
+            if(isOnline()==false){
+                return bids;
+
+            }
+
+            // NOTE: I'm a making a huge assumption here, that only the first search term
+            // will be used.
+            String search_string;
+            if(search_strings[0] != "") {
+                //search_string = "{\"from\" : 0, \"size\" : 10000,\"query\":{\"match\":{\"message\":\"" + search_strings[0] + "\"}}}";
+                search_string = "{\"query\":{\"match\":{\"bidder\":\"" + search_strings[0] + "\"}}}";
+            } else {
+                search_string = "{\"from\" : 0, \"size\" : 100}";
+            }
+
+            Search search = new Search.Builder(search_string)
+                    .addIndex("warondemand")
+                    .addType("bids")
+                    .build();
+
+            try {
+                SearchResult execute = client.execute(search);
+                if(execute.isSucceeded()) {
+                    // Return our list of tweets
+                    List<Bid> returned_tweets = execute.getSourceAsObjectList(Bid.class);
+                    bids.addAll(returned_tweets);
+                } else {
+                    // TODO: Add an error message, because that other thing was puzzling.
+                    // TODO: Right here it will trigger if the search fails
+                    Log.i("TODO", "We actually failed here, searching for users");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return bids;
+        }
+    }
+
+
+
+
+
+
+
     /**
      * class for returning items in the database
      * Returns a list of items. Unless search value is a parameter
@@ -372,12 +482,13 @@ NormalTweet latestTweet = new NormalTweet(text);
             // Start our initial array list (empty)
             ArrayList<WarItem> items = new ArrayList<WarItem>();
 
-
+            // If the device is offline return an empty array
             if(isOnline()==false){
                 return items;
 
             }
-
+            // if the device is now online, update the database, checking if there were any newly created
+            // items offline. Adding it to the database before we output all the items.
             if (isOnline()==true){
 
                 loadFromFileItems(additem);
@@ -436,8 +547,19 @@ NormalTweet latestTweet = new NormalTweet(text);
         }
     }
 
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+    // UPDATING
 
 
+
+    /**
+     * Here we add items that were added offline, and saved in a local file, and now read the info
+     * and add it to to the databse. If this function is called that means the device is now connected
+     * to the internet.
+     * @param item
+     */
     public static void updateAddItem(WarItem item){
         AsyncTask<WarItem, Void, Void> execute = new DatabaseController.AddItems();
         execute.execute(item);
@@ -445,7 +567,8 @@ NormalTweet latestTweet = new NormalTweet(text);
     }
 
     /**
-     *
+     * Updating users to the database. We delete the old user his/her information
+     * and update it by adding a new user.
      * @param
      * @return Items object
      */
@@ -465,7 +588,8 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
     /**
-     *
+     * Updating items to the databse. We elete the old item from the database
+     * and add a new item.
      * @param
      * @return Items object
      */
@@ -484,10 +608,32 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
+    public void updateBids(Bid oldBid, Bid newBid) {
+
+        if(isOnline()==false){
+
+        }
+
+        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
+        //Delete.execute(oldBid.bidder);
+
+        AsyncTask<Bid, Void, Void> execute = new DatabaseController.AddBids();
+        execute.execute(newBid);
+    }
+
+
+
+
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+    // DELETING
+
 
 
     /**
-     *
+     * Deleting users from the database. Here we call the database , and query it,
+     * searching for the user who matches username.
      * @param
      * @return Items object
      */
@@ -519,10 +665,9 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
-
-
     /**
-     *
+     * Deleting items from the database. Here we connect to the database
+     * and call it to remove the item that matches the query
      * @param
      * @return Items object
      */
@@ -553,10 +698,8 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
-
-
     /**
-     *
+     * Deleting items from the database
      * @param
      * @return Items object
      */
@@ -574,8 +717,65 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
+    /**
+     * Deleting bids from the database.
+     */
+
+    public static class DeleteBids extends AsyncTask<String, Void, ArrayList<Bid>> {
+        // TODO: Get users
+        @Override
+        protected ArrayList<Bid> doInBackground(String... search_strings) {
+            verifyClient();
+            String search_string;
+            search_string = "{\"query\":{\"match\":{\"bidID\":\"" + search_strings[0] + "\"}}}";
+            DeleteByQuery deleteItem = new DeleteByQuery.Builder(search_string)
+                    .addIndex("warondemand")
+                    .addType("bids")
+                    .build();
 
 
+            try {
+                client.execute(deleteItem);
+            } catch (IOException e) {
+                Log.i("TODO", "We actually failed here, deleting a item");
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
+
+    /**
+     * deleting bids from the database
+     * This function calls deleteBids function
+     * @param oldItem
+     */
+
+    public void deleteBids(WarItem oldItem) {
+
+
+        if(isOnline()==false){
+
+        }
+
+        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
+        Delete.execute(oldItem.getName());
+    }
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+    // Loading
+
+    /**
+     * Loading items that were created offline.
+     * @param filename
+     */
 
     private static void loadFromFileItems(String filename) {
         try {
@@ -602,7 +802,7 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
     /**
-     *
+     * Saving items that are added offline
      * @param
      * @return Items object
      */
@@ -629,7 +829,7 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
     /**
-     *
+     * Loading a created user profile offline
      * @param
      * @return Items object
      */
@@ -658,7 +858,7 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
     /**
-     *
+     * User creating a new profile offline
      * @param
      * @return Items object
      */
@@ -682,129 +882,6 @@ NormalTweet latestTweet = new NormalTweet(text);
 
 
 
-
-    /**
-     *
-     * @param
-     * @return Items object
-     */
-    public static Boolean isOnline(){
-        context = getContext();
-        if (context==null){
-            return false;
-        }
-        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isAvailable() && activeNetwork.isConnected();
-        return isConnected;
-    }
-
-
-
-
-
-
-
-    public class AddBids extends AsyncTask<Bid,Void,Void>{
-
-        @Override
-        protected Void doInBackground(Bid... bids) {
-
-            if(isOnline()==false){
-                for(int i = 0; i < bids.length; i++) {
-                    Bid bid = bids[i];
-                    bidsList.add(bid);
-                }
-                adapterItems.notifyDataSetChanged();
-                saveInFileItems(additem);
-                return null;
-
-            }
-            verifyClient();
-
-            // Since AsyncTasks work on arrays, we need to work with arrays as well (>= 1 tweet)
-            for(int i = 0; i < bids.length; i++) {
-                Bid bid = bids[i];
-
-                Index index = new Index.Builder(bid).index("warondemand").type("bids").build();
-                try {
-                    DocumentResult result = client.execute(index);
-                    if(result.isSucceeded()) {
-                        // Set the ID to tweet that elasticsearch told me it was
-                        //bid.setId(result.getId());
-                    } else {
-                        // TODO: Add an error message, because this was puzzling.
-                        // TODO: Right here it will trigger if the insert fails
-                        Log.i("TODO", "We actually failed here, adding a user");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            Log.i("Success", "We have added an item to the DB");
-            return null;
-        }
-    }
-
-    /**
-     * Getting users from the database
-     * Returns all a list of users unless a username is a parameter
-     * @param
-     * @return
-     */
-
-    public class GetBids extends AsyncTask<String, Void, ArrayList<Bid>> {
-        // TODO: Get Bids
-        @Override
-        protected ArrayList<Bid> doInBackground(String... search_strings) {
-
-
-
-            verifyClient();
-
-            // Start our initial array list (empty)
-            ArrayList<Bid> bids = new ArrayList<Bid>();
-
-            if(isOnline()==false){
-                return bids;
-
-            }
-
-            // NOTE: I'm a making a huge assumption here, that only the first search term
-            // will be used.
-            String search_string;
-            if(search_strings[0] != "") {
-                //search_string = "{\"from\" : 0, \"size\" : 10000,\"query\":{\"match\":{\"message\":\"" + search_strings[0] + "\"}}}";
-                search_string = "{\"query\":{\"match\":{\"bidder\":\"" + search_strings[0] + "\"}}}";
-            } else {
-                search_string = "{\"from\" : 0, \"size\" : 100}";
-            }
-
-            Search search = new Search.Builder(search_string)
-                    .addIndex("warondemand")
-                    .addType("bids")
-                    .build();
-
-            try {
-                SearchResult execute = client.execute(search);
-                if(execute.isSucceeded()) {
-                    // Return our list of tweets
-                    List<Bid> returned_tweets = execute.getSourceAsObjectList(Bid.class);
-                    bids.addAll(returned_tweets);
-                } else {
-                    // TODO: Add an error message, because that other thing was puzzling.
-                    // TODO: Right here it will trigger if the search fails
-                    Log.i("TODO", "We actually failed here, searching for users");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return bids;
-        }
-    }
 
 
 
@@ -855,58 +932,13 @@ NormalTweet latestTweet = new NormalTweet(text);
  */
 
 
-    public static class DeleteBids extends AsyncTask<String, Void, ArrayList<Bid>> {
-        // TODO: Get users
-        @Override
-        protected ArrayList<Bid> doInBackground(String... search_strings) {
-            verifyClient();
-            String search_string;
-            search_string = "{\"query\":{\"match\":{\"bidID\":\"" + search_strings[0] + "\"}}}";
-            DeleteByQuery deleteItem = new DeleteByQuery.Builder(search_string)
-                    .addIndex("warondemand")
-                    .addType("bids")
-                    .build();
 
 
-            try {
-                client.execute(deleteItem);
-            } catch (IOException e) {
-                Log.i("TODO", "We actually failed here, deleting a item");
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-    }
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 
-
-    public void deleteBids(WarItem oldItem) {
-
-
-        if(isOnline()==false){
-
-        }
-
-        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
-        Delete.execute(oldItem.getName());
-    }
-
-
-
-
-    public void updateBids(Bid oldBid, Bid newBid) {
-
-        if(isOnline()==false){
-
-        }
-
-        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
-        //Delete.execute(oldBid.bidder);
-
-        AsyncTask<Bid, Void, Void> execute = new DatabaseController.AddBids();
-        execute.execute(newBid);
-    }
 
 
 
