@@ -62,13 +62,15 @@
         android:background="#134260"/>
 
     <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/searchItemsList"
+        android:scrollbars="vertical"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/keywordDesc"
         android:choiceMode="singleChoice"
         android:textColor="#ffffff"
-        android:background="#134260"/>
+        android:background="#134260">
+    </ListView>
 
 </LinearLayout>
