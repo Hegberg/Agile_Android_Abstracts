@@ -32,8 +32,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hello.hegberg.warondemand.MainActivity" />
         </activity>
-        <activity android:name=".AddEditAccount" />
-        <activity android:name=".AddWarItemActivity" />
+        <activity android:name=".AddEditAccount"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".AddWarItemActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".ViewWarItemActivity"
             android:label="@string/title_activity_view_war_item"

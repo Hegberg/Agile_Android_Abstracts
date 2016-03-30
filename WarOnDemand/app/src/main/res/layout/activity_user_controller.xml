@@ -12,12 +12,21 @@
     android:gravity="center_horizontal"
     tools:context="com.hello.hegberg.warondemand.UserControllerActivity">
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Profile"
-        android:id="@+id/createProfile"
-        android:layout_marginTop="77dp" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
+        android:text="Enter Username: "
+        android:id="@+id/textView2"
+        android:layout_marginTop="60dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:textColor="#ffffff"
+        android:id="@+id/usernameSignIn"
+        android:background="#134260"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -29,8 +38,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exit"
-        android:id="@+id/back"
-        android:layout_marginTop="57dp" />
+        android:text="Register"
+        android:id="@+id/createProfile"
+        android:layout_marginTop="77dp" />
 
 </LinearLayout>
