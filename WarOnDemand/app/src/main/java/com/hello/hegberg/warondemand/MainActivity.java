@@ -44,69 +44,62 @@ public class MainActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.chosenUser == null) {
-                    //change view to sign in view
-                    setContentView(R.layout.sing_in_info);
-                    Button signInAgain = (Button) findViewById(R.id.signInWithInfo);
-                    Button backAgain = (Button) findViewById(R.id.backSignInWithInfo);
+                //change view to sign in view
+                setContentView(R.layout.sing_in_info);
+                Button signInAgain = (Button) findViewById(R.id.signInWithInfo);
+                Button backAgain = (Button) findViewById(R.id.backSignInWithInfo);
 
-                    final EditText username = (EditText) findViewById(R.id.usernameSignIn);
-                    username.setText("");
-                    //checks if username is a valid one, can login tro any user with just username
-                    signInAgain.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            try {
-                                DatabaseController.GetUsers getUsersTask = new DatabaseController.GetUsers();
-                                getUsersTask.execute("");
-                                checkAgainst = getUsersTask.get();
-                                Log.i("size->",""+checkAgainst.size());
-                                validUsername = false;
-                                for (int i = 0; i < checkAgainst.size(); i++) {
-                                    Log.i("check->", String.valueOf(checkAgainst.get(i).getUsername().equals(username.getText().toString())));
+                final EditText username = (EditText) findViewById(R.id.usernameSignIn);
+                username.setText("");
+                //checks if username is a valid one, can login tro any user with just username
+                signInAgain.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            DatabaseController.GetUsers getUsersTask = new DatabaseController.GetUsers();
+                            getUsersTask.execute("");
+                            checkAgainst = getUsersTask.get();
+                            Log.i("size->",""+checkAgainst.size());
+                            validUsername = false;
+                            for (int i = 0; i < checkAgainst.size(); i++) {
+                                Log.i("check->", String.valueOf(checkAgainst.get(i).getUsername().equals(username.getText().toString())));
+                                Log.i("username -> ", checkAgainst.get(i).getUsername());
+                                Log.i("username entered -> ", username.getText().toString());
+                                if (checkAgainst.get(i).getUsername().equals(username.getText().toString())) {
+                                    MainActivity.chosenUser = checkAgainst.get(i);
+                                    //for debug purposes
                                     Log.i("username -> ", checkAgainst.get(i).getUsername());
                                     Log.i("username entered -> ", username.getText().toString());
-                                    if (checkAgainst.get(i).getUsername().equals(username.getText().toString())) {
-                                        MainActivity.chosenUser = checkAgainst.get(i);
-                                        //for debug purposes
-                                        Log.i("username -> ", checkAgainst.get(i).getUsername());
-                                        Log.i("username entered -> ", username.getText().toString());
-                                        Log.i("chosen username -> ", MainActivity.chosenUser.getUsername());
-                                        validUsername = true;
-                                        startActivity(new Intent(MainActivity.this, AccountController.class));
-                                    } else {
-                                        //entire else statemnt is for debugging login
-                                        //Log.i("username_bad->", checkAgainst.get(i).getUsername());
-                                        //Log.i("username_entered->", username.getText().toString());
-                                        //Log.i("check->", String.valueOf(checkAgainst.get(i).getUsername().equals(username.getText().toString())));
-                                    }
-
+                                    Log.i("chosen username -> ", MainActivity.chosenUser.getUsername());
+                                    validUsername = true;
+                                    startActivity(new Intent(MainActivity.this, AccountController.class));
+                                } else {
+                                    //entire else statemnt is for debugging login
+                                    //Log.i("username_bad->", checkAgainst.get(i).getUsername());
+                                    //Log.i("username_entered->", username.getText().toString());
+                                    //Log.i("check->", String.valueOf(checkAgainst.get(i).getUsername().equals(username.getText().toString())));
                                 }
-                                if (validUsername == false){
-                                    Toast.makeText(MainActivity.this, "Incorrect username entered", Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } catch (ExecutionException e) {
-                                e.printStackTrace();
                             }
-
+                            if (validUsername == false){
+                                Toast.makeText(MainActivity.this, "Incorrect username entered", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
                         }
-                    });
+
+                    }
+                });
 
                     //return to main screen
-                    backAgain.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                            startActivity(new Intent(MainActivity.this, MainActivity.class));
-                        }
-                    });
-
-                } else { //already logged in
-                    startActivity(new Intent(MainActivity.this, AccountController.class));
-                }
-
+                backAgain.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                        startActivity(new Intent(MainActivity.this, MainActivity.class));
+                    }
+                });
             }
         });
 

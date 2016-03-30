@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:text="Name:  "
+        android:text="Item:  "
         android:id="@+id/name"
         android:layout_marginTop="40dp"/>
 
@@ -33,8 +33,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:text="Email: "
-        android:id="@+id/description"
+        android:text="Bidding Amount:"
+        android:id="@+id/bidding_amount"
         android:layout_marginTop="30dp"/>
 
     <TextView
@@ -43,15 +43,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Medium Text"
-        android:id="@+id/description_info"/>
-
+        android:id="@+id/bidding_info"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:text="Phone Number: "
-        android:id="@+id/contactInfo"
+        android:text="Bidder's Name:"
+        android:id="@+id/bidder_name"
         android:layout_marginTop="30dp"/>
 
     <TextView
@@ -60,6 +59,28 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Medium Text"
-        android:id="@+id/contact_info"/>
+        android:id="@+id/bidder_info"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity ="bottom|center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accept"
+            android:id="@+id/accept_item"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Decline"
+            android:id="@+id/decline_button"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
 
 </LinearLayout>

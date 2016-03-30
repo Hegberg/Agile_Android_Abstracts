@@ -26,10 +26,16 @@ public class AccountController extends AppCompatActivity {
         // Initialize Buttons
         Button editProfile = (Button) findViewById(R.id.editProfile);
         Button myProducts = (Button) findViewById(R.id.myProducts);
-        Button back = (Button) findViewById(R.id.backAccountController);
         Button search = (Button) findViewById(R.id.searchForItems);
         Button myBids = (Button) findViewById(R.id.myBids);
         Button borrowedProducts = (Button) findViewById(R.id.borrowedProducts);
+
+        //bid notification functionality
+        /*
+        if (){
+
+        }
+        */
 
         //TODO: Create classes to go to with products, bids, borrowed.
         // Create Buttons
@@ -44,7 +50,6 @@ public class AccountController extends AppCompatActivity {
                 final TextView contactInfo = (TextView) findViewById(R.id.contactInfoUser);
 
                 Button done = (Button) findViewById(R.id.doneAddAccount);
-                Button back = (Button) findViewById(R.id.backAddAccount);
 
                 nameInfo.setText(MainActivity.chosenUser.getUsername());
                 contactInfoHolder = MainActivity.chosenUser.getContactInfo();
@@ -67,20 +72,15 @@ public class AccountController extends AppCompatActivity {
                         } else {
                             tempUser = MainActivity.chosenUser;
                             MainActivity.chosenUser.editUser(name, description, contact);
-                            DatabaseController.updateUser(tempUser, MainActivity.chosenUser);
+                            DatabaseController controller = new DatabaseController();
+                            controller.updateUser(tempUser, MainActivity.chosenUser);
                             finish();
                             startActivity(new Intent(AccountController.this, AccountController.class));
                         }
                     }
                 });
 
-                back.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                        startActivity((new Intent(AccountController.this, AccountController.class)));
-                    }
-                });
+
             }
         });
 
@@ -92,13 +92,6 @@ public class AccountController extends AppCompatActivity {
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-
-            }
-        });
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override

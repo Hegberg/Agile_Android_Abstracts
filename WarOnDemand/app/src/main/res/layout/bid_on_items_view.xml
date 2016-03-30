@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:background="#134260"
-    tools:context="com.hello.hegberg.warondemand.ViewWarItemActivity">
+    tools:context="com.hello.hegberg.warondemand.ViewWarItemActivity"
+    android:background="#134260">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -23,7 +23,9 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:scrollbars="vertical">
+        android:scrollbars="vertical"
+        android:textColor="#ffffff"
+        android:background="#134260">
 
     </ListView>
 
@@ -32,14 +34,6 @@
         android:layout_height="wrap_content"
         android:gravity ="bottom|center_horizontal"
         android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add"/>
-
-
     </LinearLayout>
 
 </LinearLayout>

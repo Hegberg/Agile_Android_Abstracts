@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:text="Cost: "
+        android:text="Minimum Starting Bid Price: "
         android:id="@+id/cost"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/name"
@@ -78,13 +78,7 @@
             android:id="@+id/doneAddItem"
             android:layout_gravity="bottom" />
 
-        <Button
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/doneAddItem"
-            android:text="Back"
-            android:id="@+id/backAddItem" />
+
 
     </LinearLayout>
 

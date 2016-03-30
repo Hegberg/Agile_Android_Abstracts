@@ -20,16 +20,13 @@ import io.searchbox.annotations.JestId;
  */
 public class WarItem {
     private String name;
-
     private Double cost;
-
     private String desc;
     //Using an int for ease of coding in status.
     //0 for Available
     //1 for bid on
     //2 for borrowed
     private Integer status;
-
     private Boolean bidOn;
     private ArrayList<User> listOfBidders;
     private User owner;
@@ -183,12 +180,25 @@ public class WarItem {
     @Override
     public String toString() {
         //Allows printing of the class.
-        return  "Name: "+ this.name + ", Description: "
-                + this.desc + ", Cost: "
+        String outString = "Name: "+ this.name + "\nDescription: "
+                + this.desc + "\nMinimum Bid Price: "
                // + twoDec.format(this.cost);
-                +this.cost + ", Owner: "
+                +this.cost  +"\nOwner: "
                 +this.owner.getUsername();
+        //0 for Available
+        //1 for bid on
+        //2 for borrowed
+        if (this.status == 0) {
+            outString = outString + "\nStatus: Available";
+        }
+        else if (this.status == 1) {
+            outString = outString + "\nStatus: Bid On";
+        }
 
+        else {
+            outString = outString + "\nStatus: Borrowed";
+        }
+        return outString;
     }
 
     public void addThumbnail(Bitmap newThumbnail){

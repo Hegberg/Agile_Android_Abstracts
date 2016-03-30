@@ -26,6 +26,8 @@ import java.util.ArrayList;
 
 public class AddEditAccount extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
+    private Boolean userNameCheck;
+    private int numberOfChecked;
 
     //profileOption 1 = ViewAccount, 2 = CreateAccount,
 
@@ -49,14 +51,6 @@ public class AddEditAccount extends AppCompatActivity {
 
 
     private void ViewAccount() {
-        Button back = (Button) findViewById(R.id.return_from_viewing);
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
     }
 
@@ -64,7 +58,6 @@ public class AddEditAccount extends AppCompatActivity {
         MainActivity.profileOption = 0;
 
         Button done = (Button) findViewById(R.id.doneAddAccount);
-        Button back = (Button) findViewById(R.id.backAddAccount);
         final TextView nameInfo = (TextView) findViewById(R.id.nameUser);
         final TextView descriptionInfo = (TextView) findViewById(R.id.descriptionUser);
         final TextView contactInfo = (TextView) findViewById(R.id.contactInfoUser);
@@ -81,18 +74,39 @@ public class AddEditAccount extends AppCompatActivity {
                     final String name = nameInfo.getText().toString();
                     final String description = descriptionInfo.getText().toString();
                     final String contact = contactInfo.getText().toString();
+                    userNameCheck = false;
+                    numberOfChecked = 0;
+                    try {
+                        DatabaseController.GetUsers getUsersTask = new DatabaseController.GetUsers();
+                        getUsersTask.execute("");
+                        ArrayList<User> checkAgainst = getUsersTask.get();
+                        for (int i = 0; i < checkAgainst.size(); i++) {
+                            if (!checkAgainst.get(i).getUsername().equals(name)) {
+                                numberOfChecked ++;
+                            }
+                        }
+                        if (numberOfChecked == checkAgainst.size()){
+                            userNameCheck = true;
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
                     if (name.equals("")) {
                         Toast.makeText(AddEditAccount.this, "You need to enter a name", Toast.LENGTH_SHORT).show();
+                    } else if (!userNameCheck) {
+                        Log.i("username -> ", userNameCheck.toString());
+                        Toast.makeText(AddEditAccount.this, "Name already taken", Toast.LENGTH_SHORT).show();
                     } else if (description.equals("")) {
                         Toast.makeText(AddEditAccount.this, "You need to enter a email", Toast.LENGTH_SHORT).show();
-                    } else if (contact.equals("")) {
+                    } else if (contact.equals("")){
                         Toast.makeText(AddEditAccount.this, "You need to enter your phone number", Toast.LENGTH_SHORT).show();
                     } else {
                         User user = new User(name, description, contact);
                         AsyncTask<User, Void, Void> execute = new DatabaseController.AddUsers();
                         execute.execute(user);
                         finish();
-                        //startActivity(new Intent(AddEditAccount.this, MainActivity.class));
 
                     }
                 } catch (NumberFormatException e) {
@@ -104,14 +118,7 @@ public class AddEditAccount extends AppCompatActivity {
 
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.profileOption = 0;
-                finish();
-            }
 
-        });
     }
 }
 

@@ -43,7 +43,6 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Button addButton = (Button) findViewById(R.id.add);
-        Button backButton = (Button) findViewById(R.id.back);
 
         ItemList = (ListView) findViewById(R.id.itemlist);
 
@@ -72,13 +71,6 @@ public class ViewMyItemsActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
 
-        });
-        backButton.setOnClickListener(new View.OnClickListener() {
-            //Exits the program
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
         });
 
         ItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
