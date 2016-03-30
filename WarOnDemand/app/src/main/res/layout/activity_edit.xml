@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:background="#000000"
-    tools:context="com.hello.hegberg.warondemand.addActivity">
+    tools:context="com.hello.hegberg.warondemand.EditActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,14 +19,16 @@
         android:textColor="#ffffff"
         android:text="Name: "
         android:layout_marginTop="30dp"
-        android:id="@+id/name" />
+        android:id="@+id/name_edit" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="53dp"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:id="@+id/nameUser"
-        android:background="#134260"/>
+        android:text="placeholder"
+        android:id="@+id/editNameText"
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,14 +36,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Email: "
-        android:id="@+id/description"
+        android:id="@+id/description_edit"
         android:layout_marginTop="30dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:textColor="#ffffff"
-        android:id="@+id/contactInfoUser"
+        android:id="@+id/contactInfoUserEdit"
         android:background="#134260" />
 
     <TextView
@@ -50,7 +52,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Phone Number: "
-        android:id="@+id/contactInfo"
+        android:id="@+id/contactInfoEdit"
         android:layout_marginTop="30dp" />
 
 
@@ -60,7 +62,7 @@
         android:textColor="#ffffff"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/descriptionUser"
+        android:id="@+id/descriptionUserEdit"
         android:background="#134260" />
 
     <LinearLayout
@@ -73,7 +75,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Done"
-            android:id="@+id/doneAddAccount" />
+            android:id="@+id/doneEditAccount" />
 
     </LinearLayout>
 </LinearLayout>
+
+
