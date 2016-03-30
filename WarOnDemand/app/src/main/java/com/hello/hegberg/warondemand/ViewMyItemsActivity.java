@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,6 +36,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
 
     //To edit a log we must, gasp, use a global variable that contains its index number.
     public static int editPos;
+    private ImageView pictureButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
 
         Button addButton = (Button) findViewById(R.id.add);
         Button backButton = (Button) findViewById(R.id.back);
-
+        pictureButton = (ImageView) findViewById(R.id.pictureButton);
         ItemList = (ListView) findViewById(R.id.itemlist);
 
         adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, warItems);
@@ -102,7 +105,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, warItems);
+        adapter = new WarItemAdapter(this, warItems );
         ItemList.setAdapter(adapter);
         search();
         adapter.notifyDataSetChanged();

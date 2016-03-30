@@ -32,7 +32,8 @@
         android:layout_weight="1"
         android:scrollbars="vertical"
         android:textColor="#ffffff"
-        android:background="#134260">
+        android:background="#134260"
+        tools:listitem="@layout/list_item">
 
     </ListView>
 
