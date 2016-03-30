@@ -68,11 +68,6 @@
         android:gravity ="bottom|center_horizontal"
         android:orientation="horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            android:id="@+id/return_from_viewing" />
     </LinearLayout>
 
 </LinearLayout>

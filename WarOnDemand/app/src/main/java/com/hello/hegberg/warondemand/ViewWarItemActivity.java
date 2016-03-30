@@ -53,7 +53,6 @@ public class ViewWarItemActivity extends AppCompatActivity {
         search();
 
         Button saveButton = (Button) findViewById(R.id.saveEditOfItem);
-        Button backButton = (Button) findViewById(R.id.back);
         Button deleteButton = (Button) findViewById(R.id.delete);
 
         //Get the entry to view and edit.
@@ -103,12 +102,6 @@ public class ViewWarItemActivity extends AppCompatActivity {
 
         });
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //Nothings changed, go back to FuelTrackActivity
-                finish();
-            }
-        });
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

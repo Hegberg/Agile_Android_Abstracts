@@ -70,15 +70,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Done"
-            android:layout_alignRight="@+id/backAddItem"
-            android:orientation="horizontal"
-            android:id="@+id/doneAddItem"
-            android:layout_gravity="bottom" />
-
-        <Button
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

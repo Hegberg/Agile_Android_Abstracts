@@ -26,7 +26,6 @@ public class AccountController extends AppCompatActivity {
         // Initialize Buttons
         Button editProfile = (Button) findViewById(R.id.editProfile);
         Button myProducts = (Button) findViewById(R.id.myProducts);
-        Button back = (Button) findViewById(R.id.backAccountController);
         Button search = (Button) findViewById(R.id.searchForItems);
         Button myBids = (Button) findViewById(R.id.myBids);
         Button borrowedProducts = (Button) findViewById(R.id.borrowedProducts);
@@ -45,13 +44,13 @@ public class AccountController extends AppCompatActivity {
             public void onClick(View v) {
                 //MainActivity.profileOption = 1;
                 //startActivity(new Intent(AccountController.this, AddEditAccount.class));
+                //TODO: make this so hitting back works properly, aka start new activity
                 setContentView(R.layout.activity_add_account);
                 final TextView nameInfo = (TextView) findViewById(R.id.nameUser);
                 final TextView descriptionInfo = (TextView) findViewById(R.id.descriptionUser);
                 final TextView contactInfo = (TextView) findViewById(R.id.contactInfoUser);
 
                 Button done = (Button) findViewById(R.id.doneAddAccount);
-                Button back = (Button) findViewById(R.id.backAddAccount);
 
                 nameInfo.setText(MainActivity.chosenUser.getUsername());
                 contactInfoHolder = MainActivity.chosenUser.getContactInfo();
@@ -82,13 +81,7 @@ public class AccountController extends AppCompatActivity {
                     }
                 });
 
-                back.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                        startActivity((new Intent(AccountController.this, AccountController.class)));
-                    }
-                });
+
             }
         });
 
@@ -96,14 +89,6 @@ public class AccountController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AccountController.this, ViewMyItemsActivity.class));
-
-            }
-        });
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
 
             }
         });

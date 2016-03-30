@@ -39,12 +39,6 @@
             android:text="Search"
             android:id="@+id/searchSearching"
             android:orientation="horizontal"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            android:id="@+id/backSearching"
-            android:orientation="horizontal" />
 
     </LinearLayout>
 

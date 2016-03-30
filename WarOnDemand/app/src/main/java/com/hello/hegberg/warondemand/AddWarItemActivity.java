@@ -25,7 +25,6 @@ public class AddWarItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_war_item);
 
         Button submitButton = (Button) findViewById(R.id.doneAddItem);
-        Button backButton = (Button) findViewById(R.id.backAddItem);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
 
@@ -64,12 +63,7 @@ public class AddWarItemActivity extends AppCompatActivity {
             }
 
         });
-        backButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //Nothings changed, go back to previous activity
-                finish();
-            }
-        });
+
     }
     private Runnable mMyRunnable = new Runnable()
     {

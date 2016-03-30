@@ -24,7 +24,6 @@ public class BiddingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bidding);
 
         Button doneBidding = (Button) findViewById(R.id.doneBidding);
-        Button back = (Button) findViewById(R.id.backBidding);
         final EditText bidAmountString = (EditText) findViewById(R.id.bid_amount);
         TextView itemInfo = (TextView) findViewById(R.id.biddingItemInfo);
 
@@ -63,12 +62,6 @@ public class BiddingActivity extends AppCompatActivity {
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     public void notifyOwner(){

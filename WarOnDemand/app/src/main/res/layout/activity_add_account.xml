@@ -73,14 +73,8 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"
-            android:id="@+id/backAddAccount" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Done"
-            android:orientation="horizontal"
             android:id="@+id/doneAddAccount" />
+
     </LinearLayout>
 </LinearLayout>

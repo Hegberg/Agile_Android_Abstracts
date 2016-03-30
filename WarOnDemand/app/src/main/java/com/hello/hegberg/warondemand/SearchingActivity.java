@@ -45,17 +45,9 @@ public class SearchingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Button back = (Button) findViewById(R.id.backSearching);
         Button search = (Button) findViewById(R.id.searchSearching);
         adapter = new ArrayAdapter<WarItem>(this, android.R.layout.simple_list_item_1, itemsPostFilter);
         listOfItems.setAdapter(adapter);
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         search.setOnClickListener(new View.OnClickListener(){
             @Override
