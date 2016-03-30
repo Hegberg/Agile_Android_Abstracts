@@ -48,7 +48,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".BiddingActivity" />
         <activity android:name=".BorrowingActivity" />
-        <activity android:name=".EditActivity"></activity>
+        <activity android:name=".EditActivity" />
+        <activity android:name=".BiddingChooseItem"></activity>
     </application>
 
 </manifest>

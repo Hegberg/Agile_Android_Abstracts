@@ -292,7 +292,7 @@ public class DatabaseController extends Application {
      * @param
      * @return
      */
-    public class AddBids extends AsyncTask<Bid,Void,Void>{
+    public static class AddBids extends AsyncTask<Bid,Void,Void>{
 
         @Override
         protected Void doInBackground(Bid... bids) {
@@ -411,7 +411,7 @@ public class DatabaseController extends Application {
      * @param
      * @return
      */
-    public class GetBids extends AsyncTask<String, Void, ArrayList<Bid>> {
+    public static class GetBids extends AsyncTask<String, Void, ArrayList<Bid>> {
         // TODO: Get Bids
         @Override
         protected ArrayList<Bid> doInBackground(String... search_strings) {

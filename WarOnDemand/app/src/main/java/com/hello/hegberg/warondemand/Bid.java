@@ -16,6 +16,14 @@ public class Bid {
         owner = ownerOfItem;
     }
 
+    public User getOwner(){
+        return owner;
+    }
+
+    public WarItem getItemBidOn(){
+        return itemBidOn;
+    }
+
     private void acceptBid(){
         //add functionality
     }

@@ -1,5 +1,6 @@
 package com.hello.hegberg.warondemand;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -54,6 +55,9 @@ public class BiddingActivity extends AppCompatActivity {
                     } else {
                         Bid bid = new Bid(MainActivity.chosenUser, itemBiddingOn.getOwner(), itemBiddingOn, bidAmount);
                         //add database functionality
+                        AsyncTask<Bid, Void, Void> execute = new DatabaseController.AddBids();
+                        execute.execute(bid);
+
                         //Toast.makeText(BiddingActivity.this, "Bid successfully recorded", Toast.LENGTH_SHORT).show();
                         notifyOwner();
                         finish();

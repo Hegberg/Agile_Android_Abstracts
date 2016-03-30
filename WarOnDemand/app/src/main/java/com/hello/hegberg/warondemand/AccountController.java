@@ -65,16 +65,14 @@ public class AccountController extends AppCompatActivity {
                 startActivity(new Intent(AccountController.this, SearchingActivity.class));
             }
         });
-        /*
-        //commented out since breaks app currently
 
         myBids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AccountController.this, <Insert Class>.class));
-
+                startActivity(new Intent(AccountController.this, BiddingChooseItem.class));
             }
         });
+        /*
         borrowedProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

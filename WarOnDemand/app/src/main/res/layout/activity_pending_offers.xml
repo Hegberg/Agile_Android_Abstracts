@@ -7,36 +7,19 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.hello.hegberg.warondemand.ViewWarItemActivity"
+    tools:context="com.hello.hegberg.warondemand.BiddingChooseItem"
     android:background="#134260">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        android:id="@+id/view">
-
-    </android.support.design.widget.AppBarLayout>
-
     <ListView
-        android:id="@+id/itemlist"
+        android:id="@+id/itemlist_bids"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:scrollbars="vertical"
         android:textColor="#ffffff"
-        android:background="#134260">
-
+        android:background="#134260"
+        tools:listitem="@layout/list_item">
     </ListView>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity ="bottom|center_horizontal"
-        android:orientation="horizontal">
-
-    </LinearLayout>
 
 
 </LinearLayout>

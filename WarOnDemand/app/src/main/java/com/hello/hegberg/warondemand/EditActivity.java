@@ -45,7 +45,6 @@ public class EditActivity extends AppCompatActivity {
                     DatabaseController controller = new DatabaseController();
                     controller.updateUser(tempUser, MainActivity.chosenUser);
                     finish();
-                    startActivity(new Intent(EditActivity.this, AccountController.class));
                 }
             }
         });
