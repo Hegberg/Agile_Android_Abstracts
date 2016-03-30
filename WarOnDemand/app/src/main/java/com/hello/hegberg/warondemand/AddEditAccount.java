@@ -49,7 +49,6 @@ public class AddEditAccount extends AppCompatActivity {
         }
     }
 
-
     private void AddAccount() {
         MainActivity.profileOption = 0;
 

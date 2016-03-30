@@ -26,6 +26,7 @@ public class AddWarItemActivity extends AppCompatActivity {
 
         Button submitButton = (Button) findViewById(R.id.doneAddItem);
 
+
         submitButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
