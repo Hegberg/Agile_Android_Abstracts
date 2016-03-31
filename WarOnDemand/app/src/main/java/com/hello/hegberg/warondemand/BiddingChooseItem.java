@@ -1,8 +1,12 @@
 package com.hello.hegberg.warondemand;
 
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,6 +21,7 @@ public class BiddingChooseItem extends AppCompatActivity {
     private ArrayList<WarItem> bidOnItems = new ArrayList<WarItem>();
 
     private ArrayAdapter<WarItem> adapter;
+    public static WarItem bidItemClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,20 @@ public class BiddingChooseItem extends AppCompatActivity {
         BidOnItemList.setAdapter(adapter);
         search();
         adapter.notifyDataSetChanged();
+
+        BidOnItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            //http://stackoverflow.com/questions/17851687/how-to-handle-the-click-event-in-listview-in-android
+            //User wishes to edit a log.
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                bidItemClicked = bidOnItems.get(position);
+                Intent intent = new Intent(BiddingChooseItem.this, BidChooseBid.class);
+                startActivity(intent);
+                Handler myHandler = new Handler();
+                myHandler.postDelayed(mMyRunnable, 1000);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     public void search(){
@@ -61,11 +80,38 @@ public class BiddingChooseItem extends AppCompatActivity {
             bidOnItems.remove(i);
         }
 
+        Log.i("size-> ", "" + bids.size());
         for (int i = 0; i<bids.size(); i++){
-            if(!bidOnItems.contains(bids.get(i).getItemBidOn())){
+            Log.i("item 1->",""+bids.get(i).getItemBidOn().getName() );
+            Log.i("name 1->",""+bids.get(i).getItemBidOn().getId() );
+            if(bidOnItems.size() == 0) {
                 bidOnItems.add(bids.get(i).getItemBidOn());
+            } else {
+                Boolean check = true;
+                for (int j = 0; j<bidOnItems.size(); j++){
+                    Log.i("true/false->",""+bids.get(i).getItemBidOn().getId().equals(bidOnItems.get(j).getId()) );
+                    Log.i("item->",""+bids.get(i).getItemBidOn().getId() );
+                    Log.i("name->",""+bids.get(i).getItemBidOn().getName() );
+                    Log.i("item->", "" + bidOnItems.get(j).getId());
+                    Log.i("name->", "" + bidOnItems.get(j).getName());
+                    if(bids.get(i).getItemBidOn().getName().equals(bidOnItems.get(j).getName())){
+                        check = false;
+                    }
+                }
+                if (check){
+                    bidOnItems.add(bids.get(i).getItemBidOn());
+                }
             }
         }
 
     }
+
+    private Runnable mMyRunnable = new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            adapter.notifyDataSetChanged();
+        }
+    };
 }

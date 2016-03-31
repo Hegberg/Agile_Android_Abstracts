@@ -49,7 +49,10 @@
         <activity android:name=".BiddingActivity" />
         <activity android:name=".BorrowingActivity" />
         <activity android:name=".EditActivity" />
-        <activity android:name=".BiddingChooseItem"></activity>
+        <activity android:name=".BiddingChooseItem" />
+        <activity android:name=".BiddingChooseBid" />
+        <activity android:name=".AcceptOrRejectBid" />
+        <activity android:name=".BidChooseBid"></activity>
     </application>
 
 </manifest>

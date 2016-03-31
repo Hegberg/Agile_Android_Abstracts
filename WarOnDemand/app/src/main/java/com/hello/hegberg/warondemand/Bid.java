@@ -24,6 +24,14 @@ public class Bid {
         return itemBidOn;
     }
 
+    public String toString(){
+        return "Bidder: "+ this.bidder.getUsername()
+                + "\nItem Bidding On: " + this.itemBidOn
+                + "\nBid Amount: "
+                +this.bidAmount  +"\nOwner: "
+                +this.owner.getUsername();
+    }
+
     private void acceptBid(){
         //add functionality
     }
