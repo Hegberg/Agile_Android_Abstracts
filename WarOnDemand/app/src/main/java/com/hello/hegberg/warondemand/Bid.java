@@ -1,5 +1,7 @@
 package com.hello.hegberg.warondemand;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by Chris on 3/28/2016.
  */
@@ -8,6 +10,9 @@ public class Bid {
     private WarItem itemBidOn;
     private double bidAmount;
     private User owner;
+
+    @JestId
+    protected String id;
 
     public Bid(User userBidder, User ownerOfItem, WarItem itemBiddingOn, double bid){
         bidder = userBidder;
@@ -30,6 +35,14 @@ public class Bid {
 
     public String getBidAmount() {
         return String.valueOf(bidAmount);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String toString(){

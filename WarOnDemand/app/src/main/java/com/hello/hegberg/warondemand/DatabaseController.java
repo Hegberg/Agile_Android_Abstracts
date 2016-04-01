@@ -318,7 +318,7 @@ public class DatabaseController extends Application {
                     DocumentResult result = client.execute(index);
                     if(result.isSucceeded()) {
                         // Set the ID to tweet that elasticsearch told me it was
-                        //bid.setId(result.getId());
+                        bid.setId(result.getId());
                     } else {
                         // TODO: Add an error message, because this was puzzling.
                         // TODO: Right here it will trigger if the insert fails
@@ -749,18 +749,18 @@ public class DatabaseController extends Application {
     /**
      * deleting bids from the database
      * This function calls deleteBids function
-     * @param oldItem
+     * @param oldBid
      */
 
-    public void deleteBids(WarItem oldItem) {
+    public static void deleteBids(Bid oldBid) {
 
 
         if(isOnline()==false){
 
         }
 
-        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
-        Delete.execute(oldItem.getName());
+        DatabaseController.DeleteBids Delete = new DatabaseController.DeleteBids();
+        Delete.execute(oldBid.getId());
     }
 
 

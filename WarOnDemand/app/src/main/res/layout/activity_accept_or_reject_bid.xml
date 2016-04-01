@@ -71,14 +71,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Accept"
-            android:id="@+id/accept_item"
+            android:id="@+id/accept_bid"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Decline"
-            android:id="@+id/decline_button"
+            android:id="@+id/decline_bid"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
     </LinearLayout>
