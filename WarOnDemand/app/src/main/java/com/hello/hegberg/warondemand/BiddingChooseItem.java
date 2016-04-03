@@ -22,6 +22,7 @@ public class BiddingChooseItem extends AppCompatActivity {
 
     private ArrayAdapter<WarItem> adapter;
     public static WarItem bidItemClicked;
+    public static Boolean bidAccepted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,14 @@ public class BiddingChooseItem extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    protected void onStart(){
+        super.onStart();
+        if (BiddingChooseItem.bidAccepted == true){
+            bidAccepted = false;
+            finish();
+        }
     }
 
     public void search(){

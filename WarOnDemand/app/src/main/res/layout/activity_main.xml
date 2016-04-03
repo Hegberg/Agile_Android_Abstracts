@@ -40,4 +40,11 @@
         android:layout_below="@+id/Products"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="73dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@mipmap/logo2_launcher"
+        android:id="@+id/intro_main">
+    </LinearLayout>
 </LinearLayout>

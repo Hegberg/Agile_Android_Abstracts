@@ -12,7 +12,6 @@ import java.util.concurrent.ExecutionException;
 
 public class AcceptOrRejectBid extends AppCompatActivity {
     private ArrayList<Bid> bids = new ArrayList<Bid>();
-    public static Boolean bidAccepted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +33,15 @@ public class AcceptOrRejectBid extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 search();
-                for(int i = bids.size()-1; i > 0; i--){
-                    DatabaseController.deleteBids(bids.get(i));
-                }
                 WarItem temp = BiddingChooseItem.bidItemClicked;
                 BiddingChooseItem.bidItemClicked.setStatus(2);
+                BiddingChooseItem.bidItemClicked.setBorrower(BidChooseBid.bidClicked.getBidder());
+                Log.i("size->", String.valueOf(bids.size()));
+                for(int i = bids.size()-1; i >= 0; i--){
+                    DatabaseController.deleteBids(bids.get(i));
+                }
                 DatabaseController.updateItem(temp, BiddingChooseItem.bidItemClicked);
-                bidAccepted = true;
+                BiddingChooseItem.bidAccepted = true;
                 finish();
             }
         });
@@ -50,10 +51,17 @@ public class AcceptOrRejectBid extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i("id->", BidChooseBid.bidClicked.getId());
                 DatabaseController.deleteBids(BidChooseBid.bidClicked);
-                bidAccepted = false;
+                BiddingChooseItem.bidAccepted = false;
                 finish();
             }
         });
+    }
+
+    protected void onStart(){
+        super.onStart();
+        if (BiddingChooseItem.bidAccepted == true){
+            finish();
+        }
     }
 
     public void search(){

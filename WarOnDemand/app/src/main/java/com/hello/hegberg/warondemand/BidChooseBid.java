@@ -44,12 +44,15 @@ public class BidChooseBid extends AppCompatActivity {
                 Handler myHandler = new Handler();
                 myHandler.postDelayed(mMyRunnable, 1000);
                 adapter.notifyDataSetChanged();
-                if (AcceptOrRejectBid.bidAccepted == true){
-                    finish();
-                    AcceptOrRejectBid.bidAccepted = false;
-                }
             }
         });
+    }
+
+    protected void onStart(){
+        super.onStart();
+        if (BiddingChooseItem.bidAccepted == true){
+            finish();
+        }
     }
 
     public void search(){
