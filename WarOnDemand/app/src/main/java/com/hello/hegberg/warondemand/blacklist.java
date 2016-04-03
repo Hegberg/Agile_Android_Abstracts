@@ -1,13 +1,17 @@
 package com.hello.hegberg.warondemand;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +19,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.concurrent.ExecutionException;
 
 public class blacklist extends AppCompatActivity {
@@ -24,13 +29,14 @@ public class blacklist extends AppCompatActivity {
     private ArrayList<User> checkAgainst = new ArrayList<User>();
     Boolean validUsername = false;
     public static User blacklisted = null;
-
+    public static int editPos;
 
     private ListView BLlist;
     private ArrayAdapter<User> adapter;
     private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<User> users1 = new ArrayList<User>();
 
-
+    private User remove=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,19 +71,19 @@ public class blacklist extends AppCompatActivity {
                         if (checkAgainst.get(i).getUsername().equals(username.getText().toString())) {
                             //for debug purposes
 
-                            if(checkAgainst.get(i).getUsername().equals(user.getUsername())){
+                            if (checkAgainst.get(i).getUsername().equals(user.getUsername())) {
                                 validUsername = false;
                                 break;
                             }
 
                             validUsername = true;
                             blacklisted = checkAgainst.get(i);
-                            Log.i("afg",checkAgainst.get(i).getUsername());
-                            Log.i("afg",user.getUsername());
+                            Log.i("afg", checkAgainst.get(i).getUsername());
+                            Log.i("afg", user.getUsername());
 
-                            try{
+                            try {
                                 user.addblacklist(checkAgainst.get(i));
-                            }catch (NullPointerException n){
+                            } catch (NullPointerException n) {
                                 n.printStackTrace();
                             }
 
@@ -99,7 +105,55 @@ public class blacklist extends AppCompatActivity {
                 }
             }
         });
+
+        BLlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            //http://stackoverflow.com/questions/17851687/how-to-handle-the-click-event-in-listview-in-android
+            //User wishes to edit a log.
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                editPos = position;
+                AlertDialog.Builder alt = new AlertDialog.Builder(blacklist.this);
+                alt.setMessage("Remove From BlackList? ");
+                alt.setCancelable(true);
+                final int pos = position;
+
+                alt.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //new intent new view
+                    }
+                });
+
+                alt.setNeutralButton("Remove", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent intent = new Intent(blacklist.this, blacklist.class);
+                        User remove = users.get(editPos);
+                        remove(remove);
+                        DatabaseController controller = new DatabaseController();
+                        controller.updateUser(user, user);
+                        adapter.notifyDataSetChanged();
+                        finish();
+                        startActivity(intent);
+
+                    }
+                });
+
+
+                alt.show();
+
+
+
+
+            }
+
+        });
+
     }
+
+
 
     private void add() {
 
@@ -119,6 +173,12 @@ public class blacklist extends AppCompatActivity {
     }
 
 
+    private void remove(User Remove) {
+
+        user.removeblacklist(Remove);
+
+
+    }
 
 
 }

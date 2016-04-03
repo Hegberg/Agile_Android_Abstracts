@@ -59,18 +59,16 @@
         android:textColor="#ffffff"
         android:background="#134260"
         tools:listitem="@layout/list_item"
-        android:layout_above="@+id/done"
-        android:layout_below="@+id/usernameEntered">
-
+        android:layout_below="@+id/done">
     </ListView>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done"
+        android:text="Add"
         android:id="@+id/done"
-        android:layout_marginBottom="56dp"
-        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_below="@+id/usernameEntered"
         android:layout_toRightOf="@+id/userBLed."
         android:layout_toEndOf="@+id/userBLed." />
 </RelativeLayout>
