@@ -28,7 +28,7 @@ public class BidChooseBid extends AppCompatActivity {
 
         BidList = (ListView) findViewById(R.id.itemlist_choose_bid);
 
-        adapter = new ArrayAdapter<Bid>(this, android.R.layout.simple_spinner_item, bids);
+        adapter = new ArrayAdapter<Bid>(this, R.layout.bid_list_item,R.id.bidData, bids);
         BidList.setAdapter(adapter);
         search();
         adapter.notifyDataSetChanged();
