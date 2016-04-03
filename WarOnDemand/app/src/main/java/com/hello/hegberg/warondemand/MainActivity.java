@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Boolean validUsername = false;
     public static int profileOption;
     public static User chosenUser = null;
-    private ArrayList<User> checkAgainst = new ArrayList<>();
+    private ArrayList<User> checkAgainst = new ArrayList<User>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
