@@ -55,11 +55,8 @@ public class BiddingChooseItem extends AppCompatActivity {
         super.onStart();
         if (BiddingChooseItem.bidAccepted == true){
             bidAccepted = false;
-            finish();
-        } else {
-            search();
-            adapter.notifyDataSetChanged();
         }
+        search();
         adapter.notifyDataSetChanged();
     }
 
