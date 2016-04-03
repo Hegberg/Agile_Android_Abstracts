@@ -43,7 +43,8 @@ public class AccountController extends AppCompatActivity {
             Log.i("size -> ", String.valueOf(bids.size()));
             for (int i = 0; i<bids.size(); i++){
                 Log.i("newBid -> ", String.valueOf(bids.get(i).getNewBid()));
-                if (bids.get(i).getNewBid() == true){
+                Log.i("owner->", bids.get(i).getOwner().getUsername());
+                if (bids.get(i).getNewBid() == true && bids.get(i).getOwner().getUsername().equals(MainActivity.chosenUser.getUsername())){
                     count++;
                     tempBids.add(bids.get(i));
                 }

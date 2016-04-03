@@ -49,7 +49,7 @@ public class SearchingActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<WarItem>(this, android.R.layout.simple_list_item_1, itemsPostFilter);
         listOfItems.setAdapter(adapter);
 
-        search.setOnClickListener(new View.OnClickListener(){
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 keyword = keywordText.getText().toString();
@@ -66,13 +66,19 @@ public class SearchingActivity extends AppCompatActivity {
                 itemClicked = itemsPostFilter.get(position);
                 Intent intent = new Intent(SearchingActivity.this, BiddingActivity.class);
                 startActivity(intent);
-                Handler myHandler = new Handler();
-                myHandler.postDelayed(mMyRunnable, 1000);
-                adapter.notifyDataSetChanged();
             }
         });
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (keyword != null) {
+            search(keyword);
+        }
+        adapter.notifyDataSetChanged();
     }
 
     public void search(String searchTerm){
@@ -105,12 +111,4 @@ public class SearchingActivity extends AppCompatActivity {
         }
 
     }
-    private Runnable mMyRunnable = new Runnable()
-    {
-        @Override
-        public void run()
-        {
-            adapter.notifyDataSetChanged();
-        }
-    };
 }

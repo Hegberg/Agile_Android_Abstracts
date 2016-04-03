@@ -105,14 +105,14 @@ public class ViewMyItemsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 editPos = position;
-                if (warItems.get(position).getStatus() == 2) {
-                    Toast.makeText(ViewMyItemsActivity.this, "Cannot edit borrowed items", Toast.LENGTH_SHORT).show();
-                } else {
+                if (warItems.get(position).getStatus() == 0) {
                     Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemActivity.class);
                     startActivity(intent);
                     Handler myHandler = new Handler();
                     myHandler.postDelayed(mMyRunnable, 1000);
                     adapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(ViewMyItemsActivity.this, "Cannot edit bid on or borrowed items", Toast.LENGTH_SHORT).show();
                 }
             }
         });
