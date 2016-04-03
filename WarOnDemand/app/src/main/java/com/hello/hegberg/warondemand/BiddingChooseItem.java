@@ -53,10 +53,12 @@ public class BiddingChooseItem extends AppCompatActivity {
 
     protected void onStart(){
         super.onStart();
+        adapter.notifyDataSetChanged();
         if (BiddingChooseItem.bidAccepted == true){
             bidAccepted = false;
             finish();
         }
+        adapter.notifyDataSetChanged();
     }
 
     public void search(){
