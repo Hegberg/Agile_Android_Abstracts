@@ -63,11 +63,26 @@
         android:id="@+id/descriptionItem"
         android:background="#134260" />
 
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/addPicButton"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/ic_menu_camera"
+            android:layout_gravity="center_horizontal" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity ="bottom|center_horizontal"
         android:orientation="horizontal">
+
+
 
         <Button
 
@@ -80,7 +95,10 @@
             android:layout_gravity="bottom" />
 
 
-
     </LinearLayout>
+
+
+
+
 
 </LinearLayout>
