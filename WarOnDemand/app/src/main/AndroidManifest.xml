@@ -54,7 +54,7 @@
         <activity android:name=".AcceptOrRejectBid" />
         <activity android:name=".BidChooseBid" />
         <activity
-            android:name=".blacklist"
+            android:name=".Blacklist"
             android:label="@string/title_activity_blacklist"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
