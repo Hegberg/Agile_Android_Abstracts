@@ -45,6 +45,12 @@ public class BorrowingActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        search();
+        adapter.notifyDataSetChanged();
+    }
 
     public void search(){
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();

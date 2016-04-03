@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ReturnBorrowedItems extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class ReturnBorrowedItems extends AppCompatActivity {
         itemsDesc.setText(BorrowingActivity.borrowedItem.getDesc());
         ownersName.setText(BorrowingActivity.borrowedItem.getOwner().getUsername());
 
+
         getloc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,6 +34,17 @@ public class ReturnBorrowedItems extends AppCompatActivity {
 
 
 
+            }
+        });
+
+        returnItem.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                WarItem temp = BorrowingActivity.borrowedItem;
+                BorrowingActivity.borrowedItem.setStatus(0);
+                BorrowingActivity.borrowedItem.setBorrower(null);
+                DatabaseController.updateItem(temp, BorrowingActivity.borrowedItem);
+                Toast.makeText(ReturnBorrowedItems.this, "Item successfully returned", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 

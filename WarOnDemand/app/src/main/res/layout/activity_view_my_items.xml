@@ -46,7 +46,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="View Only Borrowed Items"
+            android:text="View Only Your Borrowed Items"
             android:id="@+id/show_only_borrowed_items" />
 
         <Button

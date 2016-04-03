@@ -92,7 +92,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
                 } else {
                     search(false);
                     viewBorrowed = false;
-                    viewOnlyBorrowedItems.setText("View only borrowed items");
+                    viewOnlyBorrowedItems.setText("View only your borrowed items");
                     adapter.notifyDataSetChanged();
                 }
 
@@ -123,7 +123,11 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         super.onStart();
         adapter = new WarItemAdapter(this, warItems);
         ItemList.setAdapter(adapter);
-        search(false);
+        if (viewBorrowed == false){
+            search(false);
+        } else {
+            search(false);
+        }
         adapter.notifyDataSetChanged();
     }
 
