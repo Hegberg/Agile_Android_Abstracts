@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class DatabaseController extends Application {
     private static JestDroidClient client;
     private static Gson gson;
     private static final String additem="additem";
+    private static final String addbid="addbid";
     private static final String deleteitem="deleteitem";
 
     private static final String adduser="adduser";
@@ -303,7 +305,7 @@ public class DatabaseController extends Application {
                     bidsList.add(bid);
                 }
                 adapterItems.notifyDataSetChanged();
-                saveInFileItems(additem);
+                saveInFileItems(addbid);
                 return null;
 
             }
@@ -328,7 +330,7 @@ public class DatabaseController extends Application {
                     e.printStackTrace();
                 }
             }
-            Log.i("Success", "We have added an item to the DB");
+            Log.i("Success", "We have added an Bid to the DB");
             return null;
         }
     }
@@ -481,7 +483,9 @@ public class DatabaseController extends Application {
 
             // Start our initial array list (empty)
             ArrayList<WarItem> items = new ArrayList<WarItem>();
-
+            ArrayList<WarItem> finalitems = new ArrayList<WarItem>();
+            ArrayList<User> list1;
+            User user = MainActivity.chosenUser;
             // If the device is offline return an empty array
             if(isOnline()==false){
                 return items;
@@ -533,7 +537,35 @@ public class DatabaseController extends Application {
                 if(execute.isSucceeded()) {
                     // Return our list of tweets
                     List<WarItem> returned_tweets = execute.getSourceAsObjectList(WarItem.class);
-                    items.addAll(returned_tweets);
+                    List<WarItem> final1 = returned_tweets;
+
+                    list1 = user.getblacklist();
+                    if (list1 != null) {
+
+                        for (int i = 0; i < returned_tweets.size(); i++) {
+                            WarItem waritem = returned_tweets.get(i);
+                            User owner = waritem.getOwner();
+
+                            for (int k = 0; k < list1.size(); k++) {
+
+                                User bl = list1.get(k);
+
+                                if (owner.getUsername().equals(bl.getUsername())) {
+                                    Log.i("  d",owner.getUsername());
+                                    Log.i("  d", bl.getUsername());
+
+                                    final1.remove(i);
+                                    i=i-1;
+
+                                }
+                            }
+                        }
+                    }
+
+
+
+
+                    items.addAll(final1);
                 } else {
                     // TODO: Add an error message, because that other thing was puzzling.
                     // TODO: Right here it will trigger if the search fails
@@ -614,8 +646,8 @@ public class DatabaseController extends Application {
 
         }
 
-        DatabaseController.DeleteItems Delete = new DatabaseController.DeleteItems();
-        //Delete.execute(oldBid.bidder);
+        DatabaseController.DeleteBids Delete = new DatabaseController.DeleteBids();
+        Delete.execute(oldBid.getId());
 
         AsyncTask<Bid, Void, Void> execute = new DatabaseController.AddBids();
         execute.execute(newBid);
@@ -722,12 +754,12 @@ public class DatabaseController extends Application {
      */
 
     public static class DeleteBids extends AsyncTask<String, Void, ArrayList<Bid>> {
-        // TODO: Get users
+
         @Override
         protected ArrayList<Bid> doInBackground(String... search_strings) {
             verifyClient();
             String search_string;
-            search_string = "{\"query\":{\"match\":{\"bidID\":\"" + search_strings[0] + "\"}}}";
+            search_string = "{\"query\":{\"match\":{\"bidder\":\"" + search_strings[0] + "\"}}}";
             DeleteByQuery deleteItem = new DeleteByQuery.Builder(search_string)
                     .addIndex("warondemand")
                     .addType("bids")
@@ -878,9 +910,6 @@ public class DatabaseController extends Application {
             throw new RuntimeException();
         }
     }
-
-
-
 
 
 

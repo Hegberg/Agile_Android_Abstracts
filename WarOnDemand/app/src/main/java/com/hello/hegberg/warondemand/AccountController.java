@@ -29,7 +29,7 @@ public class AccountController extends AppCompatActivity {
         Button search = (Button) findViewById(R.id.searchForItems);
         Button myBids = (Button) findViewById(R.id.myBids);
         Button borrowedProducts = (Button) findViewById(R.id.borrowedProducts);
-
+        Button blacklist = (Button) findViewById(R.id.blacklist);
         //bid notification functionality
         /*
         if (){
@@ -70,6 +70,13 @@ public class AccountController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AccountController.this, BiddingChooseItem.class));
+            }
+        });
+
+        blacklist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AccountController.this, blacklist.class));
             }
         });
         /*

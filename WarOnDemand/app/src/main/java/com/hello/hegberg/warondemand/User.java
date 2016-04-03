@@ -14,6 +14,8 @@ public class User {
     private ArrayList<WarItem> inventory = new ArrayList<WarItem>();
     private ArrayList<WarItem> itemsBidOn = new ArrayList<WarItem>();
     private ArrayList<WarItem> itemsBorrowed = new ArrayList<WarItem>();
+    public ArrayList<User> blacklisted = new ArrayList<User>();
+
     @JestId
     public String id;
 
@@ -89,6 +91,27 @@ public class User {
             }
         }
         return itemsBeingBidOn;
+    }
+
+    public ArrayList<User> getblacklist(){
+        return blacklisted;
+    }
+
+    public void addblacklist(User user1){
+
+        blacklisted.add(user1);
+    }
+
+    public void removeblacklist(User user){
+
+        blacklisted.remove(user);
+    }
+
+    @Override
+    public String toString() {
+        String outString = "Username: "
+                +this.getUsername();
+        return outString;
     }
 
 

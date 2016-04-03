@@ -56,4 +56,13 @@
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BlackList"
+        android:id="@+id/blacklist"
+        android:layout_below="@+id/searchForItems"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true" />
+
 </LinearLayout>

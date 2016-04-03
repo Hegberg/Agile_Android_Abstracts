@@ -52,7 +52,11 @@
         <activity android:name=".BiddingChooseItem" />
         <activity android:name=".BiddingChooseBid" />
         <activity android:name=".AcceptOrRejectBid" />
-        <activity android:name=".BidChooseBid"></activity>
+        <activity android:name=".BidChooseBid" />
+        <activity
+            android:name=".blacklist"
+            android:label="@string/title_activity_blacklist"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
