@@ -1,10 +1,15 @@
 package com.hello.hegberg.warondemand;
 
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -12,8 +17,8 @@ import java.util.concurrent.ExecutionException;
 public class BorrowingActivity extends AppCompatActivity {
     private ListView ItemList;
     private ArrayList<WarItem> warItems = new ArrayList<WarItem>();
-    public static int borrowedItemChosen;
     private ArrayAdapter<WarItem> adapter;
+    public static WarItem borrowedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +27,24 @@ public class BorrowingActivity extends AppCompatActivity {
 
         ItemList = (ListView) findViewById(R.id.itemlist_borrowed_products);
 
-        adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, warItems);
+        adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item,R.id.itemData, warItems);
         ItemList.setAdapter(adapter);
         search();
         adapter.notifyDataSetChanged();
 
-
+        ItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            //http://stackoverflow.com/questions/17851687/how-to-handle-the-click-event-in-listview-in-android
+            //User wishes to edit a log.
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                borrowedItem = warItems.get(position);
+                Intent intent = new Intent(BorrowingActivity.this, ReturnBorrowedItems.class);
+                startActivity(intent);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
+
 
     public void search(){
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();

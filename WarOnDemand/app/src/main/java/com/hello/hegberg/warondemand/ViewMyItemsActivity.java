@@ -39,6 +39,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
     //To edit a log we must, gasp, use a global variable that contains its index number.
     public static int editPos;
     private ImageView pictureButton;
+    private boolean viewBorrowed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final Button viewOnlyBorrowedItems = (Button) findViewById(R.id.show_only_borrowed_items);
         Button addButton = (Button) findViewById(R.id.add);
         pictureButton = (ImageView) findViewById(R.id.pictureButton);
 
@@ -54,7 +56,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, warItems);
         ItemList.setAdapter(adapter);
-        search();
+        search(false);
         adapter.notifyDataSetChanged();
 
         /*
@@ -71,7 +73,6 @@ public class ViewMyItemsActivity extends AppCompatActivity {
 
 
         addButton.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
                 setResult(RESULT_OK);
                 //Go to the AddWarItemActivity to create a new log.
@@ -81,52 +82,64 @@ public class ViewMyItemsActivity extends AppCompatActivity {
 
         });
 
+        viewOnlyBorrowedItems.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (viewBorrowed == false){
+                    search(true);
+                    viewBorrowed = true;
+                    viewOnlyBorrowedItems.setText("View all items");
+                    adapter.notifyDataSetChanged();
+                } else {
+                    search(false);
+                    viewBorrowed = false;
+                    viewOnlyBorrowedItems.setText("View only borrowed items");
+                    adapter.notifyDataSetChanged();
+                }
+
+            }
+        });
+
         ItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //http://stackoverflow.com/questions/17851687/how-to-handle-the-click-event-in-listview-in-android
             //User wishes to edit a log.
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 editPos = position;
-                if (warItems.get(position).getStatus() == 2){
+                if (warItems.get(position).getStatus() == 2) {
                     Toast.makeText(ViewMyItemsActivity.this, "Cannot edit borrowed items", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemActivity.class);
                     startActivity(intent);
-
                     Handler myHandler = new Handler();
                     myHandler.postDelayed(mMyRunnable, 1000);
-
                     adapter.notifyDataSetChanged();
                 }
             }
-
         });
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
-        adapter = new WarItemAdapter(this, warItems );
+        adapter = new WarItemAdapter(this, warItems);
         ItemList.setAdapter(adapter);
-        search();
+        search(false);
         adapter.notifyDataSetChanged();
     }
 
-    private Runnable mMyRunnable = new Runnable()
-    {
+    private Runnable mMyRunnable = new Runnable() {
         @Override
-        public void run()
-        {
+        public void run() {
             adapter.notifyDataSetChanged();
         }
     };
 
-    public void search(){
+    public void search(Boolean onlyForBorrowed) {
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
 
         try {
 
-            for (int i=warItems.size() - 1; i>=0; i--) {
+            for (int i = warItems.size() - 1; i >= 0; i--) {
                 warItems.remove(i);
             }
             ArrayList<WarItem> warItemsPreSearch = new ArrayList<WarItem>();
@@ -134,11 +147,19 @@ public class ViewMyItemsActivity extends AppCompatActivity {
             getItemsTask.execute("");
             warItemsPreSearch = getItemsTask.get();
             Log.i("size-> ", "" + warItemsPreSearch.size());
-            for (int i=0; i<warItemsPreSearch.size(); i++){
+            for (int i = 0; i < warItemsPreSearch.size(); i++) {
                 temp = warItemsPreSearch.get(i).getOwner();
-                Log.i("owner->",""+warItemsPreSearch.get(i).getOwner() );
+                Log.i("owner->", "" + warItemsPreSearch.get(i).getOwner());
                 if (temp.getUsername().equals(MainActivity.chosenUser.getUsername())) {
-                    warItems.add(warItemsPreSearch.get(i));
+                    if (onlyForBorrowed == false){
+                        warItems.add(warItemsPreSearch.get(i));
+                    } else {
+                        if (warItemsPreSearch.get(i).getStatus() == 2){
+                            warItems.add(warItemsPreSearch.get(i));
+                        }
+
+                    }
+
                 }
             }
         } catch (InterruptedException e) {
