@@ -12,6 +12,7 @@ public class Bid {
     private User owner;
     Random rand = new Random();
     private String ID;
+    private Boolean newBid;
 
     @JestId
     protected String id;
@@ -22,6 +23,7 @@ public class Bid {
         bidAmount = bid;
         owner = ownerOfItem;
         ID=String.valueOf(rand.nextInt(1000000));
+        newBid = true;
     }
 
     public User getOwner(){
@@ -50,6 +52,14 @@ public class Bid {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Boolean getNewBid() {
+        return newBid;
+    }
+
+    public void setNewBid(Boolean newBid) {
+        this.newBid = newBid;
     }
 
     public String toString(){
