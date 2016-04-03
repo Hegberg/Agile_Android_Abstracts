@@ -1,7 +1,7 @@
 package com.hello.hegberg.warondemand;
 
 import io.searchbox.annotations.JestId;
-
+import java.util.Random;
 /**
  * Created by Chris on 3/28/2016.
  */
@@ -10,6 +10,8 @@ public class Bid {
     private WarItem itemBidOn;
     private double bidAmount;
     private User owner;
+    Random rand = new Random();
+    private String ID;
 
     @JestId
     protected String id;
@@ -19,7 +21,7 @@ public class Bid {
         itemBidOn = itemBiddingOn;
         bidAmount = bid;
         owner = ownerOfItem;
-        String id;
+        ID=String.valueOf(rand.nextInt(1000000));
     }
 
     public User getOwner(){
@@ -40,6 +42,10 @@ public class Bid {
 
     public String getId() {
         return id;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public void setId(String id) {

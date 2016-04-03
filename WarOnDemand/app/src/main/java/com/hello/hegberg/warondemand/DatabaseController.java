@@ -647,7 +647,7 @@ public class DatabaseController extends Application {
         }
 
         DatabaseController.DeleteBids Delete = new DatabaseController.DeleteBids();
-        Delete.execute(oldBid.getId());
+        Delete.execute(oldBid.getID());
 
         AsyncTask<Bid, Void, Void> execute = new DatabaseController.AddBids();
         execute.execute(newBid);
@@ -759,7 +759,7 @@ public class DatabaseController extends Application {
         protected ArrayList<Bid> doInBackground(String... search_strings) {
             verifyClient();
             String search_string;
-            search_string = "{\"query\":{\"match\":{\"id\":\"" + search_strings[0] + "\"}}}";
+            search_string = "{\"query\":{\"match\":{\"ID\":\"" + search_strings[0] + "\"}}}";
             DeleteByQuery deleteItem = new DeleteByQuery.Builder(search_string)
                     .addIndex("warondemand")
                     .addType("bids")
@@ -792,7 +792,7 @@ public class DatabaseController extends Application {
         }
 
         DatabaseController.DeleteBids Delete = new DatabaseController.DeleteBids();
-        Delete.execute(oldBid.getId());
+        Delete.execute(oldBid.getID());
     }
 
 
