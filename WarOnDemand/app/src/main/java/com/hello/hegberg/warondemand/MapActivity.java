@@ -72,47 +72,9 @@ public class MapActivity extends FragmentActivity {
 
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
-            // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                    .getMap();
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                ActivityCompat.requestPermissions(
-                        this,
-                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
-                        PERMISSION_LOCATION_REQUEST_CODE);
 
-            }
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
-                    PackageManager.PERMISSION_GRANTED &&
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
-                            PackageManager.PERMISSION_GRANTED) {
-                mMap.setMyLocationEnabled(true);
-            } else {
-                Toast.makeText(this, "error, location permission", Toast.LENGTH_LONG).show();
-            }
-            Log.d("working", "hello");
 
-            Criteria criteria = new Criteria();
-            LocationManager locationManager = (LocationManager)  this.getSystemService(Context.LOCATION_SERVICE);
-            String bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
-            Location location1 = locationManager.getLastKnownLocation(bestProvider);
-            Double latitude=0.0;
-            Double longitude=0.0;
-            if (location1 != null) {
-                Log.e("TAG", "GPS is on");
-                latitude = location1.getLatitude();
-                longitude = location1.getLongitude();
-
-            }
-
-            Uri gmmIntentUri = Uri.parse("geo:" + String.valueOf(latitude)+","+String.valueOf(longitude)+"");
+            Uri gmmIntentUri = Uri.parse("geo:" + String.valueOf(Lat)+","+String.valueOf(Lng)+"");
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");
             startActivity(mapIntent);
@@ -211,3 +173,8 @@ public class MapActivity extends FragmentActivity {
 //    }
 
 }
+
+
+
+
+
