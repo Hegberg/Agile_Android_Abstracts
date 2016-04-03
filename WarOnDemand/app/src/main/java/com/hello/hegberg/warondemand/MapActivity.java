@@ -52,14 +52,14 @@ public class MapActivity extends FragmentActivity {
     MapFragment mapFrag=
             (MapFragment)getFragmentManager().findFragmentById(R.id.map);
 
-    double Lat=0;
-    double Lng=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
+        double Lat=BorrowingActivity.borrowedItem.getLat();
+        double Lng=BorrowingActivity.borrowedItem.getLong();
         setUpMapIfNeeded(Lat,Lng);
 
 //        SupportMapFragment mapFragment =

@@ -88,7 +88,7 @@ public class AcceptOrRejectBid extends AppCompatActivity {
                 }
                 try {
                     BiddingChooseItem.bidItemClicked.setLocation(latitude, longitude);
-                    
+
                 }catch (NullPointerException e){
                     e.printStackTrace();
                 }
