@@ -43,6 +43,8 @@ public class WarItem {
     private String thumbnailBase64;
     @JestId
     protected String id;
+    Double latitude=0.0;
+    Double longitude=0.0;
 
     public WarItem(String name, String desc, Double cost, User owner ) {
         this.name = name;
@@ -226,4 +228,19 @@ public class WarItem {
         thumbnailBase64 = null;
     }
 
+    public void setLocation(Double lat, Double lng){
+        latitude = lat;
+        longitude = lng;
+    }
+
+    public double getLat(){
+        return latitude;
+    }
+
+    public double getLong(){
+        return longitude;
+    }
+
+
 }
+
