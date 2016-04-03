@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:background="#000000"
-    tools:context="com.hello.hegberg.hegberg_fueltrack.ViewEntry">
+    tools:context="com.hello.hegberg.warondemand.ReturnBorrowedItems">
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,7 +17,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Item:  "
-        android:id="@+id/name"
+        android:id="@+id/item_name"
         android:layout_marginTop="40dp"/>
 
     <TextView
@@ -26,16 +26,16 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Medium Text"
-        android:id="@+id/name_info"/>
+        android:id="@+id/borrowed_item_return"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:text="Bidding Amount:"
-        android:id="@+id/bidding_amount"
-        android:layout_marginTop="30dp"/>
+        android:text="Item:  "
+        android:id="@+id/desc_of_item_borrow"
+        android:layout_marginTop="40dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,13 +43,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Medium Text"
-        android:id="@+id/bidding_info"/>
+        android:id="@+id/borrowed_item_desc_return"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:text="Bidder's Name:"
+        android:text="Item Owner&apos;s Name:"
         android:id="@+id/bidder_name"
         android:layout_marginTop="30dp"/>
 
@@ -59,7 +60,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Medium Text"
-        android:id="@+id/bidder_info"/>
+        android:id="@+id/bidder_name_return"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,15 +71,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Accept"
-            android:id="@+id/accept_item"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Decline"
-            android:id="@+id/decline_button"
+            android:text="Return Item"
+            android:id="@+id/return_item"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
     </LinearLayout>

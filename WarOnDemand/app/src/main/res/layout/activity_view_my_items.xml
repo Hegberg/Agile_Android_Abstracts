@@ -44,10 +44,16 @@
         android:orientation="horizontal">
 
         <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Only Borrowed Items"
+            android:id="@+id/show_only_borrowed_items" />
+
+        <Button
             android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"/>
+            android:text="Add New Item"/>
 
 
     </LinearLayout>
