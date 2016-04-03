@@ -221,4 +221,9 @@ public class WarItem {
         return thumbnail;
     }
 
+    public void deleteThumbnail(){
+        thumbnail = null;
+        thumbnailBase64 = null;
+    }
+
 }
