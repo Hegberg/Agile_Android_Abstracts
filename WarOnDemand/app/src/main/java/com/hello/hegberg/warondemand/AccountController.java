@@ -3,14 +3,18 @@ package com.hello.hegberg.warondemand;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class AccountController extends AppCompatActivity {
     private ArrayList<String> contactInfoHolder;
     private User tempUser;
+    private ArrayList<Bid> bids;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +31,31 @@ public class AccountController extends AppCompatActivity {
         Button myBids = (Button) findViewById(R.id.myBids);
         Button borrowedProducts = (Button) findViewById(R.id.borrowedProducts);
         Button blacklist = (Button) findViewById(R.id.blacklist);
-        //bid notification functionality
-        /*
-        if (){
 
+        //bid notification functionality
+        try {
+            DatabaseController.GetBids getBidsTask = new DatabaseController.GetBids();
+            getBidsTask.execute("");
+            bids = getBidsTask.get();
+            int count = 0;
+            Log.i("size -> ", String.valueOf(bids.size()));
+            for (int i = 0; i<bids.size(); i++){
+                Log.i("newBid -> ", String.valueOf(bids.get(i).getNewBid()));
+                if (bids.get(i).getNewBid() == true){
+                    bids.get(i).setNewBid(false);
+                    count++;
+                }
+            }
+            if (count > 0) {
+                Toast.makeText(AccountController.this, String.valueOf(count)+" new bids on your items", Toast.LENGTH_SHORT).show();
+            }
+            count = 0;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
-        */
+
 
         //TODO: Create classes to go to with products, bids, borrowed.
         // Create Buttons
