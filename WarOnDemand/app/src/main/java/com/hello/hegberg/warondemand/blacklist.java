@@ -4,9 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,10 +16,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.concurrent.ExecutionException;
 
-public class blacklist extends AppCompatActivity {
+public class Blacklist extends AppCompatActivity {
 
 
     public User user = MainActivity.chosenUser;
@@ -92,11 +88,11 @@ public class blacklist extends AppCompatActivity {
                             controller.updateUser(user, user);
                             adapter.notifyDataSetChanged();
                             finish();
-                            startActivity(new Intent(blacklist.this, blacklist.class));
+                            startActivity(new Intent(Blacklist.this, Blacklist.class));
                         }
                     }
                     if (validUsername == false) {
-                        Toast.makeText(blacklist.this, "Username Does Not Exist", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Blacklist.this, "Username Does Not Exist", Toast.LENGTH_SHORT).show();
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -113,7 +109,7 @@ public class blacklist extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 editPos = position;
-                AlertDialog.Builder alt = new AlertDialog.Builder(blacklist.this);
+                AlertDialog.Builder alt = new AlertDialog.Builder(Blacklist.this);
                 alt.setMessage("Remove From BlackList? ");
                 alt.setCancelable(true);
                 final int pos = position;
@@ -129,7 +125,7 @@ public class blacklist extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Intent intent = new Intent(blacklist.this, blacklist.class);
+                        Intent intent = new Intent(Blacklist.this, Blacklist.class);
                         User remove = users.get(editPos);
                         remove(remove);
                         DatabaseController controller = new DatabaseController();

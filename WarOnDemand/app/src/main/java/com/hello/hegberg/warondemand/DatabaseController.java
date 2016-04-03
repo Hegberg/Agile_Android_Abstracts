@@ -759,7 +759,7 @@ public class DatabaseController extends Application {
         protected ArrayList<Bid> doInBackground(String... search_strings) {
             verifyClient();
             String search_string;
-            search_string = "{\"query\":{\"match\":{\"bidder\":\"" + search_strings[0] + "\"}}}";
+            search_string = "{\"query\":{\"match\":{\"id\":\"" + search_strings[0] + "\"}}}";
             DeleteByQuery deleteItem = new DeleteByQuery.Builder(search_string)
                     .addIndex("warondemand")
                     .addType("bids")

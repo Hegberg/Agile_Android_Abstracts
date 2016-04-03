@@ -19,6 +19,7 @@ public class Bid {
         itemBidOn = itemBiddingOn;
         bidAmount = bid;
         owner = ownerOfItem;
+        String id;
     }
 
     public User getOwner(){
