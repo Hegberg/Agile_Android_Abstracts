@@ -39,8 +39,7 @@ import android.net.NetworkInfo;
 import android.widget.ArrayAdapter;
 
 import java.lang.Boolean;
-
-
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -767,7 +766,7 @@ public class DatabaseController extends Application {
 
 
             try {
-                client.execute(deleteItem);
+                 client.execute(deleteItem);
             } catch (IOException e) {
                 Log.i("TODO", "We actually failed here, deleting a item");
                 e.printStackTrace();

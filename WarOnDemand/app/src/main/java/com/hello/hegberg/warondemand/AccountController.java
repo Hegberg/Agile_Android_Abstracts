@@ -15,6 +15,7 @@ public class AccountController extends AppCompatActivity {
     private ArrayList<String> contactInfoHolder;
     private User tempUser;
     private ArrayList<Bid> bids;
+    ArrayList<Bid> tempBids;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +39,22 @@ public class AccountController extends AppCompatActivity {
             getBidsTask.execute("");
             bids = getBidsTask.get();
             int count = 0;
+            ArrayList<Bid> tempBids = new ArrayList<Bid>();
             Log.i("size -> ", String.valueOf(bids.size()));
             for (int i = 0; i<bids.size(); i++){
                 Log.i("newBid -> ", String.valueOf(bids.get(i).getNewBid()));
                 if (bids.get(i).getNewBid() == true){
-                    bids.get(i).setNewBid(false);
                     count++;
+                    tempBids.add(bids.get(i));
                 }
             }
+            DatabaseController controller = new DatabaseController();
+            for (int i = 0; i<tempBids.size(); i++){
+                Bid changedBid = tempBids.get(i);
+                changedBid.setNewBid(false);
+                controller.updateBids(tempBids.get(i), changedBid);
+            }
+
             if (count > 0) {
                 Toast.makeText(AccountController.this, String.valueOf(count)+" new bids on your items", Toast.LENGTH_SHORT).show();
             }

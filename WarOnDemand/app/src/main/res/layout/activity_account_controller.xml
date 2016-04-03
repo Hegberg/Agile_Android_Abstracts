@@ -32,7 +32,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Bids"
+        android:text="Pending Offers"
         android:id="@+id/myBids"
         android:layout_below="@+id/myProducts"
         android:layout_centerHorizontal="true"

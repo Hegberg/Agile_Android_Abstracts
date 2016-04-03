@@ -57,18 +57,13 @@ public class BiddingActivity extends AppCompatActivity {
                         //add database functionality
                         AsyncTask<Bid, Void, Void> execute = new DatabaseController.AddBids();
                         execute.execute(bid);
-
+                        Toast.makeText(BiddingActivity.this, "Your bid has been recorded", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(BiddingActivity.this, "Bid successfully recorded", Toast.LENGTH_SHORT).show();
-                        notifyOwner();
                         finish();
                     }
                 }
             }
         });
-
-    }
-
-    public void notifyOwner(){
 
     }
 }
