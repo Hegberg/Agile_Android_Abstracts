@@ -76,6 +76,7 @@ public class SearchingActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (keyword != null) {
+            Log.i("keyword-> ", ""+keyword);
             search(keyword);
         }
         adapter.notifyDataSetChanged();

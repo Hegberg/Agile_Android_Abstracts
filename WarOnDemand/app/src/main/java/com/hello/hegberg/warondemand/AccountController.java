@@ -50,6 +50,7 @@ public class AccountController extends AppCompatActivity {
                 }
             }
             DatabaseController controller = new DatabaseController();
+            Log.i("size of changedBid -> ", String.valueOf(tempBids.size()));
             for (int i = 0; i<tempBids.size(); i++){
                 Bid changedBid = tempBids.get(i);
                 changedBid.setNewBid(false);

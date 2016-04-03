@@ -54,7 +54,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
 
         ItemList = (ListView) findViewById(R.id.itemlist);
 
-        adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, warItems);
+        adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, R.id.itemData, warItems);
         ItemList.setAdapter(adapter);
         search(false);
         adapter.notifyDataSetChanged();
@@ -121,12 +121,10 @@ public class ViewMyItemsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        adapter = new WarItemAdapter(this, warItems);
-        ItemList.setAdapter(adapter);
         if (viewBorrowed == false){
             search(false);
         } else {
-            search(false);
+            search(true);
         }
         adapter.notifyDataSetChanged();
     }
