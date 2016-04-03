@@ -26,7 +26,7 @@ public class BiddingActivity extends AppCompatActivity {
 
         Button doneBidding = (Button) findViewById(R.id.doneBidding);
         final EditText bidAmountString = (EditText) findViewById(R.id.bid_amount);
-        TextView itemInfo = (TextView) findViewById(R.id.biddingItemInfo);
+        final TextView itemInfo = (TextView) findViewById(R.id.biddingItemInfo);
 
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
         try {
@@ -55,8 +55,13 @@ public class BiddingActivity extends AppCompatActivity {
                     } else {
                         Bid bid = new Bid(MainActivity.chosenUser, itemBiddingOn.getOwner(), itemBiddingOn, bidAmount);
                         //add database functionality
+                        WarItem temp = itemBiddingOn;
+                        itemBiddingOn.setStatus(1);
+                        DatabaseController.updateItem(temp, itemBiddingOn);
+
                         AsyncTask<Bid, Void, Void> execute = new DatabaseController.AddBids();
                         execute.execute(bid);
+
                         Toast.makeText(BiddingActivity.this, "Your bid has been recorded", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(BiddingActivity.this, "Bid successfully recorded", Toast.LENGTH_SHORT).show();
                         finish();

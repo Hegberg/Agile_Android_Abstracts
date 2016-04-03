@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 //import java.util.logging.Handler;
 import android.os.Handler;
+import android.widget.Toast;
+
 import java.util.logging.LogRecord;
 
 public class ViewMyItemsActivity extends AppCompatActivity {
@@ -55,6 +57,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         search();
         adapter.notifyDataSetChanged();
 
+        /*
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
         try {
             getItemsTask.execute("");
@@ -64,6 +67,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        */
 
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -83,13 +87,17 @@ public class ViewMyItemsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 editPos = position;
-                Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemActivity.class);
-                startActivity(intent);
+                if (warItems.get(position).getStatus() == 2){
+                    Toast.makeText(ViewMyItemsActivity.this, "Cannot edit borrowed items", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemActivity.class);
+                    startActivity(intent);
 
-                Handler myHandler = new Handler();
-                myHandler.postDelayed(mMyRunnable, 1000);
+                    Handler myHandler = new Handler();
+                    myHandler.postDelayed(mMyRunnable, 1000);
 
-                adapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
+                }
             }
 
         });
