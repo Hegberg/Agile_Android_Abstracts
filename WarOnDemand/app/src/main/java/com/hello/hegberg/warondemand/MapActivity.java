@@ -74,7 +74,7 @@ public class MapActivity extends FragmentActivity {
         if (mMap == null) {
 
 
-            Uri gmmIntentUri = Uri.parse("geo:" + String.valueOf(Lat)+","+String.valueOf(Lng)+"");
+            Uri gmmIntentUri = Uri.parse("geo:<" + String.valueOf(Lat)+">,<"+String.valueOf(Lng)+">?q=<"+String.valueOf(Lat)+">,<"+String.valueOf(Lng)+">(Item Location)");
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");
             startActivity(mapIntent);

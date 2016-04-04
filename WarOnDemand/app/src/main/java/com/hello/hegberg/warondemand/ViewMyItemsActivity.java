@@ -38,6 +38,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
 
     //To edit a log we must, gasp, use a global variable that contains its index number.
     public static int editPos;
+    public static WarItem itemClicked;
     private ImageView pictureButton;
     private boolean viewBorrowed = false;
 
@@ -105,6 +106,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 editPos = position;
+                itemClicked = warItems.get(editPos);
                 if (warItems.get(position).getStatus() == 0) {
                     Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemActivity.class);
                     startActivity(intent);
@@ -112,7 +114,9 @@ public class ViewMyItemsActivity extends AppCompatActivity {
                     myHandler.postDelayed(mMyRunnable, 1000);
                     adapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(ViewMyItemsActivity.this, "Cannot edit bid on or borrowed items", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemNoEdit.class);
+                    startActivity(intent);
+                    //Toast.makeText(ViewMyItemsActivity.this, "Cannot edit bid on or borrowed items", Toast.LENGTH_SHORT).show();
                 }
             }
         });
