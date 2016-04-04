@@ -31,7 +31,8 @@ public class BiddingChooseItem extends AppCompatActivity {
 
         BidOnItemList = (ListView) findViewById(R.id.itemlist_bids);
 
-        adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item,R.id.itemData, bidOnItems);
+        //adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item,R.id.itemData, bidOnItems);
+        adapter = new WarItemAdapter(this, bidOnItems);
         BidOnItemList.setAdapter(adapter);
         search();
         adapter.notifyDataSetChanged();

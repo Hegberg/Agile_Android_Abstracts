@@ -39,9 +39,10 @@ public class ViewMyItemsActivity extends AppCompatActivity {
     //To edit a log we must, gasp, use a global variable that contains its index number.
     public static int editPos;
     public static WarItem itemClicked;
-    private ImageView pictureButton;
     private boolean viewBorrowed = false;
-
+    public ArrayAdapter<WarItem> getAdapter() {
+        return adapter;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +52,12 @@ public class ViewMyItemsActivity extends AppCompatActivity {
 
         final Button viewOnlyBorrowedItems = (Button) findViewById(R.id.show_only_borrowed_items);
         Button addButton = (Button) findViewById(R.id.add);
-        pictureButton = (ImageView) findViewById(R.id.pictureButton);
+        ImageView pictureButton = (ImageView) findViewById(R.id.pictureButton);
 
         ItemList = (ListView) findViewById(R.id.itemlist);
 
-        adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, R.id.itemData, warItems);
+       // adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, R.id.itemData, warItems);
+        adapter = new WarItemAdapter(this, warItems);
         ItemList.setAdapter(adapter);
         search(false);
         adapter.notifyDataSetChanged();
@@ -130,6 +132,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         } else {
             search(true);
         }
+       // adapter = new WarItemAdapter(this, warItems);
         adapter.notifyDataSetChanged();
     }
 

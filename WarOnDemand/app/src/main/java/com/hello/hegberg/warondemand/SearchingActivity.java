@@ -40,7 +40,8 @@ public class SearchingActivity extends AppCompatActivity {
         search("");
 
         Button search = (Button) findViewById(R.id.searchSearching);
-        adapter = new ArrayAdapter<WarItem>(this, android.R.layout.simple_list_item_1, itemsPostFilter);
+        //adapter = new ArrayAdapter<WarItem>(this, android.R.layout.simple_list_item_1, itemsPostFilter);
+        adapter = new WarItemAdapter(this, itemsPostFilter);
         listOfItems.setAdapter(adapter);
 
         search.setOnClickListener(new View.OnClickListener() {

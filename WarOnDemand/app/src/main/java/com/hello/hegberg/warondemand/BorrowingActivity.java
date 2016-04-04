@@ -27,7 +27,8 @@ public class BorrowingActivity extends AppCompatActivity {
 
         ItemList = (ListView) findViewById(R.id.itemlist_borrowed_products);
 
-        adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item,R.id.itemData, warItems);
+        //adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item,R.id.itemData, warItems);
+        adapter = new WarItemAdapter(this, warItems);
         ItemList.setAdapter(adapter);
         search();
         adapter.notifyDataSetChanged();

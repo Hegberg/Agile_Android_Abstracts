@@ -69,7 +69,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@android:drawable/ic_menu_camera"
+            android:src="@android:drawable/ic_menu_camera"
             android:layout_gravity="center_horizontal" />
 
 
