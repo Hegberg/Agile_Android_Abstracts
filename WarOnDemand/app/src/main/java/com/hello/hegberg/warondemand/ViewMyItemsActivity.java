@@ -25,6 +25,10 @@ import android.widget.Toast;
 
 import java.util.logging.LogRecord;
 
+/**
+ * This activity allows the user to view a list of all the items you own, along with their thumbnails,
+ * information, and current status.
+ */
 public class ViewMyItemsActivity extends AppCompatActivity {
     //This activity allows you to view a crude list of all your items you own. This links to
     //add item and view item
@@ -37,6 +41,10 @@ public class ViewMyItemsActivity extends AppCompatActivity {
     private ArrayAdapter<WarItem> adapter;
 
     //To edit a log we must, gasp, use a global variable that contains its index number.
+    /**
+     * To allow the user to click any item to start editing it, editPos saves the index of the item
+     * you wish to add.
+     */
     public static int editPos;
     public static WarItem itemClicked;
     private static WarItem itemAdded;
@@ -165,7 +173,12 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    //Skipping databse function
+    //Skipping database function
+
+    /**
+     * updates local saves while skipping the database functions.
+     * @param itemTOAdd
+     */
     public static void addWarItems(WarItem itemTOAdd){
         itemAdded = itemTOAdd;
     }

@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * This activity is used to view a user after clicking his/her name outside of a list.
+ *
+ */
 public class ViewSpecificUser extends AppCompatActivity {
     private User user;
     private String username;
@@ -22,7 +26,6 @@ public class ViewSpecificUser extends AppCompatActivity {
         final TextView nameInfo = (TextView) findViewById(R.id.name_info);
         final TextView emailInfo = (TextView) findViewById(R.id.email_info);
         final TextView phoneInfo = (TextView) findViewById(R.id.phone_info);
-        //TODO get it so that you grab from the last activity.
 
         if(getIntent().getStringExtra("from").equals("BiddingActivity")) {
             user = BiddingActivity.specificUser;
@@ -46,10 +49,6 @@ public class ViewSpecificUser extends AppCompatActivity {
         nameInfo.setText(username);
         emailInfo.setText(contactInfo.get(1));
         phoneInfo.setText(contactInfo.get(0));
-
-
-
-
 
     }
 
