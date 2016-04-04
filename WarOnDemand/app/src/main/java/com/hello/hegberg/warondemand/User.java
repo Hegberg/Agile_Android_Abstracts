@@ -18,7 +18,7 @@ public class User {
     public String id;
 
     /**
-     * Contructor
+     * Constructor
      * @param name
      * @param email
      * @param phoneNumber
