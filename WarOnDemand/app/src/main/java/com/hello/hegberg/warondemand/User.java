@@ -16,6 +16,12 @@ public class User {
     @JestId
     public String id;
 
+    /**
+     *
+     * @param name
+     * @param email
+     * @param phoneNumber
+     */
     public User(String name, String email, String phoneNumber) {
         username = name;
         contactInfo.add(0, email);
