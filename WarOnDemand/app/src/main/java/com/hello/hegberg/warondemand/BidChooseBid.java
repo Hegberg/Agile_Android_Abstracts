@@ -52,6 +52,9 @@ public class BidChooseBid extends AppCompatActivity {
         super.onStart();
         if (BiddingChooseItem.bidAccepted == true){
             finish();
+        } else {
+            search();
+            adapter.notifyDataSetChanged();
         }
     }
 

@@ -38,6 +38,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
 
     //To edit a log we must, gasp, use a global variable that contains its index number.
     public static int editPos;
+    public static WarItem itemClicked;
     private ImageView pictureButton;
     private boolean viewBorrowed = false;
 
@@ -54,7 +55,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
 
         ItemList = (ListView) findViewById(R.id.itemlist);
 
-        adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, warItems);
+        adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, R.id.itemData, warItems);
         ItemList.setAdapter(adapter);
         search(false);
         adapter.notifyDataSetChanged();
@@ -105,14 +106,17 @@ public class ViewMyItemsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 editPos = position;
-                if (warItems.get(position).getStatus() == 2) {
-                    Toast.makeText(ViewMyItemsActivity.this, "Cannot edit borrowed items", Toast.LENGTH_SHORT).show();
-                } else {
+                itemClicked = warItems.get(editPos);
+                if (warItems.get(position).getStatus() == 0) {
                     Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemActivity.class);
                     startActivity(intent);
                     Handler myHandler = new Handler();
                     myHandler.postDelayed(mMyRunnable, 1000);
                     adapter.notifyDataSetChanged();
+                } else {
+                    Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemNoEdit.class);
+                    startActivity(intent);
+                    //Toast.makeText(ViewMyItemsActivity.this, "Cannot edit bid on or borrowed items", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -121,12 +125,10 @@ public class ViewMyItemsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        adapter = new WarItemAdapter(this, warItems);
-        ItemList.setAdapter(adapter);
         if (viewBorrowed == false){
             search(false);
         } else {
-            search(false);
+            search(true);
         }
         adapter.notifyDataSetChanged();
     }

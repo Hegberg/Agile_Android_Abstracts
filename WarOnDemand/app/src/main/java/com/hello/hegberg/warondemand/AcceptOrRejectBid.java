@@ -109,7 +109,16 @@ public class AcceptOrRejectBid extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i("id->", BidChooseBid.bidClicked.getId());
                 DatabaseController.deleteBids(BidChooseBid.bidClicked);
-                BiddingChooseItem.bidAccepted = false;
+                bids.remove(BidChooseBid.bidClicked);
+                if (bids.size() == 0){
+                    BiddingChooseItem.bidAccepted = true;
+                    WarItem temp = BiddingChooseItem.bidItemClicked;
+                    BiddingChooseItem.bidItemClicked.setStatus(0);
+                    BiddingChooseItem.bidItemClicked.setBorrower(null);
+                    DatabaseController.updateItem(temp, BiddingChooseItem.bidItemClicked);
+                } else {
+                    BiddingChooseItem.bidAccepted = false;
+                }
                 finish();
             }
         });

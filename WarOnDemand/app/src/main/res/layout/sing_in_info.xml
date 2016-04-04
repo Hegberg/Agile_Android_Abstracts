@@ -36,7 +36,6 @@
             android:layout_height="wrap_content"
             android:text="Sign In"
             android:id="@+id/signInWithInfo"/>
-b
 
     </LinearLayout>
 

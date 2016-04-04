@@ -44,7 +44,9 @@ public class AccountController extends AppCompatActivity {
             ArrayList<Bid> tempBids = new ArrayList<Bid>();
             Log.i("size -> ", String.valueOf(bids.size()));
             for (int i = 0; i<bids.size(); i++){
-                Log.i("newBid -> ", String.valueOf(bids.get(i).getNewBid()));
+
+                Log.i("owner->", bids.get(i).getOwner().getUsername());
+
                 if (bids.get(i).getNewBid() == true && bids.get(i).getOwner().getUsername().equals(MainActivity.chosenUser.getUsername())){
                     count++;
                     tempBids.add(bids.get(i));
@@ -52,6 +54,7 @@ public class AccountController extends AppCompatActivity {
             }
 
             DatabaseController controller = new DatabaseController();
+            Log.i("size of changedBid -> ", String.valueOf(tempBids.size()));
             for (int i = 0; i<tempBids.size(); i++){
                 Bid changedBid = tempBids.get(i);
                 changedBid.setNewBid(false);
