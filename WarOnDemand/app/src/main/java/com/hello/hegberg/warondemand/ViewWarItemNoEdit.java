@@ -7,8 +7,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Class for viewing items and not editing them
+ */
 public class ViewWarItemNoEdit extends AppCompatActivity {
     public static User specificUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,15 +26,27 @@ public class ViewWarItemNoEdit extends AppCompatActivity {
         itemsName.setText(ViewMyItemsActivity.itemClicked.getName());
         itemsDesc.setText(ViewMyItemsActivity.itemClicked.getDesc());
         minBidPrice.setText(String.valueOf(ViewMyItemsActivity.itemClicked.getCost()));
+
+        /**
+         * Checks between wether an item is borrowed or not
+         */
         try {
             biddersName.setText(ViewMyItemsActivity.itemClicked.getBorrower().getUsername());
         } catch (NullPointerException e) {
             biddersName.setText("No current borrower");
         }
+
+        /**
+         * checks if image is present
+         */
         ImageView imageView = (ImageView) findViewById(R.id.picView);
         if(ViewMyItemsActivity.itemClicked.getThumbnail() != null){
             imageView.setImageBitmap(ViewMyItemsActivity.itemClicked.getThumbnail());
         }
+
+        /**
+         * If bidders name is clicked take user to bidder information
+         */
         biddersName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

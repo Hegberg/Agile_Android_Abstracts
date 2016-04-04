@@ -17,6 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * This class allows usersto search for items
+ * It makes sure to parse through the users blacklist
+ * and avoid returning any items sold by those users in the blacklist
+ * Returns an list of items to bid on.
+ */
 public class SearchingActivity extends AppCompatActivity {
     private String keyword;
 
@@ -26,6 +32,17 @@ public class SearchingActivity extends AppCompatActivity {
 
     public static WarItem itemClicked;
 
+    private static WarItem itemAdded;
+    private static WarItem itemDeleted;
+
+    /**
+     * onCreate SearchingActivity
+     * All the items in the database are returned in a list
+     * excluding the users blacklited.
+     *
+     * User can also make a search
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +73,15 @@ public class SearchingActivity extends AppCompatActivity {
         listOfItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //http://stackoverflow.com/questions/17851687/how-to-handle-the-click-event-in-listview-in-android
             //User wishes to edit a log.
+
+            /**
+             * onItemClick listOfItems
+             * You can click on an item and get more info and bid on it
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 itemClicked = itemsPostFilter.get(position);
@@ -67,18 +93,63 @@ public class SearchingActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * OnStart
+     * return all the items in the database, Makes sure to filter blacklist
+     */
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i("keyword-> ", "" + keyword);
-        if (keyword != null) {
-            search(keyword);
-        } else {
-            search("");
+        //updates items without having to access the database. Rejoice!!! Speed!!!
+        try {
+            Log.i("remove item ->", "" + itemDeleted);
+
+            Log.i("item->", "" + itemsPostFilter.contains(itemDeleted));
+
+            if (itemDeleted != null) {
+                for (int i = 0; i <itemsPostFilter.size(); i++){
+                    Log.i("items->", "" + itemsPostFilter.get(i).getName());
+                    Log.i("items2->", "" + itemDeleted.getName());
+                    Log.i("itemsistrue->", "" + itemsPostFilter.get(i).getName().equals(itemDeleted.getName()));
+                    if (itemsPostFilter.get(i).getName().equals(itemDeleted.getName())){
+                        itemsPostFilter.remove(i);
+                    }
+                }
+            }
+            if (itemAdded != null) {
+                itemsPostFilter.add(itemAdded);
+            }
+        } catch (NullPointerException e) {
+
         }
+        itemDeleted = null;
+        itemAdded = null;
+
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Local Storage before adding to DB
+     * @param itemTOAdd
+     */
+    public static void addWarItems(WarItem itemTOAdd){
+        itemAdded = itemTOAdd;
+    }
+
+    //Skipping database function
+
+    /**
+     * Local Storage before deleting from DB
+     * @param itemToDelete
+     */
+    public static void deleteWarItems(WarItem itemToDelete){
+        itemDeleted = itemToDelete;
+    }
+
+    /**
+     * Searching in the database for items
+     * @param searchTerm
+     */
     public void search(String searchTerm){
         ArrayList<WarItem> itemsPreFilter;
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();

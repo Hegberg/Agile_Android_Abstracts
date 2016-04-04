@@ -14,7 +14,6 @@ import android.content.res.*;
 
 
 /**
- * Created by unkno on 2016-03-29.
  * Converts any list of War Items so that the image of the item can be displayed beside the War Item's
  * information.
  */
@@ -27,18 +26,22 @@ public class WarItemAdapter extends ArrayAdapter<WarItem>{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
+        /** Get the data item for this position
+        */
         WarItem warItem = getItem(position);
         String message = warItem.toString();
         Bitmap thumbnail;
 
-        // Check if an existing view is being reused, otherwise inflate the view
+        /**Check if an existing view is being reused, otherwise inflate the view
+         */
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
         ImageView itemImage = (ImageView) convertView.findViewById(R.id.pictureButton);
         TextView itemText = (TextView) convertView.findViewById(R.id.itemData);
-        // Populate the data into the template view using the data object
+        /**
+         * Populate the data into the template view using the data object
+         */
         itemText.setText(message);
         Resources res = getContext().getResources();
 
@@ -53,11 +56,12 @@ public class WarItemAdapter extends ArrayAdapter<WarItem>{
 
 
         //thumbnail = img.setIsmageResource(R.mipmap.logo1_launcher);
+
         itemImage.setImageBitmap(thumbnail);
 
-        //}
-
-        // Return the completed view to render on screen
+        /** Return the completed view to render on screen
+         *
+         */
         return convertView;
     }
 

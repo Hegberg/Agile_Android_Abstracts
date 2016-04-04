@@ -17,6 +17,13 @@ public class Bid {
     @JestId
     protected String id;
 
+    /**
+     * Constructor
+     * @param userBidder
+     * @param ownerOfItem
+     * @param itemBiddingOn
+     * @param bid
+     */
     public Bid(User userBidder, User ownerOfItem, WarItem itemBiddingOn, double bid){
         bidder = userBidder;
         itemBidOn = itemBiddingOn;
@@ -26,42 +33,82 @@ public class Bid {
         newBid = true;
     }
 
+    /**
+     * getter
+     * @return owner
+     */
     public User getOwner(){
         return owner;
     }
 
+    /**
+     * getter
+     * @return itemBidOn
+     */
     public WarItem getItemBidOn(){
         return itemBidOn;
     }
 
+    /**
+     * getter
+     * @return bidder
+     */
     public User getBidder() {
         return bidder;
     }
 
+    /**
+     * getter
+     * @return bidAmount
+     */
     public String getBidAmount() {
         return String.valueOf(bidAmount);
     }
 
+    /**
+     * getter
+     * @return id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * getter
+     * @return ID
+     */
     public String getID() {
         return ID;
     }
 
+    /**
+     * setter
+     * @param id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     *  getter
+     * @return newBid
+     */
     public Boolean getNewBid() {
         return newBid;
     }
 
+    /**
+     * Setter
+     * @param newBid
+     */
     public void setNewBid(Boolean newBid) {
         this.newBid = newBid;
     }
 
+    /**
+     * To String function for lists
+     * @return
+     */
     public String toString(){
         return "Bidder: "+ this.bidder.getUsername()
                 + "\nItem Bidding On: " + this.itemBidOn

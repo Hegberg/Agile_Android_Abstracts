@@ -26,6 +26,12 @@ public class BiddingActivity extends AppCompatActivity {
     //used to figure out which user to use.
     public static User specificUser;
 
+    /**
+     * onCreate BiddingActivity class
+     * Item displayed, user can enter a value greater or equal to the
+     * items minimum bid
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +59,13 @@ public class BiddingActivity extends AppCompatActivity {
             image.setImageBitmap(itemBiddingOn.getThumbnail());
         }
         doneBidding.setOnClickListener(new View.OnClickListener() {
+            /**
+             * on Click doneBidding
+             * When the bid is complete, come checks to make sure bid entered, and greater
+             * than minimum bid
+             * If contraints satisfied, bid is recorded and saved to the Database
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 if(MainActivity.chosenUser.getUsername().equals(itemBiddingOn.getOwner().getUsername())){
@@ -70,6 +83,9 @@ public class BiddingActivity extends AppCompatActivity {
                         itemBiddingOn.setStatus(1);
                         DatabaseController.updateItem(temp, itemBiddingOn);
 
+                        SearchingActivity.deleteWarItems(temp);
+                        SearchingActivity.addWarItems(itemBiddingOn);
+
                         AsyncTask<Bid, Void, Void> execute = new DatabaseController.AddBids();
                         execute.execute(bid);
 
@@ -81,6 +97,11 @@ public class BiddingActivity extends AppCompatActivity {
             }
         });
         itemInfo.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click itemInfo
+             * The items information is displayed in more detail
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 specificUser = itemBiddingOn.getOwner();

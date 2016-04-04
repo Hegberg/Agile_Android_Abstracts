@@ -25,9 +25,12 @@ import android.widget.Toast;
 
 import java.util.logging.LogRecord;
 
+/**
+ * This activity allows the user to view a list of all the items you own, along with their thumbnails,
+ * information, and current status.
+ */
 public class ViewMyItemsActivity extends AppCompatActivity {
-    //This activity allows you to view a crude list of all your items you own. This links to
-    //add item and view item
+
     private ListView ItemList;
 
 
@@ -37,6 +40,10 @@ public class ViewMyItemsActivity extends AppCompatActivity {
     private ArrayAdapter<WarItem> adapter;
 
     //To edit a log we must, gasp, use a global variable that contains its index number.
+    /**
+     * To allow the user to click any item to start editing it, editPos saves the index of the item
+     * you wish to add.
+     */
     public static int editPos;
     public static WarItem itemClicked;
     private static WarItem itemAdded;
@@ -60,23 +67,10 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         itemDeleted = null;
         ItemList = (ListView) findViewById(R.id.itemlist);
 
-       // adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, R.id.itemData, warItems);
         adapter = new WarItemAdapter(this, warItems);
         ItemList.setAdapter(adapter);
         search(false);
         adapter.notifyDataSetChanged();
-
-        /*
-        DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
-        try {
-            getItemsTask.execute("");
-            warItems = getItemsTask.get();
-        }  catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        */
 
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -116,8 +110,6 @@ public class ViewMyItemsActivity extends AppCompatActivity {
                 if (warItems.get(position).getStatus() == 0) {
                     Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemActivity.class);
                     startActivity(intent);
-                    Handler myHandler = new Handler();
-                    myHandler.postDelayed(mMyRunnable, 1000);
                     adapter.notifyDataSetChanged();
                 } else {
                     Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemNoEdit.class);
@@ -128,15 +120,15 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Updates list without accessing the database for increased speed
+     */
     @Override
     protected void onStart() {
         super.onStart();
-        //updates items without having to access the database. Rejoice!!! Speed!!!
         try {
             Log.i("remove item ->", "" + itemDeleted);
-
             Log.i("item->", "" + warItems.contains(itemDeleted));
-
             if (itemDeleted != null) {
                 for (int i = 0; i <warItems.size(); i++){
                     Log.i("items->", "" + warItems.get(i).getName());
@@ -153,28 +145,32 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
 
         }
-        /*
-        if (viewBorrowed == false){
-            search(false);
-        } else {
-            search(true);
-        }
-        */
+        itemDeleted = null;
+        itemAdded = null;
 
-       // adapter = new WarItemAdapter(this, warItems);
         adapter.notifyDataSetChanged();
     }
 
-    //Skipping databse function
+    /**
+     * helps update local saves while skipping the database functions.
+     * @param itemTOAdd
+     */
     public static void addWarItems(WarItem itemTOAdd){
         itemAdded = itemTOAdd;
     }
 
-    //Skipping database function
+    /**
+     * helps update local saves while skipping the database functions.
+     * @param itemToDelete
+     */
     public static void deleteWarItems(WarItem itemToDelete){
         itemDeleted = itemToDelete;
     }
 
+    /**
+     * Searches through all the items for that users items, also can filter for only borrwed items or all items
+     * @param onlyForBorrowed
+     */
     public void search(Boolean onlyForBorrowed) {
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
 
@@ -198,9 +194,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
                         if (warItemsPreSearch.get(i).getStatus() == 2){
                             warItems.add(warItemsPreSearch.get(i));
                         }
-
                     }
-
                 }
             }
         } catch (InterruptedException e) {
@@ -208,16 +202,5 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
     }
-
-    private Runnable mMyRunnable = new Runnable()
-    {
-        @Override
-        public void run()
-        {
-            adapter.notifyDataSetChanged();
-        }
-    };
-
 }

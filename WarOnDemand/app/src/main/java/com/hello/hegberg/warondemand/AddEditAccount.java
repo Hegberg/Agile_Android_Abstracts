@@ -24,45 +24,36 @@ import java.util.concurrent.ExecutionException;
 
 import java.util.ArrayList;
 
+/**
+ * Actually only use for adding an account
+ */
 public class AddEditAccount extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
     private Boolean userNameCheck;
     private int numberOfChecked;
 
-    //profileOption 1 = ViewAccount, 2 = CreateAccount,
 
+    /**
+     * On crate AddEditAccount
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-
-
-        if (MainActivity.profileOption == 1) {
-            MainActivity.profileOption = 0;
-
-            //TODO: change this to activity
-            setContentView(R.layout.activity_view_account);
-        }
-        if (MainActivity.profileOption == 2) {
-            MainActivity.profileOption = 0;
-            setContentView(R.layout.activity_add_account);
-            AddAccount();
-        }
-    }
-
-    private void AddAccount() {
-        MainActivity.profileOption = 0;
-
+        setContentView(R.layout.activity_add_account);
         Button done = (Button) findViewById(R.id.doneAddAccount);
         final TextView nameInfo = (TextView) findViewById(R.id.nameUser);
         final TextView descriptionInfo = (TextView) findViewById(R.id.descriptionUser);
         final TextView contactInfo = (TextView) findViewById(R.id.contactInfoUser);
 
-        final String name = nameInfo.getText().toString();
-        final String description = descriptionInfo.getText().toString();
-        final String contact = contactInfo.getText().toString();
-
-
         done.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click done, Should register a user to the database. If the user
+             * Already exists then the user is prompted to change username.
+             * Else the user is added to the Database
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 try {
@@ -114,6 +105,7 @@ public class AddEditAccount extends AppCompatActivity {
         });
 
     }
+
 }
 
 

@@ -47,13 +47,19 @@ public class MapActivity extends FragmentActivity {
     private static final String[] LOCATION_PERMS={
             Manifest.permission.ACCESS_FINE_LOCATION
     };
+
     private GoogleMap mMap;
     Location location;
     MapFragment mapFrag=
             (MapFragment)getFragmentManager().findFragmentById(R.id.map);
 
 
-
+    /**
+     * onCreate MapActivity
+     * The location of an item is set to this Activity
+     * The location is displayed in google maps.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +73,13 @@ public class MapActivity extends FragmentActivity {
 //        mapFragment.getMapAsync(this);
     }
 
-
+    /**
+     * Setting up the map.
+     * Here the google map is brought up.
+     * The location of the user is displayed
+     * @param Lat
+     * @param Lng
+     */
     private void setUpMapIfNeeded(double Lat, double Lng) {
 
         // Do a null check to confirm that we have not already instantiated the map.

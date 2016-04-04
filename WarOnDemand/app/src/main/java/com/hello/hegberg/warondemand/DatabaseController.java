@@ -74,18 +74,26 @@ public class DatabaseController extends Application {
     private static ArrayAdapter<Bid> bidsItems;
 
 
-
+    /**
+     * On create
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         context = this;
     }
 
+    /**
+     * Returning the class context
+     * @return context
+     */
     public static Context getContext() {
         return context;
     }
 
-
+    /**
+     * Constructor
+     */
     public DatabaseController(){
         if (isOnline()==true){
 
@@ -114,7 +122,7 @@ public class DatabaseController extends Application {
     /**
      * Checking if the database is connected to the internet
      * @param
-     * @return Items object
+     * @return isConnected
      */
     public static Boolean isOnline(){
         context = getContext();
@@ -598,10 +606,9 @@ public class DatabaseController extends Application {
     }
 
     /**
-     * Updating users to the database. We delete the old user his/her information
-     * and update it by adding a new user.
-     * @param
-     * @return Items object
+     * Updating a users information, with updated information
+     * @param oldUser
+     * @param newUser
      */
     public static void updateUser(User oldUser, User newUser) {
 
@@ -619,10 +626,9 @@ public class DatabaseController extends Application {
 
 
     /**
-     * Updating items to the databse. We elete the old item from the database
-     * and add a new item.
-     * @param
-     * @return Items object
+     * Updating a specific item, with updated information
+     * @param oldItem
+     * @param newItem
      */
     public static void updateItem(WarItem oldItem, WarItem newItem) {
 
@@ -638,7 +644,11 @@ public class DatabaseController extends Application {
     }
 
 
-
+    /**
+     * Updating a specific bid, with updated information
+     * @param oldBid
+     * @param newBid
+     */
     public void updateBids(Bid oldBid, Bid newBid) {
 
         if(isOnline()==false){
@@ -731,8 +741,8 @@ public class DatabaseController extends Application {
 
     /**
      * Deleting items from the database
-     * @param
-     * @return Items object
+     * @param oldItem
+     *
      */
     public static void deleteItem(WarItem oldItem) {
 
@@ -750,6 +760,7 @@ public class DatabaseController extends Application {
 
     /**
      * Deleting bids from the database.
+     *
      */
 
     public static class DeleteBids extends AsyncTask<String, Void, ArrayList<Bid>> {
@@ -834,8 +845,8 @@ public class DatabaseController extends Application {
 
     /**
      * Saving items that are added offline
-     * @param
-     * @return Items object
+     * @param filename
+     *
      */
     private static void saveInFileItems(String filename) {
         try {
@@ -861,8 +872,8 @@ public class DatabaseController extends Application {
 
     /**
      * Loading a created user profile offline
-     * @param
-     * @return Items object
+     * @param filename
+     *
      */
     private static void loadFromFileUsers(String filename) {
         try {
@@ -890,8 +901,8 @@ public class DatabaseController extends Application {
 
     /**
      * User creating a new profile offline
-     * @param
-     * @return Items object
+     * @param filename
+     *
      */
     private static void saveInFileUsers(String filename) {
         try {
@@ -909,71 +920,6 @@ public class DatabaseController extends Application {
             throw new RuntimeException();
         }
     }
-
-
-
-
-//Offline activity for adding bids not needed right now.
-
-/**
-
-    private void loadFromFileBids(String filename) {
-        try {
-            FileInputStream fis = context.openFileInput(filename);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-
-            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
-            Type listType = new TypeToken<ArrayList<User>>() {
-            }.getType();
-            usersList = gson.fromJson(in, listType);
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            usersList = new ArrayList<User>();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }
-
-
-    private void saveInFileBids(String filename) {
-        try {
-            FileOutputStream fos = context.openFileOutput(filename, 0);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-            Gson gson = new Gson();
-            gson.toJson(usersList, out);
-            out.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }
-
-
-
- */
-
-
-
-
-//--------------------------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
 
 }
 

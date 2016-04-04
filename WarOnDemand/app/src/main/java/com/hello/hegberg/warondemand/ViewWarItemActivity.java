@@ -47,16 +47,21 @@ public class ViewWarItemActivity extends AppCompatActivity {
     private ArrayList<WarItem> warItemsPreSearch = new ArrayList<WarItem>();
     private ArrayAdapter<WarItem> adapter;
     private User owner = MainActivity.chosenUser;
+    private ArrayList<WarItem> duplicates = new ArrayList<>();
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created, the War Item we are editing.
+    */
     private WarItem preEditedLog;
+    /**
+     * The final result of our editing, what we are going to replace the preEditedLog with.
+     */
     private WarItem editedLog;
 
     private ImageButton pictureButton;
     private Bitmap thumbnail;
     static final int REQUEST_IMAGE_CAPTURE = 1234;
     private boolean pictureAdded;
-    private boolean pictureDeleted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,24 +95,34 @@ public class ViewWarItemActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                //The submit button creates the log. You must fill in all fields.
+                /**The submit button creates the log. You must fill in all fields.
+                 *
+                 */
                 try {
                     setResult(RESULT_OK);
-                    //Go through each text field and make sure all constraints are filled.
+                    /**
+                     * Go through each text field and make sure all constraints are filled.
+                     */
                     String name = ((EditText) findViewById(R.id.name_entered)).getText().toString();
                     Double cost = Double.parseDouble(((EditText) findViewById(R.id.cost_entered)).getText().toString());
                     String desc = ((EditText) findViewById(R.id.desc_entered)).getText().toString();
 
-                    //Checks to make sure all string fields are filled in.
+                    searchForDuplicates(name);
+                    /**Checks to make sure all string fields are filled in.
+                     * and that the name isn't a duplicate
+                     */
                     if (name.equals("")) {
                         Toast.makeText(ViewWarItemActivity.this, "Enter a name, please.", Toast.LENGTH_SHORT).show();
+                    } else if (duplicates.size() > 0) {
+                        Toast.makeText(ViewWarItemActivity.this, "Name already taken.", Toast.LENGTH_SHORT).show();
                     } else if (cost.equals("")) {
                         Toast.makeText(ViewWarItemActivity.this, "Enter a minimum starting bid price, please.", Toast.LENGTH_SHORT).show();
                     } else if (desc.equals("")) {
                         Toast.makeText(ViewWarItemActivity.this, "Enter a description, please.", Toast.LENGTH_SHORT).show();
                     } else {
-                        //No invalid fields, can commit.
-                        //Everything is fine, commit changes.
+                        /**No invalid fields, can add changes to database.
+                         *
+                         */
                         editedLog = new WarItem(name, desc, cost, owner);
                         if (pictureAdded == true) {
                             editedLog.addThumbnail(thumbnail);
@@ -118,37 +133,29 @@ public class ViewWarItemActivity extends AppCompatActivity {
                         ViewMyItemsActivity.deleteWarItems(preEditedLog);
                         ViewMyItemsActivity.addWarItems(editedLog);
 
-                        //delays return so server has time to update
-                        //Handler myHandler = new Handler();
-                        //myHandler.postDelayed(mMyRunnable, 1000);
                         finish();
 
                     }
                 } catch (NumberFormatException e) {
-                    //Error catch in case something I didn't expect.
                     Toast.makeText(ViewWarItemActivity.this, "Enter all data, please.", Toast.LENGTH_SHORT).show();
                 }
             }
 
         });
 
-
+        /**
+         * Deletes item currently viewing
+         */
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //WarItem latestItem = new WarItem(name, desc, cost, owner);
                 Log.i("username -> ", preEditedLog.getName());
-                //DatabaseController.DeleteItems delete= new DatabaseController.DeleteItems();
-
-                //delete.execute(preEditedLog.getName());
-
                 DatabaseController.deleteItem(preEditedLog);
                 ViewMyItemsActivity.deleteWarItems(preEditedLog);
-                //Handler myHandler = new Handler();
-                //myHandler.postDelayed(mMyRunnable, 1000);
                 finish();
 
             }
         });
+
         deleteImageButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 pictureAdded = true;
@@ -163,6 +170,9 @@ public class ViewWarItemActivity extends AppCompatActivity {
         super.onStart();
     }
 
+    /**
+     * Grabs the specific War Item and allows us to edit it.
+     */
     public void search(){
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
 
@@ -189,6 +199,40 @@ public class ViewWarItemActivity extends AppCompatActivity {
         }
 
     }
+
+    /**
+     * Grabs the specific War Item and allows us to edit it.
+     */
+    public void searchForDuplicates(String name){
+        DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
+        try {
+            for (int i=duplicates.size() - 1; i>=0; i--) {
+                duplicates.remove(i);
+            }
+            getItemsTask.execute("");
+            warItemsPreSearch = getItemsTask.get();
+            String temp;
+            Log.i("size-> ", "" + warItemsPreSearch.size());
+            for (int i=0; i<warItemsPreSearch.size(); i++){
+                temp = warItemsPreSearch.get(i).getName();
+                Log.i("temp->",""+warItemsPreSearch.get(i).getName() );
+                if (temp.equals(name) && !preEditedLog.getName().equals(temp)) {
+                    duplicates.add(warItemsPreSearch.get(i));
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This makes sure image is ok, saves it and changes picture
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
@@ -198,11 +242,4 @@ public class ViewWarItemActivity extends AppCompatActivity {
             pictureAdded = true;
         }
     }
-    private Runnable mMyRunnable = new Runnable() {
-        @Override
-        public void run()
-        {
-            finish();
-        }
-    };
 }
