@@ -17,9 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     //initialize variables
     //profileOption variable is for selecting the correct interface in AddEditAccount
-    //profileOption 1 = ViewAccount, 2 = CreateAccount, 3 = EditAccount
     Boolean validUsername = false;
-    public static int profileOption;
     public static User chosenUser = null;
     private ArrayList<User> checkAgainst = new ArrayList<User>();
 
@@ -47,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View v) {
-                MainActivity.profileOption = 2; // initializes createAccount interface in AddEditAccount.
                 startActivity(new Intent(MainActivity.this, AddEditAccount.class));
             }
         });

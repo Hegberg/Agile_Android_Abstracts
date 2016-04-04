@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import io.searchbox.annotations.JestId;
 
 /**
- * Created by unkno on 2016-02-11.
  * The main class that contains all the information about the items that the users of the app can bid
  * on and own.
  */
@@ -46,6 +45,13 @@ public class WarItem {
     Double latitude=0.0;
     Double longitude=0.0;
 
+    /**
+     * Constructor
+     * @param name
+     * @param desc
+     * @param cost
+     * @param owner
+     */
     public WarItem(String name, String desc, Double cost, User owner ) {
         this.name = name;
         this.cost = cost;
@@ -54,18 +60,6 @@ public class WarItem {
         this.owner = owner;
         borrow=false;
 
-    }
-
-
-    public WarItem(String name, Double cost, User owner) {
-        this.name = name;
-        this.desc = "Default Description";
-        this.status = 0;
-        this.cost = cost;
-        this.status = 0;
-        this.owner = owner;
-        borrow=false;
-        //this.returning = Boolean.FALSE;
     }
 
     public String getId() {
@@ -176,6 +170,10 @@ public class WarItem {
         return outString;
     }
 
+    /**
+     * Adds a thumbnail to the item
+     * @param newThumbnail
+     */
     public void addThumbnail(Bitmap newThumbnail){
         if (newThumbnail != null) {
             thumbnail = newThumbnail;
@@ -196,6 +194,11 @@ public class WarItem {
         return thumbnail;
     }
 
+    /**
+     * set location of an item
+     * @param lat
+     * @param lng
+     */
     public void setLocation(Double lat, Double lng){
         latitude = lat;
         longitude = lng;

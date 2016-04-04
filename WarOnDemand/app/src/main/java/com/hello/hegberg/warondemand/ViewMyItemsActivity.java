@@ -30,8 +30,7 @@ import java.util.logging.LogRecord;
  * information, and current status.
  */
 public class ViewMyItemsActivity extends AppCompatActivity {
-    //This activity allows you to view a crude list of all your items you own. This links to
-    //add item and view item
+
     private ListView ItemList;
 
 
@@ -68,23 +67,10 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         itemDeleted = null;
         ItemList = (ListView) findViewById(R.id.itemlist);
 
-       // adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, R.id.itemData, warItems);
         adapter = new WarItemAdapter(this, warItems);
         ItemList.setAdapter(adapter);
         search(false);
         adapter.notifyDataSetChanged();
-
-        /*
-        DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
-        try {
-            getItemsTask.execute("");
-            warItems = getItemsTask.get();
-        }  catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        */
 
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -124,8 +110,6 @@ public class ViewMyItemsActivity extends AppCompatActivity {
                 if (warItems.get(position).getStatus() == 0) {
                     Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemActivity.class);
                     startActivity(intent);
-                    Handler myHandler = new Handler();
-                    myHandler.postDelayed(mMyRunnable, 1000);
                     adapter.notifyDataSetChanged();
                 } else {
                     Intent intent = new Intent(ViewMyItemsActivity.this, ViewWarItemNoEdit.class);
@@ -136,15 +120,15 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Updates list without accessing the database for increased speed
+     */
     @Override
     protected void onStart() {
         super.onStart();
-        //updates items without having to access the database. Rejoice!!! Speed!!!
         try {
             Log.i("remove item ->", "" + itemDeleted);
-
             Log.i("item->", "" + warItems.contains(itemDeleted));
-
             if (itemDeleted != null) {
                 for (int i = 0; i <warItems.size(); i++){
                     Log.i("items->", "" + warItems.get(i).getName());
@@ -167,21 +151,26 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    //Skipping database function
-
     /**
-     * updates local saves while skipping the database functions.
+     * helps update local saves while skipping the database functions.
      * @param itemTOAdd
      */
     public static void addWarItems(WarItem itemTOAdd){
         itemAdded = itemTOAdd;
     }
 
-    //Skipping database function
+    /**
+     * helps update local saves while skipping the database functions.
+     * @param itemToDelete
+     */
     public static void deleteWarItems(WarItem itemToDelete){
         itemDeleted = itemToDelete;
     }
 
+    /**
+     * Searches through all the items for that users items, also can filter for only borrwed items or all items
+     * @param onlyForBorrowed
+     */
     public void search(Boolean onlyForBorrowed) {
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
 
@@ -217,14 +206,4 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         }
 
     }
-
-    private Runnable mMyRunnable = new Runnable()
-    {
-        @Override
-        public void run()
-        {
-            adapter.notifyDataSetChanged();
-        }
-    };
-
 }
