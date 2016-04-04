@@ -15,7 +15,9 @@ public class AccountController extends AppCompatActivity {
     private ArrayList<String> contactInfoHolder;
     private User tempUser;
     private ArrayList<Bid> bids;
+    private ArrayList<WarItem> items;
     ArrayList<Bid> tempBids;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +45,12 @@ public class AccountController extends AppCompatActivity {
             Log.i("size -> ", String.valueOf(bids.size()));
             for (int i = 0; i<bids.size(); i++){
                 Log.i("newBid -> ", String.valueOf(bids.get(i).getNewBid()));
-                if (bids.get(i).getNewBid() == true){
+                if (bids.get(i).getNewBid() == true && bids.get(i).getOwner().getUsername().equals(MainActivity.chosenUser.getUsername())){
                     count++;
                     tempBids.add(bids.get(i));
                 }
             }
+
             DatabaseController controller = new DatabaseController();
             for (int i = 0; i<tempBids.size(); i++){
                 Bid changedBid = tempBids.get(i);
@@ -59,6 +62,45 @@ public class AccountController extends AppCompatActivity {
                 Toast.makeText(AccountController.this, String.valueOf(count)+" new bids on your items", Toast.LENGTH_SHORT).show();
             }
             count = 0;
+
+
+
+
+
+
+
+            DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
+            getItemsTask.execute("");
+            items = getItemsTask.get();
+            int count1 = 0;
+            ArrayList<WarItem> tempItems = new ArrayList<WarItem>();
+            Log.i("size -> ", String.valueOf(items.size()));
+            for (int i = 0; i<items.size(); i++){
+                Log.i("newBid -> ", String.valueOf(items.get(i).getborrowed()));
+                if (items.get(i).getborrowed() == true && items.get(i).getBorrower().getUsername().equals(MainActivity.chosenUser.getUsername())){
+                    count1++;
+                    tempItems.add(items.get(i));
+                }
+            }
+
+            DatabaseController controller1 = new DatabaseController();
+            for (int i = 0; i<tempItems.size(); i++){
+                WarItem changedItem = tempItems.get(i);
+                changedItem.setborrowedfalse();
+                controller1.updateItem(tempItems.get(i), changedItem);
+            }
+
+            if (count1 > 0) {
+                Toast.makeText(AccountController.this, String.valueOf(count1)+" Of Your Bids Have Been Accepted. Check Location in Borrowed Products", Toast.LENGTH_LONG).show();
+            }
+            count1 = 0;
+
+
+
+
+
+
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

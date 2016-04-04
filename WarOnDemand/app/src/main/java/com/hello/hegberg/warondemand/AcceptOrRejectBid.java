@@ -86,8 +86,12 @@ public class AcceptOrRejectBid extends AppCompatActivity {
                     longitude = location1.getLongitude();
 
                 }
+                latitude = location1.getLatitude();
+                longitude = location1.getLongitude();
+
                 try {
                     BiddingChooseItem.bidItemClicked.setLocation(latitude, longitude);
+                    BiddingChooseItem.bidItemClicked.setborrowedtrue();
 
                 }catch (NullPointerException e){
                     e.printStackTrace();
@@ -96,6 +100,7 @@ public class AcceptOrRejectBid extends AppCompatActivity {
                 DatabaseController.updateItem(temp, BiddingChooseItem.bidItemClicked);
                 BiddingChooseItem.bidAccepted = true;
                 finish();
+
             }
         });
 

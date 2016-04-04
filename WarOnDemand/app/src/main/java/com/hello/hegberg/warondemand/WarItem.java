@@ -31,6 +31,7 @@ public class WarItem {
     private ArrayList<User> listOfBidders;
     private User owner;
     private User borrower;
+    public boolean borrow=false;
     //Latitude and longitude are stored in the item, but only set when the item has been bid and accepted.
     //wrong interpretation of requirement
     //private Double latitude;
@@ -52,6 +53,7 @@ public class WarItem {
         this.desc = desc;
         this.status = 0;
         this.owner = owner;
+        borrow=false;
 
     }
 
@@ -63,6 +65,7 @@ public class WarItem {
         this.cost = cost;
         this.status = 0;
         this.owner = owner;
+        borrow=false;
         //this.returning = Boolean.FALSE;
     }
 
@@ -239,6 +242,18 @@ public class WarItem {
 
     public double getLong(){
         return longitude;
+    }
+
+    public void setborrowedfalse(){
+        borrow=false;
+    }
+
+    public void setborrowedtrue(){
+        borrow=true;
+    }
+
+    public boolean getborrowed(){
+        return borrow;
     }
 
 
