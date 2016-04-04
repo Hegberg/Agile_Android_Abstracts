@@ -161,15 +161,9 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
 
         }
-        /*
-        if (viewBorrowed == false){
-            search(false);
-        } else {
-            search(true);
-        }
-        */
+        itemDeleted = null;
+        itemAdded = null;
 
-       // adapter = new WarItemAdapter(this, warItems);
         adapter.notifyDataSetChanged();
     }
 
