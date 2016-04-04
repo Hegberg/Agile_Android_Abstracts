@@ -3,6 +3,7 @@ package com.hello.hegberg.warondemand;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +25,7 @@ import java.util.concurrent.ExecutionException;
 public class AcceptOrRejectBid extends AppCompatActivity {
     private ArrayList<Bid> bids = new ArrayList<Bid>();
     private static final int PERMISSION_LOCATION_REQUEST_CODE = 1 ;
-
+    public static User specificUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,10 @@ public class AcceptOrRejectBid extends AppCompatActivity {
         bidderNameText.setText(BidChooseBid.bidClicked.getBidder().getUsername());
         bidAmountText.setText(BidChooseBid.bidClicked.getBidAmount());
         itemNameText.setText(BidChooseBid.bidClicked.getItemBidOn().getName());
-
+        ImageView imageView = (ImageView) findViewById(R.id.picView);
+        if(BidChooseBid.bidClicked.getItemBidOn().getThumbnail() != null){
+            imageView.setImageBitmap(BidChooseBid.bidClicked.getItemBidOn().getThumbnail());
+        }
         acceptBid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +120,17 @@ public class AcceptOrRejectBid extends AppCompatActivity {
                     BiddingChooseItem.bidAccepted = false;
                 }
                 finish();
+            }
+        });
+
+        bidderNameText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Need to make it so viewspecificuser grabs the specific user from the previous activity.
+                specificUser = BidChooseBid.bidClicked.getBidder();
+                Intent intent = new Intent(AcceptOrRejectBid.this, ViewSpecificUser.class).putExtra("from", "AcceptOrRejectBid");
+                startActivity(intent);
+
             }
         });
     }

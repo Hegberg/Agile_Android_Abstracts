@@ -25,7 +25,7 @@ public class BidChooseBid extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bid_choose_bid);
-
+        //TODO Fix this goddamn layout. Jesus.
         BidList = (ListView) findViewById(R.id.itemlist_choose_bid);
 
         adapter = new ArrayAdapter<Bid>(this, R.layout.bid_list_item,R.id.bidData, bids);

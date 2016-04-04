@@ -23,6 +23,9 @@ public class BiddingActivity extends AppCompatActivity {
     private WarItem itemBiddingOn;
     private ArrayList<WarItem> warItems = new ArrayList<WarItem>();
     private double bidAmount;
+    //used to figure out which user to use.
+    public static User specificUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +83,9 @@ public class BiddingActivity extends AppCompatActivity {
         itemInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BiddingActivity.this, ViewWarItemActivity.class);
+                specificUser = itemBiddingOn.getOwner();
+
+                Intent intent = new Intent(BiddingActivity.this, ViewSpecificUser.class).putExtra("from","BiddingActivity");
                 startActivity(intent);
 
             }

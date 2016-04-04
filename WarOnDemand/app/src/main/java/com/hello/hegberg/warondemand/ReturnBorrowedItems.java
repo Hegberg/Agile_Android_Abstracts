@@ -1,15 +1,18 @@
 package com.hello.hegberg.warondemand;
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class ReturnBorrowedItems extends AppCompatActivity {
 
+    public static User specificUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +28,10 @@ public class ReturnBorrowedItems extends AppCompatActivity {
         itemsDesc.setText(BorrowingActivity.borrowedItem.getDesc());
         ownersName.setText(BorrowingActivity.borrowedItem.getOwner().getUsername());
 
+        ImageView imageView = (ImageView) findViewById(R.id.picView);
+        if(BorrowingActivity.borrowedItem.getThumbnail() != null){
+            imageView.setImageBitmap(BorrowingActivity.borrowedItem.getThumbnail());
+        }
 
         getloc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +52,18 @@ public class ReturnBorrowedItems extends AppCompatActivity {
                 DatabaseController.updateItem(temp, BorrowingActivity.borrowedItem);
                 Toast.makeText(ReturnBorrowedItems.this, "Item successfully returned", Toast.LENGTH_SHORT).show();
                 finish();
+            }
+        });
+
+        ownersName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Need to make it so viewspecificuser grabs the specific user from the previous activity.
+                specificUser = BorrowingActivity.borrowedItem.getOwner();
+
+                Intent intent = new Intent(ReturnBorrowedItems.this, ViewSpecificUser.class).putExtra("from","ReturnBorrowedItems");
+                startActivity(intent);
+
             }
         });
 

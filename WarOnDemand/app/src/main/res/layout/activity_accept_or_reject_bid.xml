@@ -17,6 +17,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Item:  "
+        android:layout_gravity="center_horizontal"
+
         android:id="@+id/desc_of_item_borrow"
         android:layout_marginTop="40dp"/>
 
@@ -26,6 +28,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Medium Text"
+        android:layout_gravity="center_horizontal"
+
         android:id="@+id/name_info"/>
 
     <TextView
@@ -34,6 +38,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Bidding Amount:"
+        android:layout_gravity="center_horizontal"
+
         android:id="@+id/bidding_amount"
         android:layout_marginTop="30dp"/>
 
@@ -43,12 +49,16 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Medium Text"
+        android:layout_gravity="center_horizontal"
+
         android:id="@+id/bidding_info"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
+        android:layout_gravity="center_horizontal"
+
         android:text="Bidder's Name:"
         android:id="@+id/bidder_name"
         android:layout_marginTop="30dp"/>
@@ -56,10 +66,23 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Medium Text"
         android:id="@+id/bidder_info"/>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/picView"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/ic_launcher"/>
 
     <LinearLayout
         android:layout_width="match_parent"
