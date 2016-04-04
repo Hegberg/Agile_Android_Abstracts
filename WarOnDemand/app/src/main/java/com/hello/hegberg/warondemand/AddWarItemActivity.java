@@ -32,6 +32,11 @@ public class AddWarItemActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1234;
     private boolean pictureAdded;
 
+    /**
+     * On create AddWarItemActivity
+     * Setting the views up, and the picture buttons
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,11 @@ public class AddWarItemActivity extends AppCompatActivity {
         Button submitButton = (Button) findViewById(R.id.doneAddItem);
         submitButton.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * On click submit the values of the item are checked, to make sure they are correct
+             * The Item is then added tot he database including the image
+             * @param v
+             */
             public void onClick(View v) {
                 //The submit button creates the log. You must fill in all fields.
                 try {
@@ -93,6 +103,12 @@ public class AddWarItemActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Image information
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
@@ -102,8 +118,15 @@ public class AddWarItemActivity extends AppCompatActivity {
             pictureAdded = true;
         }
     }
+
+    /**
+     *
+     */
     private Runnable mMyRunnable = new Runnable()
     {
+        /**
+         *
+         */
         @Override
         public void run()
         {

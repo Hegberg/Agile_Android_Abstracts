@@ -34,6 +34,11 @@ public class Blacklist extends AppCompatActivity {
 
     private User remove=null;
 
+    /**
+     * Blacklist on create. Load the users that are blacklisted already.
+     * Allow the user to enter new users to blacklist
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,12 @@ public class Blacklist extends AppCompatActivity {
 
 
         done.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click done
+             * Check the Database to see if the user exists
+             * If they do the user is added to the blacklist
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 try {
@@ -105,6 +116,15 @@ public class Blacklist extends AppCompatActivity {
         BLlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //http://stackoverflow.com/questions/17851687/how-to-handle-the-click-event-in-listview-in-android
             //User wishes to edit a log.
+
+            /**
+             * On click item in list
+             * Allow the user to remove user from blacklist
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -150,7 +170,9 @@ public class Blacklist extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Adding a user to the blacklist
+     */
     private void add() {
 
         ArrayList<User> list = user.getblacklist();
@@ -169,6 +191,10 @@ public class Blacklist extends AppCompatActivity {
     }
 
 
+    /**
+     * Removing user from database
+     * @param Remove
+     */
     private void remove(User Remove) {
 
         user.removeblacklist(Remove);
