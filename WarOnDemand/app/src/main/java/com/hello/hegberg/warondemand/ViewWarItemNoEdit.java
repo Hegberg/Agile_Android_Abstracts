@@ -22,7 +22,6 @@ public class ViewWarItemNoEdit extends AppCompatActivity {
         try {
             biddersName.setText(ViewMyItemsActivity.itemClicked.getBorrower().getUsername());
         } catch (NullPointerException e) {
-
             biddersName.setText("No current borrower");
         }
     }
