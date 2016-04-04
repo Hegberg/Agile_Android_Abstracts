@@ -48,15 +48,19 @@ public class ViewWarItemActivity extends AppCompatActivity {
     private ArrayAdapter<WarItem> adapter;
     private User owner = MainActivity.chosenUser;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created, the War Item we are editing.
+    */
     private WarItem preEditedLog;
+    /**
+     * The final result of our editing, what we are going to replace the preEditedLog with.
+     */
     private WarItem editedLog;
 
     private ImageButton pictureButton;
     private Bitmap thumbnail;
     static final int REQUEST_IMAGE_CAPTURE = 1234;
     private boolean pictureAdded;
-    private boolean pictureDeleted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,6 +167,9 @@ public class ViewWarItemActivity extends AppCompatActivity {
         super.onStart();
     }
 
+    /**
+     * Grabs the specific War Item and allows us to edit it.
+     */
     public void search(){
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
 

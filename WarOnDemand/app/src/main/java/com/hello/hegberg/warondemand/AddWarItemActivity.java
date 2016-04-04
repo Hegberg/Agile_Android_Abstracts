@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * This activity is used to add new War Items to a users item list.
+ */
 public class AddWarItemActivity extends AppCompatActivity {
 
     //This activity is used to create a new Waritem, though it may be temporary.
