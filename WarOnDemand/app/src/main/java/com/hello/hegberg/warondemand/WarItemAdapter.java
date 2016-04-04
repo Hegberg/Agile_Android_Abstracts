@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.graphics.BitmapFactory;
 import java.util.ArrayList;
+import android.content.res.*;
+
 
 /**
  * Converts any list of War Items so that the image of the item can be displayed beside the War Item's
@@ -41,12 +43,20 @@ public class WarItemAdapter extends ArrayAdapter<WarItem>{
          * Populate the data into the template view using the data object
          */
         itemText.setText(message);
+        Resources res = getContext().getResources();
 
-        /**
-         * Default image is whatever is contained in the src of the xml.
-         */
+        //I was not sure on how to make a default image, so this is my attempt.
+        //Default image is whatever is contained in the src of the xml.
+        if(warItem.getThumbnail() != null) {
+            thumbnail = warItem.getThumbnail();
+        }
+        else {
+            thumbnail = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher);
+        }
 
-        thumbnail = warItem.getThumbnail();
+
+        //thumbnail = img.setIsmageResource(R.mipmap.logo1_launcher);
+
         itemImage.setImageBitmap(thumbnail);
 
         /** Return the completed view to render on screen
