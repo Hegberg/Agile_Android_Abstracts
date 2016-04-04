@@ -16,6 +16,7 @@ public class AccountController extends AppCompatActivity {
     private User tempUser;
     private ArrayList<Bid> bids;
     private ArrayList<WarItem> items;
+    private ArrayList<Bid> usersBidAmount;
     ArrayList<Bid> tempBids;
 
 
@@ -28,10 +29,7 @@ public class AccountController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_controller);
 
-        //TODO: Prompt signing
-        //TODO: Pulls profile
 
-        // Initialize Buttons
         Button editProfile = (Button) findViewById(R.id.editProfile);
         Button myProducts = (Button) findViewById(R.id.myProducts);
         Button search = (Button) findViewById(R.id.searchForItems);
@@ -39,7 +37,9 @@ public class AccountController extends AppCompatActivity {
         Button borrowedProducts = (Button) findViewById(R.id.borrowedProducts);
         Button blacklist = (Button) findViewById(R.id.blacklist);
 
-        //bid notification functionality
+        /**
+         * bid and borrowed notification functionality
+         */
         try {
             DatabaseController.GetBids getBidsTask = new DatabaseController.GetBids();
             getBidsTask.execute("");
@@ -66,14 +66,9 @@ public class AccountController extends AppCompatActivity {
             }
 
             if (count > 0) {
-                Toast.makeText(AccountController.this, String.valueOf(count)+" new bids on your items", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AccountController.this, String.valueOf(count)+" new bids on your items", Toast.LENGTH_LONG).show();
             }
             count = 0;
-
-
-
-
-
 
 
             DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
@@ -102,12 +97,6 @@ public class AccountController extends AppCompatActivity {
             }
             count1 = 0;
 
-
-
-
-
-
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -115,8 +104,6 @@ public class AccountController extends AppCompatActivity {
         }
 
 
-        //TODO: Create classes to go to with products, bids, borrowed.
-        // Create Buttons
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             /**
@@ -125,12 +112,7 @@ public class AccountController extends AppCompatActivity {
              */
             @Override
             public void onClick(View v) {
-                //MainActivity.profileOption = 1;
-                //startActivity(new Intent(AccountController.this, AddEditAccount.class));
-                //TODO: make this so hitting back works properly, aka start new activity
                 startActivity(new Intent(AccountController.this, EditActivity.class));
-
-
             }
         });
 
@@ -160,11 +142,16 @@ public class AccountController extends AppCompatActivity {
         myBids.setOnClickListener(new View.OnClickListener() {
             /**
              * On click my bids start new intent
+             * Checks to see if you have bids to view first
              * @param v
              */
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AccountController.this, BiddingChooseItem.class));
+                if (search() > 0) {
+                    startActivity(new Intent(AccountController.this, BiddingChooseItem.class));
+                } else {
+                    Toast.makeText(AccountController.this,"No current bids on your items", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -191,5 +178,33 @@ public class AccountController extends AppCompatActivity {
             }
         });
 
+    }
+
+    /**
+     * Checks how many bids the user has
+     * @return count
+     */
+    private int search(){
+        int count = 0;
+        try {
+            DatabaseController.GetBids getBidsTask = new DatabaseController.GetBids();
+            getBidsTask.execute("");
+            usersBidAmount = getBidsTask.get();
+            ArrayList<Bid> tempBids = new ArrayList<Bid>();
+            Log.i("size -> ", String.valueOf(items.size()));
+            for (int i = 0; i < usersBidAmount.size(); i++) {
+                Log.i("newBid on -> ", String.valueOf(usersBidAmount.get(i).getItemBidOn()));
+                Log.i("user -> ", usersBidAmount.get(i).getOwner().getUsername());
+                if (usersBidAmount.get(i).getOwner().getUsername().equals(MainActivity.chosenUser.getUsername())) {
+                    count++;
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        Log.i("count -> ", String.valueOf(count));
+        return count;
     }
 }
