@@ -16,28 +16,26 @@ import java.util.ArrayList;
 import io.searchbox.annotations.JestId;
 
 /**
- * Created by unkno on 2016-02-11.
+ * The main class that contains all the information about the items that the users of the app can bid
+ * on and own.
  */
 public class WarItem {
     private String name;
     private Double cost;
     private String desc;
-    //Using an int for ease of coding in status.
-    //0 for Available
-    //1 for bid on
-    //2 for borrowed
+    /**Status of the War Item.
+     * Used an int for ease of coding in status.
+     * 0 for Available
+     * 1 for bid on
+     * 2 for borrowed
+     */
     private Integer status;
     private Boolean bidOn;
     private ArrayList<User> listOfBidders;
     private User owner;
     private User borrower;
     public boolean borrow=false;
-    //Latitude and longitude are stored in the item, but only set when the item has been bid and accepted.
-    //wrong interpretation of requirement
-    //private Double latitude;
-    //private Double longitude;
-    //private BufferedImage image; //Failed to get this to work.
-//    private Image image = null;
+
     DecimalFormat twoDec = new DecimalFormat("#.##");
 
     private transient Bitmap thumbnail;
@@ -47,6 +45,13 @@ public class WarItem {
     Double latitude=0.0;
     Double longitude=0.0;
 
+    /**
+     * Constructor
+     * @param name
+     * @param desc
+     * @param cost
+     * @param owner
+     */
     public WarItem(String name, String desc, Double cost, User owner ) {
         this.name = name;
         this.cost = cost;
@@ -55,18 +60,6 @@ public class WarItem {
         this.owner = owner;
         borrow=false;
 
-    }
-
-
-    public WarItem(String name, Double cost, User owner) {
-        this.name = name;
-        this.desc = "Default Description";
-        this.status = 0;
-        this.cost = cost;
-        this.status = 0;
-        this.owner = owner;
-        borrow=false;
-        //this.returning = Boolean.FALSE;
     }
 
     public String getId() {
@@ -141,37 +134,6 @@ public class WarItem {
     public void setListOfBidders(ArrayList<User> listOfBidders) {
         this.listOfBidders = listOfBidders;
     }
-    /*
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-    */
-    //I'll be honest, this is probably just a temporary measure. I'm not sure how we want to
-    //Actually want to do image in the actual product. Additionally, I, for some reason, could not
-    //use bufferedimage like every guide was telling me to.
-//    public Image getImage() {
-//        return image;
-//    }
-//
-//    public void setImage(Image image) {
-//        this.image = image;
-//    }
 
     public void AddBidder(User userAdded) {
         this.listOfBidders.add(userAdded);
@@ -180,8 +142,10 @@ public class WarItem {
         this.listOfBidders.remove(userRemoved);
     }
 
-
-    //causes error, so commented out to test other things, uncomment if you want to use
+    /**
+     * Converts the War Item's infomation into a printable string to display in the app.
+     * @return A printable string that contains the information about the War Item
+     */
     @Override
     public String toString() {
         //Allows printing of the class.
@@ -206,6 +170,10 @@ public class WarItem {
         return outString;
     }
 
+    /**
+     * Adds a thumbnail to the item
+     * @param newThumbnail
+     */
     public void addThumbnail(Bitmap newThumbnail){
         if (newThumbnail != null) {
             thumbnail = newThumbnail;
@@ -226,11 +194,11 @@ public class WarItem {
         return thumbnail;
     }
 
-    public void deleteThumbnail(){
-        thumbnail = null;
-        thumbnailBase64 = null;
-    }
-
+    /**
+     * set location of an item
+     * @param lat
+     * @param lng
+     */
     public void setLocation(Double lat, Double lng){
         latitude = lat;
         longitude = lng;

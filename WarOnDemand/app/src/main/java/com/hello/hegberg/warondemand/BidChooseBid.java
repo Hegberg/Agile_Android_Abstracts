@@ -21,6 +21,11 @@ public class BidChooseBid extends AppCompatActivity {
     private ArrayAdapter<Bid> adapter;
     public static Bid bidClicked;
 
+    /**
+     * On Create BidChooseBid
+     * Loading all the items with bids on them
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,18 +41,29 @@ public class BidChooseBid extends AppCompatActivity {
         BidList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //http://stackoverflow.com/questions/17851687/how-to-handle-the-click-event-in-listview-in-android
             //User wishes to edit a log.
+
+            /**
+             * On item click
+             * All the bids on the item clicked is returned.
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 bidClicked = bids.get(position);
                 Intent intent = new Intent(BidChooseBid.this, AcceptOrRejectBid.class);
                 startActivity(intent);
-                Handler myHandler = new Handler();
-                myHandler.postDelayed(mMyRunnable, 1000);
                 adapter.notifyDataSetChanged();
             }
         });
     }
 
+    /**
+     * onStart checks to see if any remaining bids on item, if not returns to previous view
+     *
+     */
     protected void onStart(){
         super.onStart();
         if (BiddingChooseItem.bidAccepted == true){
@@ -58,9 +74,11 @@ public class BidChooseBid extends AppCompatActivity {
         }
     }
 
+    /**
+     * gets all current bids on an the item clicked in previous view
+     */
     public void search(){
         DatabaseController.GetBids getBidsTask = new DatabaseController.GetBids();
-
         try {
 
             for (int i=bids.size() - 1; i>=0; i--) {
@@ -70,10 +88,10 @@ public class BidChooseBid extends AppCompatActivity {
             WarItem temp;
             getBidsTask.execute("");
             bidsPreSearch = getBidsTask.get();
-            Log.i("size-> ", "" + bidsPreSearch.size());
+            //Log.i("size-> ", "" + bidsPreSearch.size());
             for (int i=0; i<bidsPreSearch.size(); i++){
                 temp = BiddingChooseItem.bidItemClicked;
-                Log.i("item->",""+bidsPreSearch.get(i).getItemBidOn().getName() );
+                //Log.i("item->",""+bidsPreSearch.get(i).getItemBidOn().getName() );
                 if (temp.getName().equals(bidsPreSearch.get(i).getItemBidOn().getName())) {
                     bids.add(bidsPreSearch.get(i));
                 }
@@ -83,16 +101,6 @@ public class BidChooseBid extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
     }
-
-    private Runnable mMyRunnable = new Runnable()
-    {
-        @Override
-        public void run()
-        {
-            adapter.notifyDataSetChanged();
-        }
-    };
 
 }

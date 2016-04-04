@@ -10,9 +10,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * This class allows the user to return borrowed items
+ * and also get the location of items to pick up.
+ */
 public class ReturnBorrowedItems extends AppCompatActivity {
 
     public static User specificUser;
+
+    /**
+     * onCreate ReturnBorrowedItems
+     * This allows the borrower to return an item
+     * Also user can get the location of this product if not picked up
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,17 +45,26 @@ public class ReturnBorrowedItems extends AppCompatActivity {
         }
 
         getloc.setOnClickListener(new View.OnClickListener() {
+            /**
+             * After a item has been borrowed the user must pick it up
+             * The location of the item is recorded, and this button allows the
+             * user to use google maps to get directions to the item
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ReturnBorrowedItems.this, MapActivity.class);
                 startActivity(intent);
-
-
-
             }
         });
 
         returnItem.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick returnItem
+             * The item is returned to the owner.
+             * removed from borrowers possession
+             * @param v
+             */
             public void onClick(View v) {
                 WarItem temp = BorrowingActivity.borrowedItem;
                 BorrowingActivity.borrowedItem.setStatus(0);
@@ -56,6 +76,11 @@ public class ReturnBorrowedItems extends AppCompatActivity {
         });
 
         ownersName.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick ownersName
+             * This allows the borrower to get contact information about the seller
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 //TODO Need to make it so viewspecificuser grabs the specific user from the previous activity.

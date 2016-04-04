@@ -17,12 +17,15 @@ public class MainActivity extends AppCompatActivity {
 
     //initialize variables
     //profileOption variable is for selecting the correct interface in AddEditAccount
-    //profileOption 1 = ViewAccount, 2 = CreateAccount, 3 = EditAccount
     Boolean validUsername = false;
-    public static int profileOption;
     public static User chosenUser = null;
     private ArrayList<User> checkAgainst = new ArrayList<User>();
 
+    /**
+     * onCreate MainActivity
+     * Here the user can login or register
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,15 +35,29 @@ public class MainActivity extends AppCompatActivity {
         Button createUser = (Button) findViewById(R.id.createProfile);
         Button signIn = (Button) findViewById(R.id.signIn);
         final EditText username = (EditText) findViewById(R.id.usernameSignIn);
+
         createUser.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick createUser
+             * The user is redirected to  AddEditAccount to register
+             *
+             * @param v
+             */
             @Override
             public void onClick(View v) {
-                MainActivity.profileOption = 2; // initializes createAccount interface in AddEditAccount.
                 startActivity(new Intent(MainActivity.this, AddEditAccount.class));
             }
         });
 
         signIn.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * onClick signIn
+             * The username is matched to a username in the database
+             * If the username is valid, the user is logged in.
+             * Set to AccountController
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 try {

@@ -20,6 +20,11 @@ public class BorrowingActivity extends AppCompatActivity {
     private ArrayAdapter<WarItem> adapter;
     public static WarItem borrowedItem;
 
+    /**
+     * onCreate BorrowingActivity
+     * Loads all the items being currently borrowed by the user.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +39,14 @@ public class BorrowingActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
         ItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * OnClick ItemList
+             * The items information is shown in more detail in ReturnBorrowedItems.class
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
             //http://stackoverflow.com/questions/17851687/how-to-handle-the-click-event-in-listview-in-android
             //User wishes to edit a log.
             @Override
