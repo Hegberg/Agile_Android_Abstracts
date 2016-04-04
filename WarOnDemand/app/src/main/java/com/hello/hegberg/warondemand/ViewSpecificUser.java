@@ -19,8 +19,6 @@ public class ViewSpecificUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_specific_user);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         final TextView nameInfo = (TextView) findViewById(R.id.name_info);
         final TextView emailInfo = (TextView) findViewById(R.id.email_info);
         final TextView phoneInfo = (TextView) findViewById(R.id.phone_info);
