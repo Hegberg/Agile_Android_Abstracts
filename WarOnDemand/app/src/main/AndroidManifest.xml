@@ -73,6 +73,11 @@
 
         <activity android:name=".ReturnBorrowedItems" />
         <activity android:name=".ViewWarItemNoEdit"></activity>
+        <activity
+            android:name=".ViewSpecificUser"
+            android:label="@string/title_activity_view_specific_user"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
