@@ -1,7 +1,10 @@
 package com.hello.hegberg.warondemand;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,10 +34,11 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import android.os.Handler;
 
-
+/**
+ * While poorly named, this is the activity that allows a user to view a specific item and edit it.
+ */
 public class ViewWarItemActivity extends AppCompatActivity {
 
-    //Poorly named, but this is the activity that allows user to view a specific item, and edit it.
     private ListView ItemList;
     private User temp;
 
@@ -46,6 +51,13 @@ public class ViewWarItemActivity extends AppCompatActivity {
     /** Called when the activity is first created. */
     private WarItem preEditedLog;
     private WarItem editedLog;
+
+    private ImageButton pictureButton;
+    private Bitmap thumbnail;
+    static final int REQUEST_IMAGE_CAPTURE = 1234;
+    private boolean pictureAdded;
+    private boolean pictureDeleted;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,16 +66,26 @@ public class ViewWarItemActivity extends AppCompatActivity {
 
         Button saveButton = (Button) findViewById(R.id.saveEditOfItem);
         Button deleteButton = (Button) findViewById(R.id.delete);
-
-        //Get the entry to view and edit.
+        Button deleteImageButton = (Button) findViewById(R.id.deleteImage);
+        /**
+         * Get the entry to view and edit.
+         */
         preEditedLog = warItems.get(ViewMyItemsActivity.editPos);
 
-        //Fills in text fields with current data.
-        //DOES NOT WORK
         ((EditText) findViewById(R.id.name_entered)).setText(preEditedLog.getName());
         ((EditText) findViewById(R.id.desc_entered)).setText(preEditedLog.getDesc());
         ((EditText) findViewById(R.id.cost_entered)).setText(preEditedLog.getCost().toString());
 
+        pictureButton = (ImageButton) findViewById(R.id.addPicButton);
+        pictureButton.setImageBitmap(preEditedLog.getThumbnail());
+        pictureButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -86,12 +108,20 @@ public class ViewWarItemActivity extends AppCompatActivity {
                     } else {
                         //No invalid fields, can commit.
                         //Everything is fine, commit changes.
-                        editedLog = new WarItem(name,desc,cost,owner);
+                        editedLog = new WarItem(name, desc, cost, owner);
+                        if (pictureAdded == true) {
+                            editedLog.addThumbnail(thumbnail);
+                        } else {
+                            editedLog.addThumbnail(preEditedLog.getThumbnail());
+                        }
                         DatabaseController.updateItem(preEditedLog, editedLog);
+                        ViewMyItemsActivity.deleteWarItems(preEditedLog);
+                        ViewMyItemsActivity.addWarItems(editedLog);
 
                         //delays return so server has time to update
-                        Handler myHandler = new Handler();
-                        myHandler.postDelayed(mMyRunnable, 1000);
+                        //Handler myHandler = new Handler();
+                        //myHandler.postDelayed(mMyRunnable, 1000);
+                        finish();
 
                     }
                 } catch (NumberFormatException e) {
@@ -112,13 +142,21 @@ public class ViewWarItemActivity extends AppCompatActivity {
                 //delete.execute(preEditedLog.getName());
 
                 DatabaseController.deleteItem(preEditedLog);
-                Handler myHandler = new Handler();
-                myHandler.postDelayed(mMyRunnable, 1000);
+                ViewMyItemsActivity.deleteWarItems(preEditedLog);
+                //Handler myHandler = new Handler();
+                //myHandler.postDelayed(mMyRunnable, 1000);
                 finish();
 
             }
         });
+        deleteImageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                pictureAdded = true;
+                thumbnail = null;
+                pictureButton.setImageBitmap(null);
 
+            }
+        });
     }
     @Override
     protected void onStart(){
@@ -151,8 +189,16 @@ public class ViewWarItemActivity extends AppCompatActivity {
         }
 
     }
-    private Runnable mMyRunnable = new Runnable()
-    {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            Bundle extras = data .getExtras();
+            thumbnail = (Bitmap) extras.get("data");
+            pictureButton.setImageBitmap(thumbnail);
+            pictureAdded = true;
+        }
+    }
+    private Runnable mMyRunnable = new Runnable() {
         @Override
         public void run()
         {

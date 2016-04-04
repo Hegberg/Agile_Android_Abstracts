@@ -22,6 +22,7 @@ public class BiddingChooseItem extends AppCompatActivity {
 
     private ArrayAdapter<WarItem> adapter;
     public static WarItem bidItemClicked;
+    public static Boolean bidAccepted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,8 @@ public class BiddingChooseItem extends AppCompatActivity {
 
         BidOnItemList = (ListView) findViewById(R.id.itemlist_bids);
 
-        adapter = new ArrayAdapter<WarItem>(this, android.R.layout.simple_spinner_item, bidOnItems);
+        //adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item,R.id.itemData, bidOnItems);
+        adapter = new WarItemAdapter(this, bidOnItems);
         BidOnItemList.setAdapter(adapter);
         search();
         adapter.notifyDataSetChanged();
@@ -48,6 +50,15 @@ public class BiddingChooseItem extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    protected void onStart(){
+        super.onStart();
+        if (BiddingChooseItem.bidAccepted == true){
+            bidAccepted = false;
+        }
+        search();
+        adapter.notifyDataSetChanged();
     }
 
     public void search(){

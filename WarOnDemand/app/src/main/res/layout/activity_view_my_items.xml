@@ -37,6 +37,13 @@
 
     </ListView>
 
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Item"
+        android:layout_gravity="center_horizontal" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,10 +51,10 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"/>
+            android:text="View Only Your Borrowed Items"
+            android:id="@+id/show_only_borrowed_items" />
 
 
     </LinearLayout>

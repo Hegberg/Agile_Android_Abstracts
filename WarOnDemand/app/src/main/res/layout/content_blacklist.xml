@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Blacklist"
+    tools:showIn="@layout/activity_blacklist"
+    android:background="#000000">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:text="Here you can blacklist users, and never see any of their items"
+        android:id="@+id/info."
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Enter Username:"
+        android:id="@+id/userBLed."
+        android:textColor="#ffffff"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/info."/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="53dp"
+        android:id="@+id/usernameEntered"
+        android:layout_below="@+id/userBLed."
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#134260"
+        android:clickable="false"
+        android:textColor="#ffffff" />
+
+    <ListView
+        android:id="@+id/BLlist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:scrollbars="vertical"
+        android:textColor="#ffffff"
+        android:background="#134260"
+        tools:listitem="@layout/list_item"
+        android:layout_below="@+id/done">
+    </ListView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:id="@+id/done"
+        android:gravity="center"
+        android:layout_below="@+id/usernameEntered"
+        android:layout_toRightOf="@+id/userBLed."
+        android:layout_toEndOf="@+id/userBLed." />
+</RelativeLayout>

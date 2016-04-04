@@ -20,8 +20,8 @@ import java.util.concurrent.ExecutionException;
 public class SearchingActivity extends AppCompatActivity {
     private String keyword;
 
-    private ArrayList<WarItem> itemsPostFilter = null;
-
+    private ArrayList<WarItem> itemsPostFilter = new ArrayList<>();
+    private ArrayList<WarItem> itemsTemp = new ArrayList<>();
     private ArrayAdapter<WarItem> adapter;
 
     public static WarItem itemClicked;
@@ -36,20 +36,15 @@ public class SearchingActivity extends AppCompatActivity {
         ListView listOfItems = (ListView) findViewById(R.id.searchItemsList);
 
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
-        try {
-            getItemsTask.execute("");
-            itemsPostFilter = getItemsTask.get();
-        }  catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+
+        search("");
 
         Button search = (Button) findViewById(R.id.searchSearching);
-        adapter = new ArrayAdapter<WarItem>(this, android.R.layout.simple_list_item_1, itemsPostFilter);
+        //adapter = new ArrayAdapter<WarItem>(this, android.R.layout.simple_list_item_1, itemsPostFilter);
+        adapter = new WarItemAdapter(this, itemsPostFilter);
         listOfItems.setAdapter(adapter);
 
-        search.setOnClickListener(new View.OnClickListener(){
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 keyword = keywordText.getText().toString();
@@ -66,13 +61,22 @@ public class SearchingActivity extends AppCompatActivity {
                 itemClicked = itemsPostFilter.get(position);
                 Intent intent = new Intent(SearchingActivity.this, BiddingActivity.class);
                 startActivity(intent);
-                Handler myHandler = new Handler();
-                myHandler.postDelayed(mMyRunnable, 1000);
-                adapter.notifyDataSetChanged();
             }
         });
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("keyword-> ", "" + keyword);
+        if (keyword != null) {
+            search(keyword);
+        } else {
+            search("");
+        }
+        adapter.notifyDataSetChanged();
     }
 
     public void search(String searchTerm){
@@ -92,11 +96,20 @@ public class SearchingActivity extends AppCompatActivity {
                 temp = itemsPreFilter.get(i).getStatus();
                 Log.i("status->",""+itemsPreFilter.get(i).getStatus() );
                 if ((temp != 2 && itemsPreFilter.get(i).getName().contains(searchTerm))) {
-                    itemsPostFilter.add(itemsPreFilter.get(i));
+
+                    if(itemsPreFilter.get(i).getOwner().getUsername()!= MainActivity.chosenUser.getUsername()) {
+                        itemsPostFilter.add(itemsPreFilter.get(i));
+                    }
+
                 }
-                if ((temp != 2 && itemsPreFilter.get(i).getDesc().contains(searchTerm))) {
-                    itemsPostFilter.add(itemsPreFilter.get(i));
+                else if ((temp != 2 && itemsPreFilter.get(i).getDesc().contains(searchTerm))) {
+
+                    if(itemsPreFilter.get(i).getOwner().getUsername()!= MainActivity.chosenUser.getUsername()) {
+                        itemsPostFilter.add(itemsPreFilter.get(i));
+                    }
+
                 }
+
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -105,12 +118,4 @@ public class SearchingActivity extends AppCompatActivity {
         }
 
     }
-    private Runnable mMyRunnable = new Runnable()
-    {
-        @Override
-        public void run()
-        {
-            adapter.notifyDataSetChanged();
-        }
-    };
 }

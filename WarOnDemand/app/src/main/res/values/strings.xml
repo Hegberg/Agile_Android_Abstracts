@@ -10,4 +10,7 @@
     <string name="title_activity_add_war_item">AddWarItemActivity</string>
     <string name="title_activity_view_war_item">ViewWarItemActivity</string>
     <string name="title_activity_view_my_items">ViewMyItemsActivity</string>
+    <string name="title_activity_blacklist">blacklist</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_view_specific_user">ViewSpecificUser</string>
 </resources>

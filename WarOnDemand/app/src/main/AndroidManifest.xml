@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".DatabaseController"
@@ -15,6 +17,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,7 +55,30 @@
         <activity android:name=".BiddingChooseItem" />
         <activity android:name=".BiddingChooseBid" />
         <activity android:name=".AcceptOrRejectBid" />
-        <activity android:name=".BidChooseBid"></activity>
+        <activity android:name=".BidChooseBid" />
+        <activity
+            android:name=".Blacklist"
+            android:label="@string/title_activity_blacklist"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MapActivity"
+            android:label="@string/title_activity_map"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity android:name=".ReturnBorrowedItems" />
+        <activity android:name=".ViewWarItemNoEdit"></activity>
+        <activity
+            android:name=".ViewSpecificUser"
+            android:label="@string/title_activity_view_specific_user"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

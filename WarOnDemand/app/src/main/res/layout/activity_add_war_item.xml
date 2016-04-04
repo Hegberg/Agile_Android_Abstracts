@@ -16,7 +16,7 @@
         android:textColor="#ffffff"
         android:text="Name: "
         android:layout_marginTop="30dp"
-        android:id="@+id/name" />
+        android:id="@+id/desc_of_item_borrow" />
 
     <EditText
         android:layout_width="match_parent"
@@ -32,10 +32,7 @@
         android:textColor="#ffffff"
         android:text="Minimum Starting Bid Price: "
         android:id="@+id/cost"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/name"
-        android:layout_alignStart="@+id/name" />
+        android:layout_marginTop="30dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -63,11 +60,26 @@
         android:id="@+id/descriptionItem"
         android:background="#134260" />
 
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/addPicButton"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@android:drawable/ic_menu_camera"
+            android:layout_gravity="center_horizontal" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity ="bottom|center_horizontal"
         android:orientation="horizontal">
+
+
 
         <Button
 
@@ -80,7 +92,10 @@
             android:layout_gravity="bottom" />
 
 
-
     </LinearLayout>
+
+
+
+
 
 </LinearLayout>

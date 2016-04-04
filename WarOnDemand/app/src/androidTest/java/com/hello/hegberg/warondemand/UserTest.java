@@ -19,8 +19,6 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         String number = "780-2212";
 
         User user = new User(username, email, number);
-
-
     }
 
     public void testReturnContactInfo(){

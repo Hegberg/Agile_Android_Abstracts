@@ -1,19 +1,23 @@
 package com.hello.hegberg.warondemand;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class AccountController extends AppCompatActivity {
     private ArrayList<String> contactInfoHolder;
     private User tempUser;
+    private ArrayList<Bid> bids;
+    private ArrayList<WarItem> items;
+    ArrayList<Bid> tempBids;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +33,83 @@ public class AccountController extends AppCompatActivity {
         Button search = (Button) findViewById(R.id.searchForItems);
         Button myBids = (Button) findViewById(R.id.myBids);
         Button borrowedProducts = (Button) findViewById(R.id.borrowedProducts);
+        Button blacklist = (Button) findViewById(R.id.blacklist);
 
         //bid notification functionality
-        /*
-        if (){
+        try {
+            DatabaseController.GetBids getBidsTask = new DatabaseController.GetBids();
+            getBidsTask.execute("");
+            bids = getBidsTask.get();
+            int count = 0;
+            ArrayList<Bid> tempBids = new ArrayList<Bid>();
+            Log.i("size -> ", String.valueOf(bids.size()));
+            for (int i = 0; i<bids.size(); i++){
 
+                Log.i("owner->", bids.get(i).getOwner().getUsername());
+
+                if (bids.get(i).getNewBid() == true && bids.get(i).getOwner().getUsername().equals(MainActivity.chosenUser.getUsername())){
+                    count++;
+                    tempBids.add(bids.get(i));
+                }
+            }
+
+            DatabaseController controller = new DatabaseController();
+            Log.i("size of changedBid -> ", String.valueOf(tempBids.size()));
+            for (int i = 0; i<tempBids.size(); i++){
+                Bid changedBid = tempBids.get(i);
+                changedBid.setNewBid(false);
+                controller.updateBids(tempBids.get(i), changedBid);
+            }
+
+            if (count > 0) {
+                Toast.makeText(AccountController.this, String.valueOf(count)+" new bids on your items", Toast.LENGTH_SHORT).show();
+            }
+            count = 0;
+
+
+
+
+
+
+
+            DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
+            getItemsTask.execute("");
+            items = getItemsTask.get();
+            int count1 = 0;
+            ArrayList<WarItem> tempItems = new ArrayList<WarItem>();
+            Log.i("size -> ", String.valueOf(items.size()));
+            for (int i = 0; i<items.size(); i++){
+                Log.i("newBid -> ", String.valueOf(items.get(i).getborrowed()));
+                if (items.get(i).getborrowed() == true && items.get(i).getBorrower().getUsername().equals(MainActivity.chosenUser.getUsername())){
+                    count1++;
+                    tempItems.add(items.get(i));
+                }
+            }
+
+            DatabaseController controller1 = new DatabaseController();
+            for (int i = 0; i<tempItems.size(); i++){
+                WarItem changedItem = tempItems.get(i);
+                changedItem.setborrowedfalse();
+                controller1.updateItem(tempItems.get(i), changedItem);
+            }
+
+            if (count1 > 0) {
+                Toast.makeText(AccountController.this, String.valueOf(count1)+" Of Your Bids Have Been Accepted. Check Location in Borrowed Products", Toast.LENGTH_LONG).show();
+            }
+            count1 = 0;
+
+
+
+
+
+
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
-        */
+
 
         //TODO: Create classes to go to with products, bids, borrowed.
         // Create Buttons
@@ -72,14 +146,21 @@ public class AccountController extends AppCompatActivity {
                 startActivity(new Intent(AccountController.this, BiddingChooseItem.class));
             }
         });
-        /*
+
+        blacklist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AccountController.this, Blacklist.class));
+            }
+        });
+
         borrowedProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AccountController.this, <Insert Class>. class));
+                startActivity(new Intent(AccountController.this, BorrowingActivity.class));
 
             }
         });
-        */
+
     }
 }
