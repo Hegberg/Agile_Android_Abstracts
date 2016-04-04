@@ -39,6 +39,8 @@ public class ViewMyItemsActivity extends AppCompatActivity {
     //To edit a log we must, gasp, use a global variable that contains its index number.
     public static int editPos;
     public static WarItem itemClicked;
+    private static WarItem itemAdded;
+    private static WarItem itemDeleted;
     private boolean viewBorrowed = false;
     public ArrayAdapter<WarItem> getAdapter() {
         return adapter;
@@ -54,6 +56,8 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         Button addButton = (Button) findViewById(R.id.add);
         ImageView pictureButton = (ImageView) findViewById(R.id.pictureButton);
 
+        itemAdded = null;
+        itemDeleted = null;
         ItemList = (ListView) findViewById(R.id.itemlist);
 
        // adapter = new ArrayAdapter<WarItem>(this, R.layout.list_item, R.id.itemData, warItems);
@@ -127,21 +131,49 @@ public class ViewMyItemsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        //updates items without having to access the database. Rejoice!!! Speed!!!
+        try {
+            Log.i("remove item ->", "" + itemDeleted);
+
+            Log.i("item->", "" + warItems.contains(itemDeleted));
+
+            if (itemDeleted != null) {
+                for (int i = 0; i <warItems.size(); i++){
+                    Log.i("items->", "" + warItems.get(i).getName());
+                    Log.i("items2->", "" + itemDeleted.getName());
+                    Log.i("itemsistrue->", "" + warItems.get(i).getName().equals(itemDeleted.getName()));
+                    if (warItems.get(i).getName().equals(itemDeleted.getName())){
+                        warItems.remove(i);
+                    }
+                }
+            }
+            if (itemAdded != null) {
+                warItems.add(itemAdded);
+            }
+        } catch (NullPointerException e) {
+
+        }
+        /*
         if (viewBorrowed == false){
             search(false);
         } else {
             search(true);
         }
+        */
+
        // adapter = new WarItemAdapter(this, warItems);
         adapter.notifyDataSetChanged();
     }
 
-    private Runnable mMyRunnable = new Runnable() {
-        @Override
-        public void run() {
-            adapter.notifyDataSetChanged();
-        }
-    };
+    //Skipping databse function
+    public static void addWarItems(WarItem itemTOAdd){
+        itemAdded = itemTOAdd;
+    }
+
+    //Skipping database function
+    public static void deleteWarItems(WarItem itemToDelete){
+        itemDeleted = itemToDelete;
+    }
 
     public void search(Boolean onlyForBorrowed) {
         DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
@@ -178,5 +210,14 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         }
 
     }
+
+    private Runnable mMyRunnable = new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            adapter.notifyDataSetChanged();
+        }
+    };
 
 }

@@ -34,10 +34,11 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import android.os.Handler;
 
-
+/**
+ * While poorly named, this is the activity that allows a user to view a specific item and edit it.
+ */
 public class ViewWarItemActivity extends AppCompatActivity {
 
-    //Poorly named, but this is the activity that allows user to view a specific item, and edit it.
     private ListView ItemList;
     private User temp;
 
@@ -66,7 +67,9 @@ public class ViewWarItemActivity extends AppCompatActivity {
         Button saveButton = (Button) findViewById(R.id.saveEditOfItem);
         Button deleteButton = (Button) findViewById(R.id.delete);
         Button deleteImageButton = (Button) findViewById(R.id.deleteImage);
-        //Get the entry to view and edit.
+        /**
+         * Get the entry to view and edit.
+         */
         preEditedLog = warItems.get(ViewMyItemsActivity.editPos);
 
         ((EditText) findViewById(R.id.name_entered)).setText(preEditedLog.getName());
@@ -108,12 +111,17 @@ public class ViewWarItemActivity extends AppCompatActivity {
                         editedLog = new WarItem(name, desc, cost, owner);
                         if (pictureAdded == true) {
                             editedLog.addThumbnail(thumbnail);
+                        } else {
+                            editedLog.addThumbnail(preEditedLog.getThumbnail());
                         }
                         DatabaseController.updateItem(preEditedLog, editedLog);
+                        ViewMyItemsActivity.deleteWarItems(preEditedLog);
+                        ViewMyItemsActivity.addWarItems(editedLog);
 
                         //delays return so server has time to update
-                        Handler myHandler = new Handler();
-                        myHandler.postDelayed(mMyRunnable, 1000);
+                        //Handler myHandler = new Handler();
+                        //myHandler.postDelayed(mMyRunnable, 1000);
+                        finish();
 
                     }
                 } catch (NumberFormatException e) {
@@ -134,8 +142,9 @@ public class ViewWarItemActivity extends AppCompatActivity {
                 //delete.execute(preEditedLog.getName());
 
                 DatabaseController.deleteItem(preEditedLog);
-                Handler myHandler = new Handler();
-                myHandler.postDelayed(mMyRunnable, 1000);
+                ViewMyItemsActivity.deleteWarItems(preEditedLog);
+                //Handler myHandler = new Handler();
+                //myHandler.postDelayed(mMyRunnable, 1000);
                 finish();
 
             }
