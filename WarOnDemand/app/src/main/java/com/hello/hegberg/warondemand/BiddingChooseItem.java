@@ -69,7 +69,8 @@ public class BiddingChooseItem extends AppCompatActivity {
     }
 
     /**
-     * OnStart
+     * OnStart checks if any items have bids left on them
+     * if no items have bids on them returns to account controller
      */
     protected void onStart(){
         super.onStart();
@@ -86,6 +87,7 @@ public class BiddingChooseItem extends AppCompatActivity {
 
     /**
      * Searching the database for bid on items of the current user
+     * also counts the amount for checks used in on start method
      */
     public void search(){
         DatabaseController.GetBids getBidsTask = new DatabaseController.GetBids();
@@ -141,10 +143,5 @@ public class BiddingChooseItem extends AppCompatActivity {
             }
         }
         amountOfBidOnItems = bidOnItems.size();
-
-    }
-
-    public static int getAmountOfBidOnItems(){
-        return amountOfBidOnItems;
     }
 }
