@@ -46,7 +46,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:text="Medium Text"
-        android:id="@+id/textView4" />
+        android:id="@+id/min_bid_price_borrowing" />
 
     <TextView
         android:id="@+id/desc"
