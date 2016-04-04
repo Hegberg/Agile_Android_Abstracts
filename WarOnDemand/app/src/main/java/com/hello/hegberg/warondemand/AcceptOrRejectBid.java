@@ -91,8 +91,7 @@ public class AcceptOrRejectBid extends AppCompatActivity {
                     longitude = location1.getLongitude();
 
                 }
-                latitude = location1.getLatitude();
-                longitude = location1.getLongitude();
+                
 
                 try {
                     BiddingChooseItem.bidItemClicked.setLocation(latitude, longitude);
