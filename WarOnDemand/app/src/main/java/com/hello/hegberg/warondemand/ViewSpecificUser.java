@@ -33,6 +33,13 @@ public class ViewSpecificUser extends AppCompatActivity {
         else if(getIntent().getStringExtra("from").equals("AcceptOrRejectBid")) {
             user = AcceptOrRejectBid.specificUser;
         }
+        else if(getIntent().getStringExtra("from").equals("ViewWarItemNoEdit")) {
+            user = ViewWarItemNoEdit.specificUser;
+        }
+        else{
+            //panic.
+            //TODO: Error catch here?
+        }
         username = user.getUsername();
         contactInfo = user.getContactInfo();
 
