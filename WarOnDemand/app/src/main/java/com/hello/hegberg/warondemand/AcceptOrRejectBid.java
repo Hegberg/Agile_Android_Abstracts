@@ -132,10 +132,12 @@ public class AcceptOrRejectBid extends AppCompatActivity {
              */
             @Override
             public void onClick(View v) {
+                search();
                 Log.i("id->", BidChooseBid.bidClicked.getId());
                 DatabaseController.deleteBids(BidChooseBid.bidClicked);
                 bids.remove(BidChooseBid.bidClicked);
-                if (bids.size() == 0){
+                Log.i("size->", String.valueOf(bids.size()));
+                if (bids.size() == 1){
                     BiddingChooseItem.bidAccepted = true;
                     WarItem temp = BiddingChooseItem.bidItemClicked;
                     BiddingChooseItem.bidItemClicked.setStatus(0);
@@ -179,9 +181,7 @@ public class AcceptOrRejectBid extends AppCompatActivity {
      */
     public void search(){
         DatabaseController.GetBids getBidsTask = new DatabaseController.GetBids();
-
         try {
-
             for (int i=bids.size() - 1; i>=0; i--) {
                 bids.remove(i);
             }

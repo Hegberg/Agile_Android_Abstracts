@@ -55,8 +55,8 @@ public class BidChooseBid extends AppCompatActivity {
                 bidClicked = bids.get(position);
                 Intent intent = new Intent(BidChooseBid.this, AcceptOrRejectBid.class);
                 startActivity(intent);
-                Handler myHandler = new Handler();
-                myHandler.postDelayed(mMyRunnable, 1000);
+                //Handler myHandler = new Handler();
+                //myHandler.postDelayed(mMyRunnable, 1000);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -78,7 +78,6 @@ public class BidChooseBid extends AppCompatActivity {
 
     public void search(){
         DatabaseController.GetBids getBidsTask = new DatabaseController.GetBids();
-
         try {
 
             for (int i=bids.size() - 1; i>=0; i--) {
@@ -88,10 +87,10 @@ public class BidChooseBid extends AppCompatActivity {
             WarItem temp;
             getBidsTask.execute("");
             bidsPreSearch = getBidsTask.get();
-            Log.i("size-> ", "" + bidsPreSearch.size());
+            //Log.i("size-> ", "" + bidsPreSearch.size());
             for (int i=0; i<bidsPreSearch.size(); i++){
                 temp = BiddingChooseItem.bidItemClicked;
-                Log.i("item->",""+bidsPreSearch.get(i).getItemBidOn().getName() );
+                //Log.i("item->",""+bidsPreSearch.get(i).getItemBidOn().getName() );
                 if (temp.getName().equals(bidsPreSearch.get(i).getItemBidOn().getName())) {
                     bids.add(bidsPreSearch.get(i));
                 }
@@ -101,7 +100,6 @@ public class BidChooseBid extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
     }
 
     private Runnable mMyRunnable = new Runnable()

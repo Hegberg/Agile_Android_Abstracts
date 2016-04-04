@@ -24,6 +24,8 @@ public class BiddingChooseItem extends AppCompatActivity {
     public static WarItem bidItemClicked;
     public static Boolean bidAccepted = false;
 
+    private static int amountOfBidOnItems;
+
     /**
      * onCreate BiddingChooseItem
      * Shows a list of bids on an item.
@@ -61,8 +63,6 @@ public class BiddingChooseItem extends AppCompatActivity {
                 bidItemClicked = bidOnItems.get(position);
                 Intent intent = new Intent(BiddingChooseItem.this, BidChooseBid.class);
                 startActivity(intent);
-                Handler myHandler = new Handler();
-                myHandler.postDelayed(mMyRunnable, 1000);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -73,7 +73,11 @@ public class BiddingChooseItem extends AppCompatActivity {
      */
     protected void onStart(){
         super.onStart();
-        if (BiddingChooseItem.bidAccepted == true){
+        Log.i("amount of items->", String.valueOf(amountOfBidOnItems));
+        if (BiddingChooseItem.bidAccepted == true && amountOfBidOnItems == 1){
+            bidAccepted = false;
+            finish();
+        } else {
             bidAccepted = false;
         }
         search();
@@ -81,7 +85,7 @@ public class BiddingChooseItem extends AppCompatActivity {
     }
 
     /**
-     * Searching the database for bids
+     * Searching the database for bid on items of the current user
      */
     public void search(){
         DatabaseController.GetBids getBidsTask = new DatabaseController.GetBids();
@@ -95,10 +99,10 @@ public class BiddingChooseItem extends AppCompatActivity {
             User temp;
             getBidsTask.execute("");
             bidsPreSearch = getBidsTask.get();
-            Log.i("size-> ", "" + bidsPreSearch.size());
+            //Log.i("size-> ", "" + bidsPreSearch.size());
             for (int i=0; i<bidsPreSearch.size(); i++){
                 temp = bidsPreSearch.get(i).getOwner();
-                Log.i("owner->",""+bidsPreSearch.get(i).getOwner().getUsername() );
+                //Log.i("owner->",""+bidsPreSearch.get(i).getOwner().getUsername() );
                 if (temp.getUsername().equals(MainActivity.chosenUser.getUsername())) {
                     bids.add(bidsPreSearch.get(i));
                 }
@@ -113,20 +117,20 @@ public class BiddingChooseItem extends AppCompatActivity {
             bidOnItems.remove(i);
         }
 
-        Log.i("size-> ", "" + bids.size());
+        //Log.i("size-> ", "" + bids.size());
         for (int i = 0; i<bids.size(); i++){
-            Log.i("item 1->",""+bids.get(i).getItemBidOn().getName() );
-            Log.i("name 1->",""+bids.get(i).getItemBidOn().getId() );
+            //Log.i("item 1->",""+bids.get(i).getItemBidOn().getName() );
+            //Log.i("name 1->",""+bids.get(i).getItemBidOn().getId() );
             if(bidOnItems.size() == 0) {
                 bidOnItems.add(bids.get(i).getItemBidOn());
             } else {
                 Boolean check = true;
                 for (int j = 0; j<bidOnItems.size(); j++){
-                    Log.i("true/false->",""+bids.get(i).getItemBidOn().getId().equals(bidOnItems.get(j).getId()) );
-                    Log.i("item->",""+bids.get(i).getItemBidOn().getId() );
-                    Log.i("name->",""+bids.get(i).getItemBidOn().getName() );
-                    Log.i("item->", "" + bidOnItems.get(j).getId());
-                    Log.i("name->", "" + bidOnItems.get(j).getName());
+                    //Log.i("true/false->",""+bids.get(i).getItemBidOn().getId().equals(bidOnItems.get(j).getId()) );
+                    //Log.i("item->",""+bids.get(i).getItemBidOn().getId() );
+                    //Log.i("name->",""+bids.get(i).getItemBidOn().getName() );
+                    //Log.i("item->", "" + bidOnItems.get(j).getId());
+                    //Log.i("name->", "" + bidOnItems.get(j).getName());
                     if(bids.get(i).getItemBidOn().getName().equals(bidOnItems.get(j).getName())){
                         check = false;
                     }
@@ -136,18 +140,11 @@ public class BiddingChooseItem extends AppCompatActivity {
                 }
             }
         }
+        amountOfBidOnItems = bidOnItems.size();
 
     }
 
-    /**
-     *
-     */
-    private Runnable mMyRunnable = new Runnable()
-    {
-        @Override
-        public void run()
-        {
-            adapter.notifyDataSetChanged();
-        }
-    };
+    public static int getAmountOfBidOnItems(){
+        return amountOfBidOnItems;
+    }
 }
