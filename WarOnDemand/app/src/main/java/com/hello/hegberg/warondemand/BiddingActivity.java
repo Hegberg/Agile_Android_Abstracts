@@ -70,6 +70,9 @@ public class BiddingActivity extends AppCompatActivity {
                         itemBiddingOn.setStatus(1);
                         DatabaseController.updateItem(temp, itemBiddingOn);
 
+                        SearchingActivity.deleteWarItems(temp);
+                        SearchingActivity.addWarItems(itemBiddingOn);
+
                         AsyncTask<Bid, Void, Void> execute = new DatabaseController.AddBids();
                         execute.execute(bid);
 

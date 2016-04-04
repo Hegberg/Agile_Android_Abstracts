@@ -26,6 +26,9 @@ public class SearchingActivity extends AppCompatActivity {
 
     public static WarItem itemClicked;
 
+    private static WarItem itemAdded;
+    private static WarItem itemDeleted;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +70,7 @@ public class SearchingActivity extends AppCompatActivity {
 
     }
 
+    /*
     @Override
     protected void onStart() {
         super.onStart();
@@ -77,6 +81,46 @@ public class SearchingActivity extends AppCompatActivity {
             search("");
         }
         adapter.notifyDataSetChanged();
+    }
+    */
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //updates items without having to access the database. Rejoice!!! Speed!!!
+        try {
+            Log.i("remove item ->", "" + itemDeleted);
+
+            Log.i("item->", "" + itemsPostFilter.contains(itemDeleted));
+
+            if (itemDeleted != null) {
+                for (int i = 0; i <itemsPostFilter.size(); i++){
+                    Log.i("items->", "" + itemsPostFilter.get(i).getName());
+                    Log.i("items2->", "" + itemDeleted.getName());
+                    Log.i("itemsistrue->", "" + itemsPostFilter.get(i).getName().equals(itemDeleted.getName()));
+                    if (itemsPostFilter.get(i).getName().equals(itemDeleted.getName())){
+                        itemsPostFilter.remove(i);
+                    }
+                }
+            }
+            if (itemAdded != null) {
+                itemsPostFilter.add(itemAdded);
+            }
+        } catch (NullPointerException e) {
+
+        }
+        itemDeleted = null;
+        itemAdded = null;
+
+        adapter.notifyDataSetChanged();
+    }
+
+    public static void addWarItems(WarItem itemTOAdd){
+        itemAdded = itemTOAdd;
+    }
+
+    //Skipping database function
+    public static void deleteWarItems(WarItem itemToDelete){
+        itemDeleted = itemToDelete;
     }
 
     public void search(String searchTerm){
