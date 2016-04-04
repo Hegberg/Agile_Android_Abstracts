@@ -47,6 +47,7 @@ public class ViewWarItemActivity extends AppCompatActivity {
     private ArrayList<WarItem> warItemsPreSearch = new ArrayList<WarItem>();
     private ArrayAdapter<WarItem> adapter;
     private User owner = MainActivity.chosenUser;
+    private ArrayList<WarItem> duplicates = new ArrayList<>();
 
     /**
      * Called when the activity is first created, the War Item we are editing.
@@ -106,11 +107,14 @@ public class ViewWarItemActivity extends AppCompatActivity {
                     Double cost = Double.parseDouble(((EditText) findViewById(R.id.cost_entered)).getText().toString());
                     String desc = ((EditText) findViewById(R.id.desc_entered)).getText().toString();
 
+                    searchForDuplicates(name);
                     /**Checks to make sure all string fields are filled in.
-                     *
+                     * and that the name isn't a duplicate
                      */
                     if (name.equals("")) {
                         Toast.makeText(ViewWarItemActivity.this, "Enter a name, please.", Toast.LENGTH_SHORT).show();
+                    } else if (duplicates.size() > 0) {
+                        Toast.makeText(ViewWarItemActivity.this, "Name already taken.", Toast.LENGTH_SHORT).show();
                     } else if (cost.equals("")) {
                         Toast.makeText(ViewWarItemActivity.this, "Enter a minimum starting bid price, please.", Toast.LENGTH_SHORT).show();
                     } else if (desc.equals("")) {
@@ -194,6 +198,33 @@ public class ViewWarItemActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * Grabs the specific War Item and allows us to edit it.
+     */
+    public void searchForDuplicates(String name){
+        DatabaseController.GetItems getItemsTask = new DatabaseController.GetItems();
+        try {
+            for (int i=duplicates.size() - 1; i>=0; i--) {
+                duplicates.remove(i);
+            }
+            getItemsTask.execute("");
+            warItemsPreSearch = getItemsTask.get();
+            String temp;
+            Log.i("size-> ", "" + warItemsPreSearch.size());
+            for (int i=0; i<warItemsPreSearch.size(); i++){
+                temp = warItemsPreSearch.get(i).getName();
+                Log.i("temp->",""+warItemsPreSearch.get(i).getName() );
+                if (temp.equals(name) && !preEditedLog.getName().equals(temp)) {
+                    duplicates.add(warItemsPreSearch.get(i));
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -194,9 +194,7 @@ public class ViewMyItemsActivity extends AppCompatActivity {
                         if (warItemsPreSearch.get(i).getStatus() == 2){
                             warItems.add(warItemsPreSearch.get(i));
                         }
-
                     }
-
                 }
             }
         } catch (InterruptedException e) {
@@ -204,6 +202,5 @@ public class ViewMyItemsActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
     }
 }
