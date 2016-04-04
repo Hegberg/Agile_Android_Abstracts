@@ -78,6 +78,8 @@ public class SearchingActivity extends AppCompatActivity {
         Log.i("keyword-> ", "" + keyword);
         if (keyword != null) {
             search(keyword);
+        } else {
+            search("");
         }
         adapter.notifyDataSetChanged();
     }
