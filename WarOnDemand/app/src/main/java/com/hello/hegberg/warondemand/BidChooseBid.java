@@ -21,6 +21,11 @@ public class BidChooseBid extends AppCompatActivity {
     private ArrayAdapter<Bid> adapter;
     public static Bid bidClicked;
 
+    /**
+     * On Create BidChooseBid
+     * Loading all the items with bids on them
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +41,15 @@ public class BidChooseBid extends AppCompatActivity {
         BidList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //http://stackoverflow.com/questions/17851687/how-to-handle-the-click-event-in-listview-in-android
             //User wishes to edit a log.
+
+            /**
+             * On item click
+             * All the bids on the item clicked is returned.
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 bidClicked = bids.get(position);
@@ -48,6 +62,10 @@ public class BidChooseBid extends AppCompatActivity {
         });
     }
 
+    /**
+     * onStart BidChooseBid
+     *
+     */
     protected void onStart(){
         super.onStart();
         if (BiddingChooseItem.bidAccepted == true){

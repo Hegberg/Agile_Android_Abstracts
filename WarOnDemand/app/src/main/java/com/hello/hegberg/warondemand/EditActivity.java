@@ -14,6 +14,11 @@ public class EditActivity extends AppCompatActivity {
     private ArrayList<String> contactInfoHolder;
     private User tempUser;
 
+    /**
+     * On Create EditActivity
+     * Here the user can edit there personal information.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,12 @@ public class EditActivity extends AppCompatActivity {
         contactInfo.setText(contactInfoHolder.get(1));
 
         done.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * onClick done
+             * The user information, if correct will be saved to the database
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 String description = descriptionInfo.getText().toString();

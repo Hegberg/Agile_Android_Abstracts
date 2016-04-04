@@ -24,6 +24,12 @@ public class BiddingChooseItem extends AppCompatActivity {
     public static WarItem bidItemClicked;
     public static Boolean bidAccepted = false;
 
+    /**
+     * onCreate BiddingChooseItem
+     * Shows a list of bids on an item.
+     * The user can then click on one and be redirected to BidChooseBid
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +46,16 @@ public class BiddingChooseItem extends AppCompatActivity {
         BidOnItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //http://stackoverflow.com/questions/17851687/how-to-handle-the-click-event-in-listview-in-android
             //User wishes to edit a log.
+
+            /**
+             * Onclick BidOnItemList
+             * The user is redirected to view a bid, and from there
+             * can accept or decline a bid
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 bidItemClicked = bidOnItems.get(position);
@@ -52,6 +68,9 @@ public class BiddingChooseItem extends AppCompatActivity {
         });
     }
 
+    /**
+     * OnStart
+     */
     protected void onStart(){
         super.onStart();
         if (BiddingChooseItem.bidAccepted == true){
@@ -61,6 +80,9 @@ public class BiddingChooseItem extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Searching the database for bids
+     */
     public void search(){
         DatabaseController.GetBids getBidsTask = new DatabaseController.GetBids();
 
@@ -117,6 +139,9 @@ public class BiddingChooseItem extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     */
     private Runnable mMyRunnable = new Runnable()
     {
         @Override
