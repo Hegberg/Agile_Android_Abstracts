@@ -40,7 +40,7 @@ public class Blacklist extends AppCompatActivity {
         setContentView(R.layout.activity_blacklist);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        Toast.makeText(Blacklist.this, "Blacklist users to never see their items", Toast.LENGTH_SHORT).show();
         BLlist = (ListView) findViewById(R.id.BLlist);
         Button done = (Button) findViewById(R.id.done);
 

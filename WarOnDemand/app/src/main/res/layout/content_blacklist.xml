@@ -13,17 +13,7 @@
     tools:showIn="@layout/activity_blacklist"
     android:background="#000000">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
-        android:text="Here you can blacklist users, and never see any of their items"
-        android:id="@+id/info."
-        android:textColor="#ffffff"
-        android:gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,8 +23,7 @@
         android:textColor="#ffffff"
 
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/info."/>
+        android:layout_alignParentStart="true"/>
 
     <EditText
         android:layout_width="wrap_content"

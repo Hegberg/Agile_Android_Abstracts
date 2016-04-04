@@ -20,6 +20,10 @@ public class AccountController extends AppCompatActivity {
 
 
     @Override
+    /**
+     * On create, check the database if any new bids have been made on any of your items,
+     * or if any of your bids have been accepted
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_controller);
@@ -113,7 +117,12 @@ public class AccountController extends AppCompatActivity {
 
         //TODO: Create classes to go to with products, bids, borrowed.
         // Create Buttons
+
         editProfile.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click edit profile start new intent
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 //MainActivity.profileOption = 1;
@@ -126,6 +135,10 @@ public class AccountController extends AppCompatActivity {
         });
 
         myProducts.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click my products start new intent
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AccountController.this, ViewMyItemsActivity.class));
@@ -134,6 +147,10 @@ public class AccountController extends AppCompatActivity {
         });
 
         search.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click search start new intent
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AccountController.this, SearchingActivity.class));
@@ -141,6 +158,10 @@ public class AccountController extends AppCompatActivity {
         });
 
         myBids.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click my bids start new intent
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AccountController.this, BiddingChooseItem.class));
@@ -148,6 +169,10 @@ public class AccountController extends AppCompatActivity {
         });
 
         blacklist.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click my blacklist start new intent
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AccountController.this, Blacklist.class));
@@ -155,6 +180,10 @@ public class AccountController extends AppCompatActivity {
         });
 
         borrowedProducts.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click borrowed products start new intent
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AccountController.this, BorrowingActivity.class));

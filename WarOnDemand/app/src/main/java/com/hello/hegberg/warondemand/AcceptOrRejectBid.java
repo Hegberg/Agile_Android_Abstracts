@@ -22,10 +22,20 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+
+/**
+ * Activity called when a user clicks on one of the items in their pending bids
+ * They can accept or reject of the bids
+ */
 public class AcceptOrRejectBid extends AppCompatActivity {
     private ArrayList<Bid> bids = new ArrayList<Bid>();
     private static final int PERMISSION_LOCATION_REQUEST_CODE = 1 ;
     public static User specificUser;
+
+    /**
+     * ON create for this activity the item clicked is displayed in more detail
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +56,13 @@ public class AcceptOrRejectBid extends AppCompatActivity {
             imageView.setImageBitmap(BidChooseBid.bidClicked.getItemBidOn().getThumbnail());
         }
         acceptBid.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Onn click acceptbid the bid is set as borrowed
+             * The item infomation is transfered to the bidder
+             * The location of the user when accepted is saved and stored in the BD
+             * The bidder is now a borrower and can get the location of the borrowed item
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 search();
@@ -91,7 +108,7 @@ public class AcceptOrRejectBid extends AppCompatActivity {
                     longitude = location1.getLongitude();
 
                 }
-                
+
 
                 try {
                     BiddingChooseItem.bidItemClicked.setLocation(latitude, longitude);
@@ -109,6 +126,10 @@ public class AcceptOrRejectBid extends AppCompatActivity {
         });
 
         declineBid.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click decline, the bid is deleted and that particular bid is removed from the DB
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Log.i("id->", BidChooseBid.bidClicked.getId());
@@ -128,6 +149,10 @@ public class AcceptOrRejectBid extends AppCompatActivity {
         });
 
         bidderNameText.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On lcik bid name text
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 //TODO Need to make it so viewspecificuser grabs the specific user from the previous activity.
@@ -139,6 +164,9 @@ public class AcceptOrRejectBid extends AppCompatActivity {
         });
     }
 
+    /**
+     * On start
+     */
     protected void onStart(){
         super.onStart();
         if (BiddingChooseItem.bidAccepted == true){
@@ -146,6 +174,9 @@ public class AcceptOrRejectBid extends AppCompatActivity {
         }
     }
 
+    /**
+     * Searching for all the bids for the current item
+     */
     public void search(){
         DatabaseController.GetBids getBidsTask = new DatabaseController.GetBids();
 
@@ -174,10 +205,18 @@ public class AcceptOrRejectBid extends AppCompatActivity {
 
     }
 
+    /**
+     * Getting the context for this class
+     * @return Context
+     */
     public Context getContext(){
         return this;
     }
 
+    /**
+     * Getting the Activity for this class
+     * @return Activity
+     */
     public Activity getActivity(){
         return this;
     }
