@@ -207,7 +207,7 @@ public class AcceptOrRejectBid extends AppCompatActivity {
 
     /**
      * Getting the context for this class
-     * @return Context
+     * @return this
      */
     public Context getContext(){
         return this;
@@ -215,7 +215,7 @@ public class AcceptOrRejectBid extends AppCompatActivity {
 
     /**
      * Getting the Activity for this class
-     * @return Activity
+     * @return this
      */
     public Activity getActivity(){
         return this;
