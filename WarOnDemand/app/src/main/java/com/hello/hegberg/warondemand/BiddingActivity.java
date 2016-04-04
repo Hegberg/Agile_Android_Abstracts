@@ -1,11 +1,15 @@
 package com.hello.hegberg.warondemand;
 
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +44,11 @@ public class BiddingActivity extends AppCompatActivity {
 
         itemBiddingOn = SearchingActivity.itemClicked;
         itemInfo.setText(itemBiddingOn.toString());
-
+        ImageView image = (ImageView) findViewById(R.id.picView);
+        // I'll be honest, I don't know what final does - Poty
+        if (itemBiddingOn.getThumbnail() != null) {
+            image.setImageBitmap(itemBiddingOn.getThumbnail());
+        }
         doneBidding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +77,15 @@ public class BiddingActivity extends AppCompatActivity {
                 }
             }
         });
+        itemInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BiddingActivity.this, ViewWarItemActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 }
