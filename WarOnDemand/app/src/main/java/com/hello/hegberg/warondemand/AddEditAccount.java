@@ -31,6 +31,10 @@ public class AddEditAccount extends AppCompatActivity {
 
     //profileOption 1 = ViewAccount, 2 = CreateAccount,
 
+    /**
+     * On crate AddEditAccount
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,9 @@ public class AddEditAccount extends AppCompatActivity {
         }
     }
 
+    /**
+     * AddAccount textviews
+     */
     private void AddAccount() {
         MainActivity.profileOption = 0;
 
@@ -63,6 +70,12 @@ public class AddEditAccount extends AppCompatActivity {
 
 
         done.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click done, Should register a user to the database. If the user
+             * Already exists then the user is prompted to change username.
+             * Else the user is added to the Database
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 try {
